@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,500;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dark, [data-theme="dark"] {
+  --nextui-background: 0 0% 10%;
+}
+
+* {
+  scrollbar-color: var(--c-scrollbar);
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-scrollbar-hover);
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  border-radius: 0px;
+}
+
+:root {
+  --c-scrollbar: #eee;
+  --c-scrollbar-hover: #bbb;
+}
+
+html.dark {
+  --c-scrollbar: #111;
+  --c-scrollbar-hover: #222;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: Helvetica, HarmonyOS Sans SC, Microsoft YaHei, -apple-system, PingFang SC, Arial, sans-serif;
+}
