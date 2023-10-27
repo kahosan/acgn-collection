@@ -53,7 +53,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
             <NextImage
               src={(subject.images?.medium ?? subject.image) || 'https://placehold.co/160x224/png'}
               alt={subject.name}
-              className="object-cover bg-center opacity-0 transition-all duration-300 rounded-md w-auto h-auto"
+              className="object-cover bg-center bg-zinc-300 dark:bg-zinc-700 opacity-20 transition-all duration-300 rounded-md w-auto h-auto"
               priority
               fill
               sizes="100%"
