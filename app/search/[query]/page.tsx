@@ -1,24 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
 import SearchBar from './search-bar';
-import CollectionCard from '~/components/collection-card';
 import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';
+import CollectionCard from '~/components/collection-card';
 
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 
 import { useSearch } from '~/lib/bangumi/subjects';
 
+import type { SearchPayload } from '~/types/subjects';
+
 interface Props {
   params: { query: string }
+  searchParams: Record<string, string | undefined>
 }
 
 // enhance search filter
-export default function Search({ params }: Props) {
-  const sp = useSearchParams();
-  const type = sp.get('type') ?? '2';
+export default function Search({ params, searchParams }: Props) {
+  const type = searchParams.type ?? '2';
 
   const [offset, setOffset] = useQueryState(
     'offset',
@@ -27,7 +28,7 @@ export default function Search({ params }: Props) {
       .withDefault(0)
   );
 
-  const payload = {
+  const payload: SearchPayload = {
     keyword: decodeURIComponent(params.query),
     filter: {
       // 7 is all, type is SubjectType
@@ -35,7 +36,7 @@ export default function Search({ params }: Props) {
     }
   };
 
-  const { data, isLoading, error } = useSearch(payload, offset);
+  const { data, isLoading, error } = useSearch(payload, offset, 20);
 
   if (error) throw error;
 
