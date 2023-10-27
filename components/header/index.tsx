@@ -32,7 +32,7 @@ const navItems = {
 };
 
 export default function Header() {
-  const { data } = useUser();
+  const { data, error } = useUser();
   const setToken = useSetAtom(tokenAtom);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,6 +45,7 @@ export default function Header() {
   };
 
   if (pn === '/login') return null;
+  if (error) throw error;
 
   return (
     <Navbar isMenuOpen={isOpen} onMenuOpenChange={setIsOpen} maxWidth="full" isBordered>
