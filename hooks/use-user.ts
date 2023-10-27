@@ -21,6 +21,7 @@ export const useUser = () => {
           setToken(null);
           router.push('/login');
           fetcherErrorHandler(error, 'Token 失效, 尝试重新登入');
+          return;
         }
 
         fetcherErrorHandler(error, `获取用户信息失败: ${error.message}`);
