@@ -1,5 +1,4 @@
 import useSWRImmutable from 'swr/immutable';
-
 import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import type { Subject } from '~/types/subjects';

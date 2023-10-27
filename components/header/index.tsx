@@ -1,11 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { useSetAtom } from 'jotai';
-import { tokenAtom } from '~/hooks/use-token';
-import { useUser } from '~/hooks/use-user';
-
 import {
   Avatar,
   Dropdown,
@@ -22,9 +16,16 @@ import {
   NavbarMenuToggle
 } from '@nextui-org/react';
 
+import { useState } from 'react';
+import { useSetAtom } from 'jotai';
+import { useRouter, usePathname } from 'next/navigation';
+
+import { useUser } from '~/hooks/use-user';
+import { tokenAtom } from '~/hooks/use-token';
+
 import NextLink from 'next/link';
-import ToggleTheme from './toggle-theme';
 import HearderSearch from './search';
+import ToggleTheme from './toggle-theme';
 
 const navItems = {
   '/': '首页',

@@ -1,8 +1,8 @@
 import useSWRImmutable from 'swr/immutable';
-import { useToken } from '~/hooks/use-token';
-import { useUser } from '~/hooks/use-user';
-
 import { fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';
+
+import { useUser } from '~/hooks/use-user';
+import { useToken } from '~/hooks/use-token';
 
 import type { UserCollection, UserCollectionPayload } from '~/types/collection';
 

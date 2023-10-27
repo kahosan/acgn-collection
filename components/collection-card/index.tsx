@@ -1,6 +1,6 @@
-import { Card, CardBody, Chip, Link, Tooltip } from '@nextui-org/react';
 import NextLink from 'next/link';
 import NextImage from 'next/image';
+import { Card, CardBody, Chip, Link, Tooltip } from '@nextui-org/react';
 
 import Rate from 'rc-rate';
 import 'rc-rate/assets/index.css';

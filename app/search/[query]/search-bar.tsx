@@ -1,10 +1,11 @@
 import { Input, Tab, Tabs } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { transformSubjectTypeToJSX } from '~/utils';
 
 import { SubjectType } from '~/types/subjects';
-import { transformSubjectTypeToJSX } from '~/utils';
 
 interface Props {
   payload: { keyword: string, type: string }

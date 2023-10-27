@@ -1,9 +1,8 @@
 import useSWRImmutable from 'swr/immutable';
-
 import { fetcherErrorHandler, fetcherWithAuth, HTTPError } from '~/lib/fetcher';
 
-import { useRouter } from 'next/navigation';
 import { useToken } from './use-token';
+import { useRouter } from 'next/navigation';
 
 import type { UserInfo } from '~/types/user';
 

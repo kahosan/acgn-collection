@@ -1,10 +1,11 @@
 'use client';
 
-import { useSubject } from '~/lib/bangumi/subjects';
-
-import { Divider } from '@nextui-org/react';
 import Image from 'next/image';
+import { Divider } from '@nextui-org/react';
+
 import Loading from '~/components/loading';
+
+import { useSubject } from '~/lib/bangumi/subjects';
 
 interface Props {
   params: { id: string }

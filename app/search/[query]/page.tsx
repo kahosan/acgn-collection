@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+
 import SearchBar from './search-bar';
 import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';

@@ -2,16 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { Select, SelectItem } from '@nextui-org/react';
+
 import Loading from '~/components/loading';
+import Pagination from '~/components/pagination';
 import CollectionCard from '~/components/collection-card';
 
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 
 import { useUserCollections } from '~/lib/bangumi/user';
 
-import { SubjectType } from '~/types/subjects';
-import Pagination from '~/components/pagination';
 import { transformSubjectTypeToJSX } from '~/utils';
+
+import { SubjectType } from '~/types/subjects';
 
 export default function Collection() {
   const [offset, setOffset] = useQueryState(
@@ -74,9 +76,7 @@ export default function Collection() {
                 initial={{ opacity: 0 }}
                 transition={{ ease: 'easeInOut', duration: 0.3 }}
               >
-                <div
-                  className="grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8"
-                >
+                <div className="grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8">
                   {data.data.map(collection => (
                     <CollectionCard key={collection.subject_id} subject={collection.subject} mobileMask />
                   ))}

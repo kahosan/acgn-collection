@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button, Input, Link } from '@nextui-org/react';
 
 import { toast } from 'sonner';
+import { useState } from 'react';
 import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
+
 import { tokenAtom } from '~/hooks/use-token';
 
 import { fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';

@@ -1,4 +1,5 @@
 import { Select, SelectItem } from '@nextui-org/react';
+
 import { useTheme } from 'next-themes';
 
 export default function ToggleTheme() {
