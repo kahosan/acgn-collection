@@ -15,8 +15,8 @@ export default function SearchBar({ payload }: Props) {
   const router = useRouter();
   const [keyword, setKeyword] = useState(payload.keyword);
 
-  const handleSearch = () => {
-    router.push(`/search/${encodeURIComponent(keyword)}?type=${payload.type}`);
+  const handleSearch = (type?: string) => {
+    router.push(`/search/${encodeURIComponent(keyword)}?type=${type ?? payload.type}`);
   };
 
   return (
@@ -30,14 +30,16 @@ export default function SearchBar({ payload }: Props) {
               handleSearch();
           }}
           endContent={
-            <div className="cursor-pointer i-mdi-magnify text-lg" onClick={handleSearch} />
+            <div
+              className="cursor-pointer i-mdi-magnify text-lg"
+              onClick={() => handleSearch()} />
           }
           className="max-w-xl hidden sm:block"
         />
         <Tabs
           selectedKey={payload.type}
           onSelectionChange={key => {
-            router.push(`/search/${encodeURIComponent(keyword)}?type=${Number.parseInt(key as string, 10)}`);
+            handleSearch(key.toString());
           }}
           classNames={{
             tabList: 'rounded-medium',
