@@ -108,7 +108,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                           })} />
                       }
                     >
-                      <small>{SubjectType[subject.type]}</small>
+                      <small className="pl-1">{SubjectType[subject.type]}</small>
                     </Chip>
                   )
                   : null
