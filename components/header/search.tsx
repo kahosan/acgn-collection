@@ -9,7 +9,7 @@ import { SubjectType } from '~/types/subjects';
 
 export default function HearderSearch() {
   const [keyword, setKeyword] = useState('');
-  const [type, setType] = useState(SubjectType.动画);
+  const [type, setType] = useState('7' /** all */);
 
   const router = useRouter();
 
@@ -33,10 +33,10 @@ export default function HearderSearch() {
           popover: 'w-max'
         }}
         selectionMode="single"
-        defaultSelectedKeys={[type.toString()]}
+        defaultSelectedKeys={[type]}
         disallowEmptySelection
-        onChange={(e) => {
-          setType(+e.target.value);
+        onChange={e => {
+          setType(e.target.value);
         }}
       >
         {

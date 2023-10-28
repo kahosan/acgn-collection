@@ -16,7 +16,7 @@ import type { SearchPayload } from '~/types/subjects';
 
 // enhance search filter
 export default function Search() {
-  const type = useSearchParams().get('type') ?? '2';
+  const type = useSearchParams().get('type') ?? '7';
   const keyword = useSearchParams().get('keyword') ?? '';
 
   const [offset, setOffset] = useQueryState(

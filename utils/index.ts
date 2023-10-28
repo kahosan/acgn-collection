@@ -30,5 +30,6 @@ export const transformSubjectTypeToJSX = <T>(cb: (type: number) => T, other: Rec
   return Object.keys({ ...SubjectType, ...other })
     .filter(type => Number.isInteger(Number.parseInt(type, 10)))
     .map(type => Number.parseInt(type, 10))
-    .map(type => cb(type));
+    .map(type => cb(type))
+    .reverse();
 };
