@@ -15,8 +15,13 @@ export default function SearchBar({ payload }: Props) {
   const router = useRouter();
   const [keyword, setKeyword] = useState(payload.keyword);
 
-  const handleSearch = (type?: string) => {
-    router.push(`/search/${encodeURIComponent(keyword)}?type=${type ?? payload.type}`);
+  const handleSearch = (push = true, type?: string) => {
+    const href = `/search?keyword=${encodeURIComponent(keyword)}&type=${type ?? payload.type}`;
+
+    if (push)
+      router.push(href);
+    else
+      router.replace(href);
   };
 
   return (
@@ -39,7 +44,7 @@ export default function SearchBar({ payload }: Props) {
         <Tabs
           selectedKey={payload.type}
           onSelectionChange={key => {
-            handleSearch(key.toString());
+            handleSearch(false, key.toString());
           }}
           classNames={{
             tabList: 'rounded-medium',

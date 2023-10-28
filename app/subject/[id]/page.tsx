@@ -1,8 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import { Divider } from '@nextui-org/react';
-
 import Loading from '~/components/loading';
 
 import { useSubject } from '~/lib/bangumi/subjects';
@@ -18,19 +15,10 @@ export default function Subject({ params }: Props) {
   if (!data || isLoading) return <Loading />;
 
   return (
-    <div>
-      <div className="w-max">
+    <div className="max-w-6xl mx-auto">
+      <div className="w-max mb-4">
         <h1 className="font-bold text-2xl">{data.name}</h1>
       </div>
-      <Divider className="my-4" />
-      <Image
-        src={data.images.large}
-        alt={data.name_cn || data.name}
-        className="opacity-0 transition-opacity"
-        onLoad={e => { e.currentTarget.style.opacity = '1'; }}
-        width={240}
-        height={340}
-      />
     </div>
   );
 }

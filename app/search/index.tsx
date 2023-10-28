@@ -7,20 +7,17 @@ import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';
 import CollectionCard from '~/components/collection-card';
 
+import { useSearchParams } from 'next/navigation';
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 
 import { useSearch } from '~/lib/bangumi/subjects';
 
 import type { SearchPayload } from '~/types/subjects';
 
-interface Props {
-  params: { query: string }
-  searchParams: Record<string, string | undefined>
-}
-
 // enhance search filter
-export default function Search({ params, searchParams }: Props) {
-  const type = searchParams.type ?? '2';
+export default function Search() {
+  const type = useSearchParams().get('type') ?? '2';
+  const keyword = useSearchParams().get('keyword') ?? '';
 
   const [offset, setOffset] = useQueryState(
     'offset',
@@ -30,7 +27,7 @@ export default function Search({ params, searchParams }: Props) {
   );
 
   const payload: SearchPayload = {
-    keyword: decodeURIComponent(params.query),
+    keyword: decodeURIComponent(keyword),
     filter: {
       // 7 is all, type is SubjectType
       type: +type === 7 ? [1, 2, 3, 4, 6] : [+type]

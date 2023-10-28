@@ -8,14 +8,14 @@ import { transformSubjectTypeToJSX } from '~/utils';
 import { SubjectType } from '~/types/subjects';
 
 export default function HearderSearch() {
-  const [query, setQuery] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [type, setType] = useState(SubjectType.动画);
 
   const router = useRouter();
 
   const handleSearch = () => {
-    if (!query) return;
-    router.push(`/search/${query}?type=${type}`);
+    if (!keyword) return;
+    router.push(`/search?keyword=${keyword}&type=${type}`);
   };
 
   return (
@@ -49,8 +49,8 @@ export default function HearderSearch() {
       </Select>
       <Divider orientation="vertical" />
       <Input
-        onChange={e => setQuery(e.target.value)}
-        value={query}
+        onChange={e => setKeyword(e.target.value)}
+        value={keyword}
         classNames={{
           base: 'max-w-full sm:max-w-[20rem] h-10',
           mainWrapper: 'h-full ',
