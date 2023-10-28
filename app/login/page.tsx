@@ -51,7 +51,7 @@ export default function Login() {
         <Input
           label="Token"
           size="sm"
-          onChange={(e) => setToken(e.target.value)}
+          onChange={e => setToken(e.target.value)}
         />
         <Button
           onClick={login}

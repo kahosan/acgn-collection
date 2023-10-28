@@ -50,7 +50,7 @@ export default function Collection() {
           selectionMode="single"
           defaultSelectedKeys={[type.toString()]}
           disallowEmptySelection
-          onChange={(e) => {
+          onChange={e => {
             setOffset(0);
             setType(+e.target.value);
           }}
