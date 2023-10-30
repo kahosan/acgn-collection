@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .dark, [data-theme="dark"] {
-  --nextui-background: 0 0% 10%;
+  --nextui-background: 0 0% 11%;
 }
 
 * {
