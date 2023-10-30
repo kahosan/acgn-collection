@@ -50,8 +50,11 @@ export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
                           <Link isExternal className="min-w-max" href={userhref}>{username}</Link>
                           {item.reply.content}
                           {item.action.type}
-                          {item.contents.map(content => (
-                            <Link isExternal key={content.name} href={content.url}>{content.name}</Link>
+                          {item.contents.map((content, index) => (
+                            <div key={content.name}>
+                              <Link isExternal href={content.url}>{content.name}</Link>
+                              {item.contents.length - 1 === index ? '' : '、'}
+                            </div>
                           ))}
                           {item.action.desc}
                         </CardBody>
