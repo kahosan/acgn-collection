@@ -30,7 +30,7 @@ export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
 
                 if (showAvatar || index === 0) avatar = scope === 'me' ? user.avatar.small : item.user.avatar;
 
-                const userHref = scope === 'me' ? item.user.href.replace(/user\/d+/, user.username) : item.user.href;
+                const userHref = scope === 'me' ? `https://bgm.tv/user/${user.username}` : item.user.href;
                 const username = scope === 'me' ? user.username : item.user.name;
                 return (
                   <div key={item.time} className="flex mb-2">
