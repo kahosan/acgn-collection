@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import { BASE_URL } from './constant';
 
-import type { ErrorResponse } from '~/types/common';
+import type { ErrorResponse } from '~/types/bangumi/common';
 
 export class HTTPError extends Error {
   data: ErrorResponse;

@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { SubjectType } from '~/types/subjects';
+import { SubjectType } from '~/types/bangumi/subjects';
 
 export const isBrowser = typeof window !== 'undefined';
 

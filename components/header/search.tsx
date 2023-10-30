@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { transformSubjectTypeToJSX } from '~/utils';
 
-import { SubjectType } from '~/types/subjects';
+import { SubjectType } from '~/types/bangumi/subjects';
 
 export default function HearderSearch() {
   const [keyword, setKeyword] = useState('');

@@ -4,7 +4,7 @@ import { HTTPError, fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';
 import { useUser } from '~/hooks/use-user';
 import { useToken } from '~/hooks/use-token';
 
-import type { UserSubjectCollection, UserSubjectCollectionPayload } from '~/types/collection';
+import type { UserSubjectCollection, UserSubjectCollectionPayload } from '~/types/bangumi/collection';
 
 export const useUserSubjectCollections = (payload: UserSubjectCollectionPayload) => {
   const [token] = useToken();

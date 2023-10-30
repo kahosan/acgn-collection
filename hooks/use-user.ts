@@ -4,7 +4,7 @@ import { fetcherErrorHandler, fetcherWithAuth, HTTPError } from '~/lib/fetcher';
 import { useToken } from './use-token';
 import { useRouter } from 'next/navigation';
 
-import type { UserInfo } from '~/types/user';
+import type { UserInfo } from '~/types/bangumi/user';
 
 export const useUser = () => {
   const [token, setToken] = useToken();

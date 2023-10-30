@@ -11,7 +11,7 @@ import { tokenAtom } from '~/hooks/use-token';
 
 import { fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';
 
-import type { UserInfo } from '~/types/user';
+import type { UserInfo } from '~/types/bangumi/user';
 
 export default function Login() {
   const [token, setToken] = useState('');

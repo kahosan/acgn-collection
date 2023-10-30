@@ -1,7 +1,7 @@
 import useSWRImmutable from 'swr/immutable';
 import { fetcherErrorHandler, fetcherWithOptions } from '~/lib/fetcher';
 
-import type { SearchPayload, SearchSubject } from '~/types/subjects';
+import type { SearchPayload, SearchSubject } from '~/types/bangumi/subjects';
 
 export const useSearch = (payload: SearchPayload, offset: number, limit?: number) => {
   const options: RequestInit = {

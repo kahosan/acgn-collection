@@ -12,7 +12,7 @@ import { parseAsInteger, useQueryState } from 'next-usequerystate';
 
 import { useSearch } from '~/lib/bangumi/subjects';
 
-import type { SearchPayload } from '~/types/subjects';
+import type { SearchPayload } from '~/types/bangumi/subjects';
 
 // enhance search filter
 export default function Search() {
