@@ -41,6 +41,8 @@ html.dark {
 html {
   overflow-x: hidden;
   overflow-y: scroll;
+
+  background-color: var(--nextui-background);
 }
 
 body {
