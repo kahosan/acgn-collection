@@ -44,11 +44,11 @@ export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
                       className="bg-transparent relative mb-4"
                     >
                       <CardBody className="inline-flex flex-row flex-wrap items-center gap-2 py-1 px-3">
-                        <Link className="min-w-max" href={userHref}>{username}</Link>
+                        <Link isExternal className="min-w-max" href={userHref}>{username}</Link>
                         {item.reply.content}
                         {item.action.type}
                         {item.contents.map(content => (
-                          <Link className="" key={content.name} href={content.url}>{content.name}</Link>
+                          <Link isExternal key={content.name} href={content.url}>{content.name}</Link>
                         ))}
                         {item.action.desc}
                       </CardBody>
