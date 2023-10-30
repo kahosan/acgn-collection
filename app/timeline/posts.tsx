@@ -14,7 +14,7 @@ interface Props {
 
 export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
   if (!data || !user || isLoading) return <Loading />;
-  let avatar = '';
+  let _username = '';
 
   return (
     <div className="mt-4">
@@ -28,18 +28,19 @@ export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
               <Divider orientation="horizontal" className="my-4 max-w-[50rem]" />
               {
                 post.items.map((item, index) => {
-                  const showAvatar = avatar !== (scope === 'me' ? user.avatar.small : item.user.avatar)
-                  || avatar.includes('user/l/icon.jpg'); // default avatar
-
-                  if (showAvatar || index === 0) avatar = scope === 'me' ? user.avatar.small : item.user.avatar;
-
                   const userhref = scope === 'me' ? `https://bgm.tv/user/${user.username}` : item.user.href;
                   const username = scope === 'me' ? user.username : item.user.name;
+
+                  // 当某个用户有多条时间线时，只显示第一条的头像
+                  const showAvatar = _username !== username;
+                  if (index === 0 || showAvatar)
+                    _username = username;
+
                   return (
                     <div key={index} className="flex mb-2">
                       {
                         showAvatar || index === 0
-                          ? <Avatar radius="sm" className="min-w-max" src={avatar} />
+                          ? <Avatar radius="sm" className="min-w-max" src={scope === 'me' ? user.avatar.small : item.user.avatar} />
                           : <div className="min-w-[40px]" />
                       }
                       <Card
