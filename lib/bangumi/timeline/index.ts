@@ -1,4 +1,4 @@
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 import { fetcherErrorHandler, fetcherWithOptions } from '~/lib/fetcher';
 import type { Timeline, TimelinePayload, TimelineScope } from '~/types/bangumi/timeline';
 
@@ -11,7 +11,7 @@ export const useTimeline = (payload: TimelinePayload, scope: TimelineScope) => {
     body: JSON.stringify(payload)
   };
 
-  return useSWRImmutable<Timeline, Error>(
+  return useSWR<Timeline, Error>(
     scope === 'me'
       ? (
         payload.userId
