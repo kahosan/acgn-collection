@@ -1,29 +1,15 @@
 import useSWR from 'swr';
-import { fetcherErrorHandler, fetcherWithOptions } from '~/lib/fetcher';
-import type { Timeline, TimelinePayload, TimelineScope } from '~/types/bangumi/timeline';
+import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
+import type { Timeline, TimelinePayload } from '~/types/bangumi/timeline';
 
-export const useTimeline = (payload: TimelinePayload, scope: TimelineScope) => {
-  const options: RequestInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  };
-
-  return useSWR<Timeline, Error>(
-    scope === 'me'
-      ? (
-        payload.userId
-          ? ['https://acgn-collection-workers.kahosan.workers.dev/timeline', options]
-          : null
-      )
-      : ['https://acgn-collection-workers.kahosan.workers.dev/timeline', options],
-    fetcherWithOptions,
-    {
-      onError(error) {
-        fetcherErrorHandler(error, '获取时间胶囊失败');
-      }
+export const useTimeline = (payload: TimelinePayload) => useSWR<Timeline, Error>(
+  payload.userId
+    ? `https://acgn-collection-workers.kahosan.workers.dev/timeline?userId=${payload.userId}&type=${payload.type}&page=${payload.page}`
+    : `https://acgn-collection-workers.kahosan.workers.dev/timeline?type=${payload.type}&page=${payload.page}`,
+  fetcher,
+  {
+    onError(error) {
+      fetcherErrorHandler(error, '获取时间胶囊失败');
     }
-  );
-};
+  }
+);

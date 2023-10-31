@@ -33,12 +33,12 @@ export default function Timeline() {
     page: 1 // TODO
   };
 
-  const { data, isLoading, error } = useTimeline(payload, scope as TimelineScope);
+  const { data, isLoading, error } = useTimeline(payload);
 
   if (error) throw error;
 
   return (
-    <div>
+    <>
       <div className="flex gap-4 items-center">
         <Tabs
           selectedKey={scope}
@@ -89,6 +89,6 @@ export default function Timeline() {
         </Select>
       </div>
       <TimelinePosts data={data} isLoading={isLoading} scope={scope} user={user.data} />
-    </div>
+    </>
   );
 }
