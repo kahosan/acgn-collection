@@ -19,13 +19,11 @@ export default function Collection() {
   const [offset, setOffset] = useQueryState(
     'offset',
     parseAsInteger
-      .withOptions({ shallow: true })
       .withDefault(0)
   );
   const [type, setType] = useQueryState<SubjectType>(
     'type',
     parseAsInteger
-      .withOptions({ shallow: true })
       .withDefault(SubjectType.动画)
   );
 
