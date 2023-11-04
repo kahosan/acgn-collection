@@ -19,17 +19,17 @@ export default function HearderSearch() {
   };
 
   return (
-    <div className="flex min-w-[12rem]">
+    <div className="flex min-w-[12rem] max-w-[14rem]">
       <Select
         radius="sm"
         placeholder="选择类型"
         aria-label="选择类型"
         labelPlacement="outside"
-        className="max-w-[3.5rem]"
-        selectorIcon={<div />}
+        className="max-w-[4rem]"
         classNames={{
           trigger: 'rounded-r-none dark:bg-default-500/20 bg-default-400/20',
           innerWrapper: 'w-max',
+          selectorIcon: 'hidden',
           popover: 'w-max'
         }}
         selectionMode="single"

@@ -84,8 +84,8 @@ export default function Header() {
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownSection showDivider>
-              <DropdownItem key="bangumi-home" as="a" href={`https://bgm.tv/user/${data?.username ?? ''}`} target="_blank">
-                Bangumi 主页
+              <DropdownItem key="bangumi-home">
+                <a href={`https://bgm.tv/user/${data?.username ?? ''}`} target="_blank" rel="noreferrer">Bangumi 主页</a>
               </DropdownItem>
               <DropdownItem
                 isReadOnly
