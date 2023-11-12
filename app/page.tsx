@@ -36,7 +36,7 @@ export default function Collection() {
   const { data, isLoading, error } = useUserCollections({
     subject_type: +type,
     offset,
-    limit: 9
+    limit: 10
   });
 
   if (error) throw error;
