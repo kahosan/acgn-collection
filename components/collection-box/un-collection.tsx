@@ -64,7 +64,14 @@ export function UnCollection({ subjectId, subjectType, mutate }: Props) {
         onValueChange={v => setTags(v.split(' '))}
       />
 
-      <Textarea label="吐槽" labelPlacement="outside" maxRows={3} value={comment} onValueChange={v => setComment(v)} />
+      <Textarea
+        label="吐槽"
+        labelPlacement="outside"
+        placeholder="喂，你对我的名字有什么看法的话不妨说来听听啊"
+        maxRows={3}
+        value={comment}
+        onValueChange={v => setComment(v)}
+      />
 
       <div className="self-end">
         <ButtonGroup fullWidth>
