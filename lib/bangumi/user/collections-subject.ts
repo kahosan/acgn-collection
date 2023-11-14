@@ -1,5 +1,5 @@
 import useSWRImmutable from 'swr/immutable';
-import { HTTPError, fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';
+import { HTTPError, fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import { useUser } from '~/hooks/use-user';
 import { useToken } from '~/hooks/use-token';
@@ -12,7 +12,7 @@ export const useUserSubjectCollections = (payload: UserSubjectCollectionPayload)
 
   const { data, isLoading, mutate, error } = useSWRImmutable<UserSubjectCollection, Error>(
     (user?.username && token) ? [`/v0/users/${user.username}/collections/${payload.subject_id}`, token] : null,
-    fetcherWithAuth,
+    fetcher,
     {
       shouldRetryOnError: false,
       onError(error) {

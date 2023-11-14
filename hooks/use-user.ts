@@ -1,5 +1,5 @@
 import useSWRImmutable from 'swr/immutable';
-import { fetcherErrorHandler, fetcherWithAuth, HTTPError } from '~/lib/fetcher';
+import { fetcher, fetcherErrorHandler, HTTPError } from '~/lib/fetcher';
 
 import { useToken } from './use-token';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ export const useUser = () => {
 
   const { data, error, isLoading, mutate } = useSWRImmutable<UserInfo, Error>(
     token ? ['/v0/me', token] : null,
-    fetcherWithAuth,
+    fetcher,
     {
       shouldRetryOnError: false,
       onError(error) {

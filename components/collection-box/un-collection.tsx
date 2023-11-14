@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { transformCollectionTypeToJSX } from '~/utils';
 
-import { useAddUserCollection } from '~/lib/bangumi/user/collection-add';
+import { useAddUserCollection } from '~/lib/bangumi/user';
 
 import type { SubjectType } from '~/types/bangumi/subjects';
 

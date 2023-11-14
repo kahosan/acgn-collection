@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 import { tokenAtom } from '~/hooks/use-token';
 
-import { fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';
+import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import type { UserInfo } from '~/types/bangumi/user';
 
@@ -24,7 +24,7 @@ export default function Login() {
   const login = async () => {
     try {
       setIsLoading(true);
-      const data = await fetcherWithAuth<UserInfo>(['/v0/me', token]);
+      const data = await fetcher<UserInfo>(['/v0/me', token]);
 
       toast(`欢迎 ${data.username}!`);
 

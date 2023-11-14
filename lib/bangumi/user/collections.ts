@@ -1,5 +1,5 @@
 import useSWRImmutable from 'swr/immutable';
-import { fetcherErrorHandler, fetcherWithAuth } from '~/lib/fetcher';
+import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import { useUser } from '~/hooks/use-user';
 import { useToken } from '~/hooks/use-token';
@@ -17,7 +17,7 @@ export const useUserCollections = (payload: UserCollectionPayload) => {
 
   const { data, isLoading, mutate, error } = useSWRImmutable<UserCollection, Error>(
     (user?.username && token) ? [`/v0/users/${user.username}/collections?${params.toString()}`, token] : null,
-    fetcherWithAuth,
+    fetcher,
     {
       onError(error) {
         fetcherErrorHandler(error, '收藏获取失败');
