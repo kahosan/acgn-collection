@@ -1,4 +1,6 @@
 import { atom } from 'jotai';
+import { match } from 'ts-pattern';
+import { CollectionTypeForAnime, CollectionTypeForBook, CollectionTypeForGame, CollectionTypeForMusic } from '~/types/bangumi/collection';
 
 import { SubjectType } from '~/types/bangumi/subjects';
 
@@ -32,4 +34,20 @@ export const transformSubjectTypeToJSX = <T>(cb: (type: number) => T, other: Rec
     .map(type => Number.parseInt(type, 10))
     .map(type => cb(type))
     .reverse();
+};
+
+export const getCollectionTypeBySubjectType = (subjectType: SubjectType) => match<1 | 2 | 3 | 4 | 6>(subjectType)
+  .with(6, () => CollectionTypeForAnime) // Real
+  .with(2, () => CollectionTypeForAnime)
+  .with(1, () => CollectionTypeForBook)
+  .with(3, () => CollectionTypeForMusic)
+  .with(4, () => CollectionTypeForGame)
+  .exhaustive();
+
+export const transformCollectionTypeToJSX = (cb: (type: number, label: string) => React.ReactNode, subjectType: SubjectType, other: Record<string, string> = {}) => {
+  const collectionType = getCollectionTypeBySubjectType(subjectType);
+  return Object.keys({ ...collectionType, ...other })
+    .filter(type => Number.isInteger(Number.parseInt(type, 10)))
+    .map(type => Number.parseInt(type, 10))
+    .map(type => cb(type, collectionType[type]));
 };

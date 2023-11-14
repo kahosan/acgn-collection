@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .bg-card {
+    @apply p-4 bg-zinc-50 dark:bg-zinc-800/40 rounded-large;
+  }
+}
+
 /* Thin */
 @font-face {
   font-family: 'HarmonyOS Sans SC';

@@ -1,5 +1,7 @@
 import Providers from '~/providers';
 
+import { Suspense } from 'react';
+
 import Header from '~/components/header';
 
 import type { Metadata } from 'next';
@@ -22,9 +24,11 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          <main className="max-w-8xl mx-auto py-4 px-6">
-            {children}
-          </main>
+          <Suspense>
+            <main className="max-w-8xl mx-auto py-4 px-6">
+              {children}
+            </main>
+          </Suspense>
         </Providers>
       </body>
     </html>

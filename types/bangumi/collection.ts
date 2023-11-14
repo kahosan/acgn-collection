@@ -1,6 +1,6 @@
 import type { SlimSubject, SubjectType } from './subjects';
 
-export enum CollectionType {
+export enum CollectionTypeForAnime {
   '想看' = 1,
   '看过' = 2,
   '在看' = 3,
@@ -16,11 +16,27 @@ export enum CollectionTypeForGame {
   '抛弃' = 5
 }
 
+export enum CollectionTypeForBook {
+  '想读' = 1,
+  '读过' = 2,
+  '在读' = 3,
+  '搁置' = 4,
+  '抛弃' = 5
+}
+
+export enum CollectionTypeForMusic {
+  '想听' = 1,
+  '听过' = 2,
+  '在听' = 3,
+  '搁置' = 4,
+  '抛弃' = 5
+}
+
 // Request
 
 export interface UserCollectionPayload {
   subject_type?: SubjectType
-  type?: CollectionType
+  type?: number
   limit?: number
   offset?: number
 }
@@ -30,7 +46,7 @@ export interface UserSubjectCollectionPayload {
 }
 
 export interface UserSubjectCollectionModifyPayload {
-  type?: CollectionType
+  type?: number
   rate?: number
   ep_status?: number
   vol_status?: number
@@ -57,7 +73,7 @@ export interface UserSubjectCollection {
   vol_status: number
   ep_status: number
   subject_type: SubjectType
-  type: CollectionType
+  type: number
   rate: number
   private: boolean
 }

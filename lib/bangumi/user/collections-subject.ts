@@ -14,6 +14,7 @@ export const useUserSubjectCollections = (payload: UserSubjectCollectionPayload)
     (user?.username && token) ? [`/v0/users/${user.username}/collections/${payload.subject_id}`, token] : null,
     fetcherWithAuth,
     {
+      shouldRetryOnError: false,
       onError(error) {
         if (!(error instanceof HTTPError && error.status === 404))
           fetcherErrorHandler(error, '收藏获取失败');

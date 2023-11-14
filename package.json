@@ -28,7 +28,8 @@
     "react": "^18",
     "react-dom": "^18",
     "sonner": "^1.0.3",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "ts-pattern": "^5.0.5"
   },
   "devDependencies": {
     "@types/node": "^20",

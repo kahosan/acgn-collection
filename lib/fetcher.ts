@@ -98,3 +98,24 @@ export const fetcherWithOptions = async <T>([url, options]: [string, RequestInit
 
   return res.json() as Promise<T>;
 };
+
+export const fetcherWithAuthMutation = async ([url, token]: [string, string], { arg }: { arg: unknown }) => {
+  const headers = new Headers({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  const res = await fetch(new URL(url, BASE_URL), {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(arg)
+  });
+
+  if (!res.ok) {
+    const data = await res.json();
+    if ('title' in data)
+      throw new HTTPError(data.title, data, res.status);
+
+    throw new Error('Failed for fetcherWithAuth');
+  }
+};
