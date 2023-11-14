@@ -46,13 +46,13 @@ export default function Subject({ params }: Props) {
         </div>
       </div>
       <div className="mt-5 flex flex-wrap sm:flex-nowrap gap-4">
-        <div className="bg-card sm:max-w-[18rem] sm:min-w-[18rem]">
+        <div className="bg-card w-full sm:max-w-[18rem] sm:min-w-[18rem]">
           <InfoBox infos={data.infobox} />
         </div>
-        <div>
+        <div className="w-full">
           <div className="bg-card">
             <div className="mb-2 dark:text-blue-200 text-blue-400">剧情简介</div>
-            <p className="text-sm">{data.summary}</p>
+            <p className="text-sm">{data.summary || '暂无'}</p>
           </div>
           <div className="bg-card mt-2">
             <div className="mb-2 dark:text-blue-200 text-blue-400">大家将「{data.name}」标注为</div>
