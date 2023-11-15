@@ -7,6 +7,7 @@ import Loading from '~/components/loading';
 import Tags from '~/components/collection-info/tags';
 import CollectionBox from '~/components/collection-box';
 import InfoBox from '~/components/collection-info/info-box';
+import Summary from '~/components/collection-info/summary';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
@@ -49,12 +50,12 @@ export default function Subject({ params }: Props) {
         <div className="bg-card w-full sm:max-w-[18rem] sm:min-w-[18rem]">
           <InfoBox infos={data.infobox} />
         </div>
-        <div className="w-full">
+        <div className="w-full flex flex-col gap-4">
           <div className="bg-card">
             <div className="mb-2 dark:text-blue-200 text-blue-400">剧情简介</div>
-            <p className="text-sm">{data.summary || '暂无'}</p>
+            <Summary summary={data.summary} />
           </div>
-          <div className="bg-card mt-2">
+          <div className="bg-card">
             <div className="mb-2 dark:text-blue-200 text-blue-400">大家将「{data.name}」标注为</div>
             <Tags tags={data.tags} />
           </div>
