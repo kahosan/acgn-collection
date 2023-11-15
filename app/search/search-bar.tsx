@@ -1,7 +1,6 @@
 import { Input, Tab, Tabs } from '@nextui-org/react';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import { transformSubjectTypeToJSX } from '~/utils';
 
@@ -9,21 +8,13 @@ import { SubjectType } from '~/types/bangumi/subjects';
 
 interface Props {
   payload: { keyword: string, type: string }
+  updateParams: (type: string, keyword: string) => void
 }
 
-export default function SearchBar({ payload }: Props) {
-  const router = useRouter();
+export default function SearchBar({ payload, updateParams }: Props) {
   const [keyword, setKeyword] = useState(payload.keyword);
 
-  const handleSearch = (push = true, type?: string) => {
-    const href = `/search?keyword=${encodeURIComponent(keyword)}&type=${type ?? payload.type}`;
-
-    if (push)
-      router.push(href);
-    else
-      router.replace(href);
-  };
-
+  const handleSearch = (type?: string) => updateParams(type ?? payload.type, keyword);
   return (
     <div className="mb-4">
       <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
@@ -44,7 +35,7 @@ export default function SearchBar({ payload }: Props) {
         <Tabs
           selectedKey={payload.type}
           onSelectionChange={key => {
-            handleSearch(false, key.toString());
+            handleSearch(key.toString());
           }}
           classNames={{
             tabList: 'rounded-medium',

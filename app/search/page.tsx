@@ -7,8 +7,7 @@ import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';
 import CollectionCard from '~/components/collection-card';
 
-import { useSearchParams } from 'next/navigation';
-import { parseAsInteger, useQueryState } from 'next-usequerystate';
+import { parseAsInteger, parseAsString, useQueryState } from 'next-usequerystate';
 
 import { useSearch } from '~/lib/bangumi/subjects';
 
@@ -16,13 +15,21 @@ import type { SearchPayload } from '~/types/bangumi/subjects';
 
 // enhance search filter
 export default function Search() {
-  const type = useSearchParams().get('type') ?? '7';
-  const keyword = useSearchParams().get('keyword') ?? '';
+  const [type, setType] = useQueryState(
+    'type',
+    parseAsString
+      .withDefault('7')
+  );
+
+  const [keyword, setKeyword] = useQueryState(
+    'keyword',
+    parseAsString
+      .withDefault('')
+  );
 
   const [offset, setOffset] = useQueryState(
     'offset',
     parseAsInteger
-      .withOptions({ shallow: true })
       .withDefault(0)
   );
 
@@ -36,11 +43,17 @@ export default function Search() {
 
   const { data, isLoading, error } = useSearch(payload, offset, 20);
 
+  const updateParams = (type: string, keyword: string) => {
+    setType(type);
+    setKeyword(keyword);
+    setOffset(0);
+  };
+
   if (error) throw error;
 
   return (
     <div>
-      <SearchBar payload={{ keyword: payload.keyword, type }} />
+      <SearchBar payload={{ keyword: payload.keyword, type }} updateParams={updateParams} />
       {
         data?.data.length === 0
           ? <div className="text-center text-gray-500 mt-[20rem]">没有更多了</div>
