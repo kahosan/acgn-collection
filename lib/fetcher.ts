@@ -48,14 +48,14 @@ export async function fetcher<T>(key: string | [string, string | RequestInit], {
   }
 
   if (arg) {
-    options.method = 'POST';
+    options.method = options.method ?? 'POST';
     options.body = JSON.stringify(arg);
     headers.set('Content-Type', 'application/json');
   }
 
   const res = await fetch(new URL(url, BASE_URL), {
-    headers,
-    ...options
+    ...options,
+    headers
   });
 
   const data = res.headers.get('Content-Type')?.includes('application/json') ? await res.json() : await res.text();
