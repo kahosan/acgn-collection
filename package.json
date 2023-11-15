@@ -23,7 +23,7 @@
     "jotai": "^2.4.3",
     "next": "14.0.0",
     "next-themes": "^0.2.1",
-    "next-usequerystate": "^1.8.4",
+    "next-usequerystate": "^1.12.0",
     "rc-rate": "^2.12.0",
     "react": "^18",
     "react-dom": "^18",
