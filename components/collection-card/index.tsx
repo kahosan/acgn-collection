@@ -48,7 +48,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
               />
             )
         }
-        <CardBody className="flex flex-row">
+        <CardBody className="flex flex-row gap-4 p-5">
           <div className="relative min-h-[14rem] max-h-[14rem] min-w-[9rem] max-w-[9rem] sm:min-w-[10rem] sm:max-w-[10rem]">
             <NextImage
               src={(subject.images?.medium ?? subject.image) || 'https://placehold.co/160x224/png'}
@@ -60,7 +60,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
               onLoad={e => { e.currentTarget.style.opacity = '1'; }}
             />
           </div>
-          <div className="flex flex-col justify-between gap-2 overflow-hidden ml-4">
+          <div className="flex flex-col justify-between gap-2 overflow-hidden">
             <div>
               <Tooltip content={subject.name_cn || subject.name}>
                 <Link as={NextLink} href={`/subject/${subject.id}`} color="foreground" className="block font-medium text-xl w-min max-w-[100%] truncate">

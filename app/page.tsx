@@ -51,9 +51,6 @@ export default function Collection() {
           aria-label="选择类型"
           labelPlacement="outside"
           className="max-w-[6rem]"
-          classNames={{
-            value: 'text-small'
-          }}
           selectionMode="single"
           selectedKeys={[type]}
           disallowEmptySelection

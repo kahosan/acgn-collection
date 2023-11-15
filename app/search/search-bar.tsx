@@ -12,9 +12,13 @@ interface Props {
 }
 
 export default function SearchBar({ payload, updateParams }: Props) {
-  const [keyword, setKeyword] = useState(payload.keyword);
+  const [keyword, setKeyword] = useState('');
+
+  if (keyword !== payload.keyword)
+    setKeyword(payload.keyword);
 
   const handleSearch = (type?: string) => updateParams(type ?? payload.type, keyword);
+
   return (
     <div className="mb-4">
       <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
@@ -30,17 +34,18 @@ export default function SearchBar({ payload, updateParams }: Props) {
               className="cursor-pointer i-mdi-magnify text-lg"
               onClick={() => handleSearch()} />
           }
-          className="max-w-xl hidden sm:block"
+          radius="sm"
+          labelPlacement="outside"
+          className="max-w-xl hidden sm:flex"
         />
         <Tabs
+          radius="sm"
           selectedKey={payload.type}
           onSelectionChange={key => {
             handleSearch(key.toString());
           }}
           classNames={{
-            tabList: 'rounded-medium',
-            tab: 'sm:h-8 sm:text-small px-2 sm:px-3 h-7 text-tiny rounded-small',
-            cursor: 'rounded-small'
+            tab: 'sm:h-8 sm:text-small px-2 sm:px-3 h-7 text-tiny'
           }}
           aria-label="options"
         >

@@ -16,8 +16,8 @@ interface Props {
 
 export function UnCollection({ subjectId, subjectType, mutate }: Props) {
   const [selected, setSelected] = useState<number>(1); // CollectionType - /types/bangumi/collection 查看详细定义
-  const [tags, setTags] = useState<string[]>();
-  const [comment, setComment] = useState<string>();
+  const [tags, setTags] = useState<string[]>([]);
+  const [comment, setComment] = useState<string>('');
   const [privateMode, setPrivateMode] = useState(false);
 
   const { handleAdd, isMutating } = useAddUserCollection({
@@ -60,7 +60,7 @@ export function UnCollection({ subjectId, subjectType, mutate }: Props) {
         classNames={{
           mainWrapper: 'flex-auto'
         }}
-        value={tags?.join(' ')}
+        value={tags.join(' ')}
         onValueChange={v => setTags(v.split(' '))}
       />
 
@@ -71,6 +71,9 @@ export function UnCollection({ subjectId, subjectType, mutate }: Props) {
         maxRows={3}
         value={comment}
         onValueChange={v => setComment(v)}
+        classNames={{
+          input: 'h-[60px]'
+        }}
       />
 
       <div className="self-end">

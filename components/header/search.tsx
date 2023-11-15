@@ -27,10 +27,10 @@ export default function HearderSearch() {
         labelPlacement="outside"
         className="max-w-[4rem]"
         classNames={{
-          trigger: 'rounded-r-none dark:bg-default-500/20 bg-default-400/20',
+          trigger: 'rounded-r-none dark:bg-default-500/20 bg-default-400/20 justify-center',
           innerWrapper: 'w-max',
           selectorIcon: 'hidden',
-          popover: 'w-max'
+          popoverContent: 'w-max'
         }}
         selectionMode="single"
         defaultSelectedKeys={[type]}

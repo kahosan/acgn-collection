@@ -12,11 +12,14 @@ import ToasterProvider from './toaster';
 import TransitionProvider from './transition';
 
 import { compose } from '~/utils';
+import { useRouter } from 'next/navigation';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   return compose(
     children => <TransitionProvider children={children} />,
-    children => <NextUIProvider children={children} />,
+    // eslint-disable-next-line @typescript-eslint/unbound-method -- docs
+    children => <NextUIProvider children={children} navigate={router.push} />,
     children => <NextThemeProvider children={children} attribute="class" enableSystem />,
     children => <JotaiProvider children={children} />,
     children => <AuthProvider children={children} />,
