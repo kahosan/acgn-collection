@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { transformCollectionTypeToJSX } from '~/utils';
 
-import { useAddUserCollection } from '~/lib/bangumi/user';
+import { useModifyUserCollection } from '~/lib/bangumi/user';
 
 import type { SubjectType } from '~/types/bangumi/subjects';
 
@@ -18,16 +18,16 @@ export default function UnCollection({ subjectId, subjectType, mutate }: Props) 
   const [selected, setSelected] = useState<number>(1); // CollectionType - /types/bangumi/collection 查看详细定义
   const [tags, setTags] = useState<string[]>([]);
   const [comment, setComment] = useState<string>('');
-  const [privateMode, setPrivateMode] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(false);
 
-  const { handleAdd, isMutating } = useAddUserCollection(subjectId);
+  const { handleModify, isMutating } = useModifyUserCollection(subjectId);
 
   const handleCollection = () => {
-    handleAdd({
+    handleModify({
       type: selected,
-      tags,
+      tags: tags.length ? tags : undefined,
       comment,
-      private: privateMode
+      private: isPrivate
     }, () => mutate());
   };
 
@@ -83,7 +83,7 @@ export default function UnCollection({ subjectId, subjectType, mutate }: Props) 
               <Button variant="faded">私密</Button>
             </PopoverTrigger>
             <PopoverContent>
-              <Checkbox size="sm" isSelected={privateMode} onValueChange={() => setPrivateMode(p => !p)}>
+              <Checkbox size="sm" isSelected={isPrivate} onValueChange={() => setIsPrivate(p => !p)}>
                 独属于我的 Moment
               </Checkbox>
             </PopoverContent>

@@ -6,33 +6,33 @@ import { useToken } from '~/hooks/use-token';
 
 import type { UserSubjectCollectionModifyPayload } from '~/types/bangumi/collection';
 
-export const useAddUserCollection = (subjectId: number) => {
+export const useModifyUserCollection = (subjectId: number) => {
   const [token] = useToken();
   const { trigger, isMutating } = useSWRMutation(
     token ? [`/v0/users/-/collections/${subjectId}`, token] : null,
     fetcher
   );
 
-  const handleAdd = (payload: UserSubjectCollectionModifyPayload, refreshData: () => void) => {
+  const handleModify = (payload: UserSubjectCollectionModifyPayload, refreshData: () => void) => {
     const fn = async () => {
       await trigger(payload);
       refreshData();
     };
 
     toast.promise(fn, {
-      success: '新增收藏成功',
-      loading: '正在新增收藏...',
+      success: '修改或新增收藏成功',
+      loading: '正在修改或新增收藏...',
       error(e) {
         if (e instanceof HTTPError)
-          return `新增收藏失败：${e.data.description}`;
+          return `修改或新增收藏失败：${e.data.description}`;
 
-        return '新增收藏失败';
+        return '修改或新增收藏失败';
       }
     });
   };
 
   return {
-    handleAdd,
+    handleModify,
     isMutating
   };
 };
