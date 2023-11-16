@@ -1,3 +1,5 @@
 export { useUserCollections } from './collections';
 export { useUserSubjectCollections } from './collections-subject';
-export { useAddUserCollection } from './collection-add';
+export { useModifyUserCollection } from './collection-modify';
+
+export { useUserEpisodes, useUserEpisodesPatch } from './episodes';
