@@ -1,4 +1,4 @@
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import { useUser } from '~/hooks/use-user';
@@ -15,7 +15,7 @@ export const useUserCollections = (payload: UserCollectionPayload) => {
   for (const [key, value] of Object.entries(payload))
     params.set(key, value);
 
-  const { data, isLoading, mutate, error } = useSWRImmutable<UserCollection, Error>(
+  const { data, isLoading, mutate, error } = useSWR<UserCollection, Error>(
     (user?.username && token) ? [`/v0/users/${user.username}/collections?${params.toString()}`, token] : null,
     fetcher,
     {
