@@ -196,7 +196,15 @@ function Episodes({ payload, totalEpisode, collectionType }: EpisodesProps) {
               isOpen={isMobile ? openState.isOpen && openState.ep === episode.ep : undefined}
               content={
                 <div className="min-w-[12rem] max-w-[20rem] p-2">
-                  <div>{episode.name || '暂无标题'}</div>
+                  <Link
+                    href={`https://bgm.tv/ep/${episode.id}`}
+                    color="foreground"
+                    size="sm"
+                    showAnchorIcon
+                    isExternal
+                  >
+                    {episode.name || '暂无标题'}
+                  </Link>
                   <Divider className="my-2" />
                   <div>
                     {
