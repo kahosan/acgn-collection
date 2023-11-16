@@ -14,22 +14,21 @@ interface Props {
   mutate: () => void
 }
 
-export function UnCollection({ subjectId, subjectType, mutate }: Props) {
+export default function UnCollection({ subjectId, subjectType, mutate }: Props) {
   const [selected, setSelected] = useState<number>(1); // CollectionType - /types/bangumi/collection 查看详细定义
   const [tags, setTags] = useState<string[]>([]);
   const [comment, setComment] = useState<string>('');
   const [privateMode, setPrivateMode] = useState(false);
 
-  const { handleAdd, isMutating } = useAddUserCollection({
-    type: selected,
-    tags,
-    comment,
-    private: privateMode
-  }, subjectId);
+  const { handleAdd, isMutating } = useAddUserCollection(subjectId);
 
-  const handleCollection = async () => {
-    await handleAdd();
-    mutate();
+  const handleCollection = () => {
+    handleAdd({
+      type: selected,
+      tags,
+      comment,
+      private: privateMode
+    }, () => mutate());
   };
 
   return (
