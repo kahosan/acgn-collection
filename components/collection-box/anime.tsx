@@ -58,7 +58,7 @@ export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props
         <div className="text-sm pb-1.5">我的评价</div>
         <Rate
           className="[&_li.rc-rate-star-zero.rc-rate-star]:text-[#f8b0405c] [&_li.rc-rate-star.rc-rate-star-half]:text-[#f8b0405c]"
-          value={userSubjectData.rate / 2}
+          value={userSubjectData.rate}
           count={10}
           character={
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
