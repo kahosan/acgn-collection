@@ -72,12 +72,12 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userSubject
         <ModalFooter>
           <Button color="danger" variant="flat" onPress={onClose}>返回</Button>
           <ButtonGroup color="primary">
-            <Button onPress={handleModify} isLoading={isMutating}>
+            <Button onPress={handleModify} isLoading={isMutating} radius="sm">
               保存
             </Button>
             <Popover>
               <PopoverTrigger>
-                <Button isIconOnly variant="faded">
+                <Button isIconOnly variant="faded" radius="sm">
                   <div className="i-mdi-chevron-up" />
                 </Button>
               </PopoverTrigger>
