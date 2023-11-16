@@ -85,7 +85,7 @@ export default function Collection() {
                     <CollectionCard key={collection.subject_id} subject={collection.subject} mobileMask />
                   ))}
                 </div>
-                <Pagination offset={offset} setOffset={setOffset} total={data.total} />
+                <Pagination offset={offset} setOffset={setOffset} limit={10} total={data.total} />
               </motion.div>
             )
           )

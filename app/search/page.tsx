@@ -73,7 +73,7 @@ export default function Search() {
                     <CollectionCard subject={subject} key={subject.id} mobileMask showType />
                   ))}
                 </div>
-                <Pagination offset={offset} setOffset={setOffset} total={data.total} />
+                <Pagination offset={offset} limit={20} setOffset={setOffset} total={data.total} />
               </motion.div>
             ))
       }
