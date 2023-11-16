@@ -77,7 +77,7 @@ export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props
           <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subjectData.rating.rank}</Chip>
           <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subjectData.rating.score}</Chip>
         </div>
-        <Divider className="my-2 max-w-96" />
+        <Divider className="my-2 max-w-[8rem]" />
         <Link href={`https://bgm.tv/subject/${subjectData.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
       </div>
 
