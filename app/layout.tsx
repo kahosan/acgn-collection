@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   icons: 'https://unpkg.com/xfb/favicon/favicon.ico'
 };
 
-export const harmonyOsSansSc = localFont({
+const harmonyOsSansSc = localFont({
   src: [
     {
       path: '../public/fonts/HarmonyOS_Sans_SC_Thin.woff2',
