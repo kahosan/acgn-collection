@@ -1,10 +1,9 @@
-import { cookies } from 'next/headers';
-
 import { HTTPError, fetcher } from '~/lib/fetcher';
 import type { UserInfo } from '~/types/bangumi/user';
 
 export async function GET(req: Request) {
   const token = req.headers.get('Authorization')?.replace(/^Bearer /, '') ?? '';
+  const maxAge = 365 * 24 * 60 * 60;
 
   const options: RequestInit = {
     headers: {
@@ -18,7 +17,7 @@ export async function GET(req: Request) {
     return new Response(JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json',
-        'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict;`
+        'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge};`
       }
     });
   } catch (e) {
@@ -30,6 +29,5 @@ export async function GET(req: Request) {
 }
 
 export function DELETE() {
-  cookies().delete('token');
-  return new Response(null, { status: 204 });
+  return new Response(null, { status: 204, headers: { 'Set-Cookie': 'token=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0;' } });
 }
