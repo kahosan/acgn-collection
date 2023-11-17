@@ -35,7 +35,6 @@ export default function HearderSearch() {
         selectionMode="single"
         selectedKeys={[type]}
         disallowEmptySelection
-        // @ts-expect-error -- TODO nextui 把这个干掉了 why
         onChange={e => {
           setType(e.target.value);
         }}

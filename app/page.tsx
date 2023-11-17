@@ -54,7 +54,6 @@ export default function Collection() {
           selectionMode="single"
           selectedKeys={[type]}
           disallowEmptySelection
-          // @ts-expect-error -- TODO nextui 把这个干掉了 why
           onChange={e => {
             setOffset(0);
             router.push(`/?type=${e.target.value}`);

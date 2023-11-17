@@ -16,7 +16,6 @@ export default function ToggleTheme() {
       selectionMode="single"
       selectedKeys={[theme ?? systemTheme ?? 'system']}
       disallowEmptySelection
-      // @ts-expect-error -- TODO nextui 把这个干掉了 why
       onChange={e => setTheme(e.target.value)}
     >
       <SelectItem key="system" value="system">系统</SelectItem>
