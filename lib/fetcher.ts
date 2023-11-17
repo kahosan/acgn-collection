@@ -25,13 +25,15 @@ export const fetcherErrorHandler = (error: Error, message?: string) => {
   }
 };
 
-export async function fetcher<T>(key: string | [string, string | RequestInit], { arg }: { arg?: Record<string, any> } = {}) {
+export type RequestInitWithBase = RequestInit & { base?: string | URL };
+
+export async function fetcher<T>(key: string | [string, string | RequestInitWithBase], { arg }: { arg?: Record<string, any> } = {}) {
   const headers = new Headers();
 
   const [url] = typeof key === 'string' ? [key] : key;
 
   let token: string | undefined;
-  const options: RequestInit = {};
+  const options: RequestInitWithBase = {};
 
   const v = Array.isArray(key) ? key.at(1) : undefined;
   if (typeof v === 'string')
@@ -53,7 +55,7 @@ export async function fetcher<T>(key: string | [string, string | RequestInit], {
     headers.set('Content-Type', 'application/json');
   }
 
-  const res = await fetch(new URL(url, BASE_URL), {
+  const res = await fetch(options.base === '/' ? url : new URL(url, BASE_URL), {
     ...options,
     headers
   });

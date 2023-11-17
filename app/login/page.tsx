@@ -24,7 +24,12 @@ export default function Login() {
   const login = async () => {
     try {
       setIsLoading(true);
-      const data = await fetcher<UserInfo>(['/v0/me', token]);
+      const data = await fetcher<UserInfo>(
+        [
+          '/login/api',
+          { base: '/', headers: { Authorization: `Bearer ${token}` } }
+        ]
+      );
 
       toast(`欢迎 ${data.username}!`);
 
@@ -51,10 +56,11 @@ export default function Login() {
         <Input
           label="Token"
           size="sm"
-          onChange={e => setToken(e.target.value)}
+          onValueChange={v => setToken(v)}
+          onKeyUp={e => e.key === 'Enter' && login()}
         />
         <Button
-          onClick={login}
+          onPress={login}
           isLoading={isLoading}
           color="primary"
           size="lg"

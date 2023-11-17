@@ -18,6 +18,7 @@ export const useUser = () => {
       onError(error) {
         if (error instanceof HTTPError && error.status === 401) {
           setToken(null);
+          fetcher(['/api/login', { method: 'DELETE', base: '/' }]);
           router.push('/login');
           fetcherErrorHandler(error, 'Token 失效, 尝试重新登入');
           return;

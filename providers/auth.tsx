@@ -4,6 +4,8 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { tokenAtom } from '~/hooks/use-token';
 
+import { fetcher } from '~/lib/fetcher';
+
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const token = useAtomValue(tokenAtom);
 
@@ -11,10 +13,12 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!token)
+    if (!token) {
+      fetcher(['/login/api', { method: 'DELETE', base: '/' }]);
       router.push('/login');
-    else if (pathname === '/login' && token)
+    } else if (pathname === '/login' && token) {
       router.push('/');
+    }
   }, [pathname, router, token]);
 
   return children;
