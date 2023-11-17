@@ -18,47 +18,53 @@ import Rate from 'rc-rate';
 import 'rc-rate/assets/index.css';
 
 import { match } from 'ts-pattern';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { useIsMobile } from '~/hooks/use-mobile';
 
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';
-import { useModifyUserCollection, useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
+import { useUserCollectionModify, useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
 
 import type { Subject } from '~/types/bangumi/subjects';
 import { CollectionTypeForAnime } from '~/types/bangumi/collection';
-import type { UserSubjectCollection, UserSubjectCollectionModifyPayload } from '~/types/bangumi/collection';
+import type { UserCollection, UserCollectionModifyPayload } from '~/types/bangumi/collection';
 import type { Episode, EpisodesPayload } from '~/types/bangumi/episodes';
 import { EpisodesType, EpisodeCollectionType } from '~/types/bangumi/episodes';
 import ModifyModal from './modal';
 
 interface Props {
-  subjectData: Subject
-  userSubjectData: UserSubjectCollection
-  mutate: () => void
+  subject: Subject
+  userCollection: UserCollection
+  userCollectionMutate: () => void
 }
 
-export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props) {
+export default function AnimeBox({ subject, userCollection, userCollectionMutate }: Props) {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const { handleModify, isMutating } = useModifyUserCollection(subjectData.id);
+  const { handleModify, isMutating } = useUserCollectionModify(subject.id);
 
-  const handleUpdate = (payload: UserSubjectCollectionModifyPayload, cb: () => void) => {
+  const handleUpdate = (payload: UserCollectionModifyPayload, cb: () => void) => {
     handleModify(payload, () => {
-      mutate();
+      userCollectionMutate();
       cb();
     });
   };
 
   return (
     <div className="grid gap-4 sm:gap-0 h-full">
-      <Episodes payload={{ subject_id: subjectData.id }} totalEpisode={subjectData.eps} collectionType={userSubjectData.type} />
+      <Episodes
+        payload={{ subject_id: subject.id, type: EpisodesType.本篇 }}
+        totalEpisode={subject.eps}
+        watchedEpisode={userCollection.ep_status}
+        collectionType={userCollection.type}
+        userCollectionMutate={userCollectionMutate}
+      />
 
       <div>
         <div className="text-sm pb-1.5">我的评价</div>
         <Rate
           className="[&_li.rc-rate-star-zero.rc-rate-star]:text-[#f8b0405c] [&_li.rc-rate-star.rc-rate-star-half]:text-[#f8b0405c]"
-          value={userSubjectData.rate}
+          value={userCollection.rate}
           count={10}
           character={
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -73,12 +79,12 @@ export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props
       <div>
         <div className="text-sm pb-1.5">社区评价</div>
         <div className="flex flex-row gap-2">
-          <Chip radius="sm" color="primary" startContent={<div className="p-2">评分数</div>}>{subjectData.rating.total}</Chip>
-          <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subjectData.rating.rank}</Chip>
-          <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subjectData.rating.score}</Chip>
+          <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subject.rating.rank}</Chip>
+          <Chip radius="sm" color="primary" startContent={<div className="p-2">评分数</div>}>{subject.rating.total}</Chip>
+          <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subject.rating.score}</Chip>
         </div>
         <Divider className="my-2 max-w-[8rem]" />
-        <Link href={`https://bgm.tv/subject/${subjectData.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
+        <Link href={`https://bgm.tv/subject/${subject.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
       </div>
 
       <div className="self-end">
@@ -104,7 +110,7 @@ export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         onClose={onClose}
-        userSubjectData={userSubjectData}
+        userCollection={userCollection}
         handleUpdate={handleUpdate}
         isMutating={isMutating}
       />
@@ -115,10 +121,12 @@ export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props
 interface EpisodesProps {
   payload: EpisodesPayload
   totalEpisode: number
+  watchedEpisode: number
   collectionType: CollectionTypeForAnime
+  userCollectionMutate: () => void
 }
 
-function Episodes({ payload, totalEpisode, collectionType }: EpisodesProps) {
+function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userCollectionMutate }: EpisodesProps) {
   const { data, error } = useEpisodes(payload);
   const {
     data: userData,
@@ -141,46 +149,66 @@ function Episodes({ payload, totalEpisode, collectionType }: EpisodesProps) {
   }, [data, userData]);
 
   const isMobile = useIsMobile();
-  const [episode, setEpisode] = useState('');
+  const [episode, setEpisode] = useState(watchedEpisode.toString());
   const [openState, setOpenState] = useState({
     isOpen: false,
     ep: 0
   });
 
-  const handleUpdateEpisodeCollectionType = (key: EpisodeCollectionType, ep: number, type?: EpisodeCollectionType) => {
+  const handleUpdateEpisodeCollectionType = useCallback((key: EpisodeCollectionType, ep: number, type?: EpisodeCollectionType) => {
     if ((type && type === key) || isMutating)
       return;
 
     const refreshData = () => {
+      userCollectionMutate();
       userDataMutate(
         userData
           ? {
             ...userData,
-            data: userData.data.map(e => {
-              if (e.episode.ep === ep)
-                return { ...e, type: key };
-              return e;
-            })
+            data: userData.data.map(e => match(key)
+              .when(
+                k => EpisodeCollectionType.看到 === k && ep < watchedEpisode,
+                () => ({ ...e, type: EpisodeCollectionType.看过 })
+              )
+              .when(
+                k => EpisodeCollectionType.看到 === k && ep < watchedEpisode && ep < e.episode.ep,
+                () => ({ ...e, type: EpisodeCollectionType.撤销 })
+              )
+              .when(
+                () => e.episode.ep === ep,
+                () => ({ ...e, type: key })
+              )
+              .otherwise(() => e))
           }
           : undefined
       );
     };
 
-    if (key === EpisodeCollectionType.看到) {
-      const episodeId = episodes?.filter(e => e.ep <= ep).map(e => e.id) ?? [];
-      handleUpdate({
-        episode_id: episodeId,
-        type: EpisodeCollectionType.看过
-      }, refreshData);
-    } else {
-      const id = episodes?.find(e => e.ep === ep)?.id;
-      const episodeId = id ? [id] : [];
-      handleUpdate({
-        episode_id: episodeId,
-        type: key
-      }, refreshData);
-    }
-  };
+    match(key)
+      .when(k => EpisodeCollectionType.看到 === k && ep < watchedEpisode, () => {
+        // 集数小于当前观看进度时，将其它集数设为未收藏状态
+        const episodeId = episodes?.filter(e => e.ep > ep).map(e => e.id) ?? [];
+        handleUpdate({
+          episode_id: episodeId,
+          type: EpisodeCollectionType.撤销
+        }, refreshData);
+      })
+      .when(k => EpisodeCollectionType.看到 === k, () => {
+        const episodeId = episodes?.filter(e => e.ep <= ep).map(e => e.id) ?? [];
+        handleUpdate({
+          episode_id: episodeId,
+          type: EpisodeCollectionType.看过
+        }, refreshData);
+      })
+      .otherwise(() => {
+        const id = episodes?.find(e => e.ep === ep)?.id;
+        const episodeId = id ? [id] : [];
+        handleUpdate({
+          episode_id: episodeId,
+          type: key
+        }, refreshData);
+      });
+  }, [episodes, handleUpdate, isMutating, userCollectionMutate, userData, userDataMutate, watchedEpisode]);
 
   if (error) throw error;
 
@@ -273,18 +301,20 @@ function Episodes({ payload, totalEpisode, collectionType }: EpisodesProps) {
           ? (
             <>
               <Divider className="mt-2 mb-3 w-52" />
-              <div className="w-48">
+              <div className="w-[10.5rem]">
                 <div className="flex gap-2">
                   <Input
                     labelPlacement="outside"
-                    placeholder="剧集"
                     value={episode /** 太草台了，input 不能给 number */}
                     onValueChange={v => setEpisode(v)}
                     variant="faded"
                     radius="sm"
                     endContent={
-                      <div className="text-sm min-w-max">/{totalEpisode}</div>
+                      <span className="text-small">/{totalEpisode}</span>
                     }
+                    classNames={{
+                      innerWrapper: 'items-baseline'
+                    }}
                   />
                   <Button
                     radius="sm"
