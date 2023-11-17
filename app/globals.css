@@ -8,60 +8,6 @@
   }
 }
 
-/* Thin */
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Thin.woff2') format('woff2');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Light */
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Regular */
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Medium */
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Bold */
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Black */
-@font-face {
-  font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Black.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 .dark, [data-theme="dark"] {
   --nextui-background: 0 0% 11%;
 }
@@ -103,8 +49,4 @@ html {
   overflow-y: scroll;
 
   background-color: var(--nextui-background);
-}
-
-body {
-  font-family: HarmonyOS Sans SC, PingFang SC, Helvetica, Microsoft YaHei, -apple-system, Arial, sans-serif;
 }
