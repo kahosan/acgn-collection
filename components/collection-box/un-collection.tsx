@@ -77,7 +77,7 @@ export default function UnCollection({ subjectId, subjectType, mutate }: Props) 
 
       <div className="self-end">
         <ButtonGroup fullWidth>
-          <Button onClick={handleCollection} isLoading={isMutating}>收藏</Button>
+          <Button onPress={handleCollection} isLoading={isMutating}>收藏</Button>
           <Popover>
             <PopoverTrigger>
               <Button variant="faded">私密</Button>

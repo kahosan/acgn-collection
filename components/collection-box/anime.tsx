@@ -83,7 +83,7 @@ export default function AnimeBox({ subjectData, userSubjectData, mutate }: Props
 
       <div className="self-end">
         <ButtonGroup fullWidth radius="sm">
-          <Button variant="faded" onClick={onOpen}>修改</Button>
+          <Button variant="faded" onPress={onOpen}>修改</Button>
           <Popover>
             <PopoverTrigger>
               <Button color="danger">删除</Button>
@@ -252,7 +252,7 @@ function Episodes({ payload, totalEpisode, collectionType }: EpisodesProps) {
                     .with(EpisodeCollectionType.抛弃, () => 'secondary')
                     .otherwise(() => 'default')
                 }
-                onClick={() => {
+                onPress={() => {
                   setOpenState(p => ({
                     isOpen: p.ep === episode.ep ? !p.isOpen : true,
                     ep: episode.ep
@@ -290,7 +290,7 @@ function Episodes({ payload, totalEpisode, collectionType }: EpisodesProps) {
                     radius="sm"
                     variant="faded"
                     isLoading={isMutating}
-                    onClick={() => handleUpdateEpisodeCollectionType(EpisodeCollectionType.看到, Number.parseInt(episode, 10))}
+                    onPress={() => handleUpdateEpisodeCollectionType(EpisodeCollectionType.看到, Number.parseInt(episode, 10))}
                   >
                     更新
                   </Button>

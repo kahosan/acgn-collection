@@ -33,8 +33,9 @@ export default function HearderSearch() {
           popoverContent: 'w-max'
         }}
         selectionMode="single"
-        defaultSelectedKeys={[type]}
+        selectedKeys={[type]}
         disallowEmptySelection
+        // @ts-expect-error -- TODO nextui 把这个干掉了 why
         onChange={e => {
           setType(e.target.value);
         }}
@@ -49,7 +50,7 @@ export default function HearderSearch() {
       </Select>
       <Divider orientation="vertical" />
       <Input
-        onChange={e => setKeyword(e.target.value)}
+        onValueChange={v => setKeyword(v)}
         value={keyword}
         classNames={{
           base: 'max-w-full sm:max-w-[20rem] h-10',

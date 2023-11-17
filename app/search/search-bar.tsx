@@ -24,7 +24,7 @@ export default function SearchBar({ payload, updateParams }: Props) {
       <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
         <Input
           value={keyword}
-          onChange={e => setKeyword(e.target.value)}
+          onValueChange={v => setKeyword(v)}
           onKeyUp={e => {
             if (e.key === 'Enter')
               handleSearch();
