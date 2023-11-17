@@ -87,8 +87,12 @@ export default function Header() {
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownSection showDivider>
-              <DropdownItem key="bangumi-home">
-                <a href={`https://bgm.tv/user/${data?.username ?? ''}`} target="_blank" rel="noreferrer">Bangumi 主页</a>
+              <DropdownItem
+                as="a"
+                key="bangumi-home"
+                href={`https://bgm.tv/user/${data?.username ?? ''}`}
+              >
+                Bangumi 主页
               </DropdownItem>
               <DropdownItem
                 isReadOnly
@@ -102,7 +106,7 @@ export default function Header() {
                 主题
               </DropdownItem>
             </DropdownSection>
-            <DropdownItem key="logout" color="danger" className="text-danger" onClick={logout}>
+            <DropdownItem key="logout" color="danger" className="text-danger" onPress={logout}>
               登出
             </DropdownItem>
           </DropdownMenu>
@@ -118,7 +122,7 @@ export default function Header() {
               color={pn === path ? 'danger' : 'foreground'}
               href={path}
               size="lg"
-              onClick={() => setIsOpen(false)}
+              onPress={() => setIsOpen(false)}
             >
               {name}
             </Link>
