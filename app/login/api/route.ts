@@ -17,7 +17,7 @@ export async function GET(req: Request) {
     return new Response(JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json',
-        'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge};`
+        'Set-Cookie': `token=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge};`
       }
     });
   } catch (e) {
@@ -29,5 +29,5 @@ export async function GET(req: Request) {
 }
 
 export function DELETE() {
-  return new Response(null, { status: 204, headers: { 'Set-Cookie': 'token=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0;' } });
+  return new Response(null, { status: 204, headers: { 'Set-Cookie': 'token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0;' } });
 }
