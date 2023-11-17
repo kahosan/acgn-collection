@@ -43,7 +43,7 @@ export default function Subject({ params }: Props) {
             </a>
             <Divider className="mt-2 mb-4" />
           </div>
-          <CollectionBox subjectData={data} />
+          <CollectionBox subject={data} />
         </div>
       </div>
       <div className="mt-5 flex flex-wrap sm:flex-nowrap gap-4">

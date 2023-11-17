@@ -4,14 +4,14 @@ import { HTTPError, fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 import { useUser } from '~/hooks/use-user';
 import { useToken } from '~/hooks/use-token';
 
-import type { UserSubjectCollection, UserSubjectCollectionPayload } from '~/types/bangumi/collection';
+import type { UserCollection } from '~/types/bangumi/collection';
 
-export const useUserSubjectCollections = (payload: UserSubjectCollectionPayload) => {
+export const useUserCollection = (subjectId: number) => {
   const [token] = useToken();
   const { data: user } = useUser();
 
-  const { data, isLoading, mutate, error } = useSWRImmutable<UserSubjectCollection, Error>(
-    (user?.username && token) ? [`/v0/users/${user.username}/collections/${payload.subject_id}`, token] : null,
+  const { data, isLoading, mutate, error } = useSWRImmutable<UserCollection, Error>(
+    (user?.username && token) ? [`/v0/users/${user.username}/collections/${subjectId}`, token] : null,
     fetcher,
     {
       shouldRetryOnError: false,

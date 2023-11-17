@@ -34,18 +34,14 @@ export enum CollectionTypeForMusic {
 
 // Request
 
-export interface UserCollectionPayload {
+export interface UserCollectionsPayload {
   subject_type?: SubjectType
   type?: number
   limit?: number
   offset?: number
 }
 
-export interface UserSubjectCollectionPayload {
-  subject_id: string
-}
-
-export interface UserSubjectCollectionModifyPayload {
+export interface UserCollectionModifyPayload {
   type?: number
   rate?: number
   ep_status?: number
@@ -57,14 +53,14 @@ export interface UserSubjectCollectionModifyPayload {
 
 // Response
 
-export interface UserCollection {
-  data: UserSubjectCollection[]
+export interface UserCollections {
+  data: UserCollection[]
   total: number
   limit: number
   offset: number
 }
 
-export interface UserSubjectCollection {
+export interface UserCollection {
   updated_at: string
   comment?: string
   tags: string[]
@@ -77,5 +73,3 @@ export interface UserSubjectCollection {
   rate: number
   private: boolean
 }
-
-export type UserSubjectCollectionModify = null;

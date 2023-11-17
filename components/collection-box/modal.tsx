@@ -4,23 +4,23 @@ import { useState } from 'react';
 
 import { transformCollectionTypeToJSX } from '~/utils';
 
-import type { UserSubjectCollection, UserSubjectCollectionModifyPayload } from '~/types/bangumi/collection';
+import type { UserCollection, UserCollectionModifyPayload } from '~/types/bangumi/collection';
 
 interface Props {
-  userSubjectData: UserSubjectCollection
+  userCollection: UserCollection
   isOpen: boolean
   onOpenChange: () => void
   onClose: () => void
-  handleUpdate: (payload: UserSubjectCollectionModifyPayload, cb: () => void) => void
+  handleUpdate: (payload: UserCollectionModifyPayload, cb: () => void) => void
   isMutating: boolean
 }
 
-export default function ModifyModal({ isOpen, onOpenChange, onClose, userSubjectData, handleUpdate, isMutating }: Props) {
-  const [selected, setSelected] = useState(userSubjectData.type);
-  const [isPrivate, setIsPrivate] = useState(userSubjectData.private);
+export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollection, handleUpdate, isMutating }: Props) {
+  const [selected, setSelected] = useState(userCollection.type);
+  const [isPrivate, setIsPrivate] = useState(userCollection.private);
 
-  const [tags, setTags] = useState(userSubjectData.tags);
-  const [comment, setComment] = useState(userSubjectData.comment ?? '');
+  const [tags, setTags] = useState(userCollection.tags);
+  const [comment, setComment] = useState(userCollection.comment ?? '');
 
   const handleModify = () => handleUpdate({ comment, tags: tags.length ? tags : undefined, type: selected, private: isPrivate }, onClose);
 
@@ -39,7 +39,7 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userSubject
                 (type, label) => (
                   <Tab key={type} title={label} />
                 ),
-                userSubjectData.subject_type
+                userCollection.subject_type
               )
             }
           </Tabs>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { transformCollectionTypeToJSX } from '~/utils';
 
-import { useModifyUserCollection } from '~/lib/bangumi/user';
+import { useUserCollectionModify } from '~/lib/bangumi/user';
 
 import type { SubjectType } from '~/types/bangumi/subjects';
 
@@ -20,7 +20,7 @@ export default function UnCollection({ subjectId, subjectType, mutate }: Props) 
   const [comment, setComment] = useState<string>('');
   const [isPrivate, setIsPrivate] = useState(false);
 
-  const { handleModify, isMutating } = useModifyUserCollection(subjectId);
+  const { handleModify, isMutating } = useUserCollectionModify(subjectId);
 
   const handleCollection = () => {
     handleModify({

@@ -4,16 +4,16 @@ import { HTTPError, fetcher } from '~/lib/fetcher';
 import { toast } from 'sonner';
 import { useToken } from '~/hooks/use-token';
 
-import type { UserSubjectCollectionModifyPayload } from '~/types/bangumi/collection';
+import type { UserCollectionModifyPayload } from '~/types/bangumi/collection';
 
-export const useModifyUserCollection = (subjectId: number) => {
+export const useUserCollectionModify = (subjectId: number) => {
   const [token] = useToken();
   const { trigger, isMutating } = useSWRMutation(
     token ? [`/v0/users/-/collections/${subjectId}`, token] : null,
     fetcher
   );
 
-  const handleModify = (payload: UserSubjectCollectionModifyPayload, refreshData: () => void) => {
+  const handleModify = (payload: UserCollectionModifyPayload, refreshData: () => void) => {
     const fn = async () => {
       await trigger(payload);
       refreshData();

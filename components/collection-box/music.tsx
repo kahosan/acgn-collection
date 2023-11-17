@@ -1,13 +1,13 @@
 import type { Subject } from '~/types/bangumi/subjects';
-import type { UserSubjectCollection } from '~/types/bangumi/collection';
+import type { UserCollection } from '~/types/bangumi/collection';
 
 interface Props {
-  subjectData: Subject
-  userSubjectData: UserSubjectCollection
-  mutate: () => void
+  subject: Subject
+  userCollection: UserCollection
+  userCollectionMutate: () => void
 }
 
-export default function MusicBox({ subjectData, userSubjectData, mutate }: Props) {
+export default function MusicBox({ subject, userCollection, userCollectionMutate }: Props) {
   return (
     <div>
       已收藏

@@ -10,25 +10,25 @@ import CollectionBoxSkeleton from './skeleton';
 
 import { match } from 'ts-pattern';
 
-import { useUserSubjectCollections } from '~/lib/bangumi/user';
+import { useUserCollection } from '~/lib/bangumi/user';
 import { HTTPError } from '~/lib/fetcher';
 
 import { SubjectType } from '~/types/bangumi/subjects';
 import type { Subject } from '~/types/bangumi/subjects';
 
 interface Props {
-  subjectData: Subject
+  subject: Subject
 }
 
-export default function CollectionBox({ subjectData }: Props) {
-  const { data, isLoading, mutate, error } = useUserSubjectCollections({ subject_id: subjectData.id.toString() });
+export default function CollectionBox({ subject }: Props) {
+  const { data, isLoading, mutate, error } = useUserCollection(subject.id);
 
   if (error && error instanceof HTTPError && error.status !== 404) throw error;
   if (isLoading) return <CollectionBoxSkeleton />;
 
   const componentProps = {
-    subjectData,
-    mutate
+    subject,
+    userCollectionMutate: mutate
   };
 
   return (
@@ -39,13 +39,13 @@ export default function CollectionBox({ subjectData }: Props) {
     >
       {
         !data
-          ? <UnCollection subjectId={subjectData.id} subjectType={subjectData.type} mutate={mutate} />
-          : match(subjectData.type)
-            .with(SubjectType.书籍, () => <BookBox {...componentProps} userSubjectData={data} />)
-            .with(SubjectType.动画, () => <AnimeBox {...componentProps} userSubjectData={data} />)
-            .with(SubjectType.音乐, () => <MusicBox {...componentProps} userSubjectData={data} />)
-            .with(SubjectType.游戏, () => <GameBox {...componentProps} userSubjectData={data} />)
-            .with(SubjectType.三次元, () => <RealBox {...componentProps} userSubjectData={data} />)
+          ? <UnCollection subjectId={subject.id} subjectType={subject.type} mutate={mutate} />
+          : match(subject.type)
+            .with(SubjectType.书籍, () => <BookBox {...componentProps} userCollection={data} />)
+            .with(SubjectType.动画, () => <AnimeBox {...componentProps} userCollection={data} />)
+            .with(SubjectType.音乐, () => <MusicBox {...componentProps} userCollection={data} />)
+            .with(SubjectType.游戏, () => <GameBox {...componentProps} userCollection={data} />)
+            .with(SubjectType.三次元, () => <RealBox {...componentProps} userCollection={data} />)
             .otherwise(() => null)
       }
     </motion.div>
