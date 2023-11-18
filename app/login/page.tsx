@@ -5,7 +5,6 @@ import { Button, Input, Link } from '@nextui-org/react';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
 
 import { tokenAtom } from '~/hooks/use-token';
 
@@ -19,11 +18,11 @@ export default function Login() {
 
   const _setToken = useSetAtom(tokenAtom);
 
-  const router = useRouter();
-
   const login = async () => {
     try {
       setIsLoading(true);
+
+      // Auth Provider will redirect to /
       const data = await fetcher<UserInfo>(
         [
           '/login/api',
@@ -35,8 +34,6 @@ export default function Login() {
 
       _setToken(token);
       setIsLoading(false);
-
-      router.push('/');
     } catch (e) {
       setIsLoading(false);
       if (e instanceof Error)

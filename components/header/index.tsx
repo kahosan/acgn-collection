@@ -22,12 +22,10 @@ import ToggleTheme from './toggle-theme';
 
 import { useState } from 'react';
 import { useSetAtom } from 'jotai';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { useUser } from '~/hooks/use-user';
 import { tokenAtom } from '~/hooks/use-token';
-
-import { fetcher } from '~/lib/fetcher';
 
 const navItems = {
   '/': '首页',
@@ -39,13 +37,11 @@ export default function Header() {
   const setToken = useSetAtom(tokenAtom);
   const [isOpen, setIsOpen] = useState(false);
 
-  const router = useRouter();
   const pn = usePathname();
 
   const logout = () => {
+    // Auth Provider will redirect to /login
     setToken(null);
-    fetcher(['/login/api', { method: 'DELETE', base: '/' }]);
-    router.push('/login');
   };
 
   if (pn === '/login') return null;
