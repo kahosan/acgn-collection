@@ -1,6 +1,7 @@
 import { Input, Tab, Tabs } from '@nextui-org/react';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import { transformSubjectTypeToJSX } from '~/utils';
 
@@ -8,16 +9,16 @@ import { SubjectType } from '~/types/bangumi/subjects';
 
 interface Props {
   payload: { keyword: string, type: string }
-  updateParams: (type: string, keyword: string) => void
 }
 
-export default function SearchBar({ payload, updateParams }: Props) {
-  const [keyword, setKeyword] = useState('');
+export default function SearchBar({ payload }: Props) {
+  const [keyword, setKeyword] = useState(payload.keyword);
 
-  if (keyword !== payload.keyword)
-    setKeyword(payload.keyword);
-
-  const handleSearch = (type?: string) => updateParams(type ?? payload.type, keyword);
+  const router = useRouter();
+  const handleSearch = useCallback((type?: string) => {
+    router.push(`/search?keyword=${encodeURIComponent(keyword)}&type=${type ?? payload.type}`);
+  },
+  [keyword, payload.type, router]);
 
   return (
     <div className="mb-4">
