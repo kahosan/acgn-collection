@@ -63,7 +63,9 @@ export async function fetcher<T>(key: string | [string, string | RequestInitWith
   const data = res.headers.get('Content-Type')?.includes('application/json') ? await res.json() : await res.text();
 
   if (!res.ok) {
-    if ('title' in data)
+    if (typeof data === 'string')
+      throw new Error(data);
+    else if ('title' in data)
       throw new HTTPError(data.title, data, res.status);
 
     throw new Error('Failed for fetcher');
