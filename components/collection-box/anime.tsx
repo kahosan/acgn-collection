@@ -1,21 +1,16 @@
 import {
   Button,
-  ButtonGroup,
-  Chip,
   Divider,
   Input,
   Link,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Skeleton,
   Tab,
   Tabs,
-  Tooltip,
-  useDisclosure
+  Tooltip
 } from '@nextui-org/react';
-import Rate from 'rc-rate';
-import 'rc-rate/assets/index.css';
+
+import Evaluation from './evaluation';
+import CollectionModify from './collection-modify';
 
 import { match } from 'ts-pattern';
 import { useCallback, useMemo, useState } from 'react';
@@ -23,14 +18,13 @@ import { useCallback, useMemo, useState } from 'react';
 import { useIsMobile } from '~/hooks/use-mobile';
 
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';
-import { useUserCollectionModify, useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
+import { useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
 
 import type { Subject } from '~/types/bangumi/subjects';
+import type { UserCollection } from '~/types/bangumi/collection';
 import { CollectionTypeForAnime } from '~/types/bangumi/collection';
-import type { UserCollection, UserCollectionModifyPayload } from '~/types/bangumi/collection';
 import type { Episode, EpisodesPayload } from '~/types/bangumi/episodes';
 import { EpisodesType, EpisodeCollectionType } from '~/types/bangumi/episodes';
-import ModifyModal from './modal';
 
 interface Props {
   subject: Subject
@@ -39,17 +33,6 @@ interface Props {
 }
 
 export default function AnimeBox({ subject, userCollection, userCollectionMutate }: Props) {
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-
-  const { handleModify, isMutating } = useUserCollectionModify(subject.id);
-
-  const handleUpdate = (payload: UserCollectionModifyPayload, cb: () => void) => {
-    handleModify(payload, () => {
-      userCollectionMutate();
-      cb();
-    });
-  };
-
   return (
     <div className="grid gap-4 sm:gap-0 h-full">
       <Episodes
@@ -60,60 +43,11 @@ export default function AnimeBox({ subject, userCollection, userCollectionMutate
         userCollectionMutate={userCollectionMutate}
       />
 
-      <div>
-        <div className="text-sm pb-1.5">我的评价</div>
-        <Rate
-          className="[&_li.rc-rate-star-zero.rc-rate-star]:text-[#f8b0405c] [&_li.rc-rate-star.rc-rate-star-half]:text-[#f8b0405c]"
-          value={userCollection.rate}
-          count={10}
-          character={
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-              <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-            </svg>
-          }
-          disabled
-          allowHalf
-        />
-      </div>
-
-      <div>
-        <div className="text-sm pb-1.5">社区评价</div>
-        <div className="flex flex-row gap-2">
-          <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subject.rating.rank}</Chip>
-          <Chip radius="sm" color="primary" startContent={<div className="p-2">评分数</div>}>{subject.rating.total}</Chip>
-          <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subject.rating.score}</Chip>
-        </div>
-        <Divider className="my-2 max-w-[8rem]" />
-        <Link href={`https://bgm.tv/subject/${subject.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
-      </div>
+      <Evaluation subject={subject} userCollection={userCollection} />
 
       <div className="self-end">
-        <ButtonGroup fullWidth radius="sm">
-          <Button variant="faded" onPress={onOpen}>修改</Button>
-          <Popover>
-            <PopoverTrigger>
-              <Button color="danger">删除</Button>
-            </PopoverTrigger>
-            <PopoverContent className="p-4 px-6">
-              <div>API 没实现啦，呜呜呜</div>
-              {/* <div>确定要删除收藏吗？</div>
-              <Divider className="my-2" />
-              <ButtonGroup size="sm" radius="sm" fullWidth>
-                <Button color="primary" isLoading={isMutating}>确定</Button>
-              </ButtonGroup> */}
-            </PopoverContent>
-          </Popover>
-        </ButtonGroup>
+        <CollectionModify subject={subject} userCollection={userCollection} userCollectionMutate={userCollectionMutate} />
       </div>
-
-      <ModifyModal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        onClose={onClose}
-        userCollection={userCollection}
-        handleUpdate={handleUpdate}
-        isMutating={isMutating}
-      />
     </div>
   );
 }
