@@ -36,6 +36,7 @@ export default function AnimeBox({ subject, userCollection, userCollectionMutate
   return (
     <div className="grid gap-4 sm:gap-0 h-full">
       <Episodes
+        key={userCollection.ep_status}
         payload={{ subject_id: subject.id, type: EpisodesType.本篇 }}
         totalEpisode={subject.eps}
         watchedEpisode={userCollection.ep_status}
