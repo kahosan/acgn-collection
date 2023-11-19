@@ -10,7 +10,7 @@ import CollectionCard from '~/components/collection-card';
 import { useSearchParams } from 'next/navigation';
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 
-import { useSearch } from '~/lib/bangumi/subjects';
+import { useLegacySearch, useSearch } from '~/lib/bangumi/subjects';
 
 import type { SearchPayload } from '~/types/bangumi/subjects';
 
@@ -18,6 +18,7 @@ import type { SearchPayload } from '~/types/bangumi/subjects';
 export default function Search() {
   const searchParams = useSearchParams();
 
+  const api = searchParams.get('api') ?? 'new';
   const type = searchParams.get('type') ?? '7';
   const keyword = searchParams.get('keyword') ?? '';
 
@@ -36,16 +37,18 @@ export default function Search() {
   };
 
   const { data, isLoading, error } = useSearch(payload, offset, 20);
+  const { data: legacyData, isLoading: legacyIsLoading, error: legacyError } = useLegacySearch(payload, offset, 20);
 
   if (error) throw error;
+  if (legacyError) throw legacyError;
 
   return (
     <div>
-      <SearchBar key={keyword} payload={{ keyword: payload.keyword, type }} />
+      <SearchBar key={keyword} payload={{ keyword: payload.keyword, type, api }} />
       {
         data?.data.length === 0
           ? <div className="text-center text-gray-500 mt-[20rem]">没有更多了</div>
-          : (isLoading || !data
+          : (isLoading || !data || legacyIsLoading || !legacyData
             ? <Loading />
             : (
               <motion.div
@@ -57,11 +60,11 @@ export default function Search() {
                 <div
                   className="grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8"
                 >
-                  {data.data.map(subject => (
+                  {(api === 'new' ? data.data : legacyData.list).map(subject => (
                     <CollectionCard subject={subject} key={subject.id} mobileMask showType />
                   ))}
                 </div>
-                <Pagination offset={offset} limit={20} setOffset={setOffset} total={data.total} />
+                <Pagination offset={offset} limit={20} setOffset={setOffset} total={api === 'new' ? data.total : legacyData.results} />
               </motion.div>
             ))
       }

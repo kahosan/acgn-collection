@@ -150,3 +150,24 @@ export interface SearchSubject {
   limit: number
   offset: number
 }
+
+export interface LegacySearchSubject {
+  results: number
+  list: Array<{
+    id: number
+    url: string
+    type: number
+    name: string
+    name_cn: string
+    summary: string
+    air_date: string
+    air_weekday: number
+    images: {
+      large: string
+      common: string
+      medium: string
+      small: string
+      grid: string
+    }
+  }>
+}

@@ -8,6 +8,10 @@ const nextConfig = {
         hostname: 'lain.bgm.tv'
       },
       {
+        protocol: 'http',
+        hostname: 'lain.bgm.tv'
+      },
+      {
         protocol: 'https',
         hostname: 'placehold.co'
       }
