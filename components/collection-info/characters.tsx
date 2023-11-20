@@ -30,7 +30,7 @@ export default function Character({ subjectId }: Props) {
                   <Image
                     src={character.images.grid || 'https://placehold.jp/56x56@3.webp'}
                     alt={character.name}
-                    className="object-cover object-top transition-all opacity-20 duration-300 rounded-md"
+                    className="object-cover object-top transition-all opacity-0 duration-300 rounded-md"
                     priority
                     fill
                     sizes="100%"

@@ -51,7 +51,7 @@ export default function Relations({ subjectId }: Props) {
                         <Image
                           src={item.images.small || 'https://placehold.co/64x64@3x.webp?text=No%20Image'}
                           alt={item.name}
-                          className="object-cover bg-center transition-all opacity-20 duration-300 rounded-md"
+                          className="object-cover bg-center transition-all opacity-0 duration-300 rounded-md"
                           priority
                           fill
                           sizes="100%"
