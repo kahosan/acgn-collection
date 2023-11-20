@@ -33,7 +33,7 @@ export default function Character({ subjectId }: Props) {
         {
           characters.map(character => (
             <div key={character.id} className="flex gap-2 flex-auto">
-              <div className="relative rounded-md h-14 min-w-[3.5rem]">
+              <Link href={`https://bgm.tv/character/${character.id}`} className="relative rounded-md h-14 min-w-[3.5rem]" isExternal>
                 <Image
                   src={character.images.grid || 'https://placehold.jp/56x56@3.webp'}
                   alt={character.name}
@@ -43,7 +43,7 @@ export default function Character({ subjectId }: Props) {
                   sizes="100%"
                   onLoad={e => { e.currentTarget.style.opacity = '1'; }}
                 />
-              </div>
+              </Link>
               <div className="overflow-hidden w-full">
                 <Link className="w-full" color="foreground" href={`https://bgm.tv/character/${character.id}`} isExternal>
                   <div className="w-full truncate text-sm">{character.name}</div>
