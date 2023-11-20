@@ -1,5 +1,6 @@
 import { Input, Tab, Tabs } from '@nextui-org/react';
 
+import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
@@ -16,6 +17,11 @@ export default function SearchBar({ payload }: Props) {
 
   const router = useRouter();
   const handleSearch = useCallback((api: string, type = payload.type) => {
+    if (!keyword) {
+      toast('请输入关键词');
+      return;
+    }
+
     router.push(`/search?keyword=${encodeURIComponent(keyword)}&type=${type}&api=${api}`);
   }, [keyword, payload.type, router]);
 
