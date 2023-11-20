@@ -1,9 +1,13 @@
-import { Link } from '@nextui-org/react';
 import Image from 'next/image';
-import { useMemo } from 'react';
-import { useRelations } from '~/lib/bangumi/subjects';
-import type { Relation } from '~/types/bangumi/relation';
+import { Link } from '@nextui-org/react';
+
 import { RelationsSkeleton } from './skeleton';
+
+import { useMemo } from 'react';
+
+import { useRelations } from '~/lib/bangumi/subjects';
+
+import type { Relation } from '~/types/bangumi/relation';
 
 interface Props {
   subjectId: number
@@ -42,9 +46,9 @@ export default function Relations({ subjectId }: Props) {
                   >
                     <div className="relative p-2 rounded-md h-20 w-20">
                       <Image
-                        src={item.images.small}
+                        src={item.images.small || 'https://placehold.co/64x64@3x.webp?text=No%20Image'}
                         alt={item.name}
-                        className="object-cover bg-center transition-all duration-300 rounded-md"
+                        className="object-cover bg-center transition-all opacity-20 duration-300 rounded-md"
                         priority
                         fill
                         sizes="100%"
