@@ -21,10 +21,13 @@ export default function Timeline() {
   const scope = searchParams.get('scope') ?? 'all';
   const type = searchParams.get('type') ?? '';
 
+  const _page = searchParams.get('page') ?? '1';
+  const page = Number.parseInt(_page, 10);
+
   const payload: TimelinePayload = {
     userId: scope === 'me' ? user.data?.username : undefined,
     type: type as TimelineType,
-    page: 1 // TODO
+    page: scope === 'me' ? page : 1
   };
 
   const { data, isLoading, error } = useTimeline(payload);
@@ -86,7 +89,14 @@ export default function Timeline() {
           }
         </Select>
       </div>
-      <TimelinePosts data={data} isLoading={isLoading} scope={scope as TimelineScope} user={user.data} />
+      <TimelinePosts
+        data={data}
+        isLoading={isLoading}
+        scope={scope as TimelineScope}
+        page={page}
+        type={type}
+        user={user.data}
+      />
     </>
   );
 }

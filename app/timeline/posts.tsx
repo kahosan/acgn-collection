@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
-import { Avatar, Card, CardBody, CardFooter, Divider, Link } from '@nextui-org/react';
+import { Avatar, Button, Card, CardBody, CardFooter, Divider, Link } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
+
+import { useRouter } from 'next/navigation';
 
 import type { Timeline, TimelineScope } from '~/types/bangumi/timeline';
 import type { UserInfo } from '~/types/bangumi/user';
@@ -10,16 +12,20 @@ interface Props {
   data: Timeline | undefined
   user: UserInfo | undefined
   scope: TimelineScope
+  page: number
+  type: string
   isLoading: boolean
 }
 
-export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
+export default function TimelinePosts({ data, user, scope, page, type, isLoading }: Props) {
+  const router = useRouter();
+
   if (!data || !user || isLoading) return <Loading />;
   let _username = '';
 
   return (
     <motion.div
-      key={Math.random()}
+      key={scope + type + page}
       variants={{
         hidden: { opacity: 0 },
         show: {
@@ -86,6 +92,32 @@ export default function TimelinePosts({ data, user, scope, isLoading }: Props) {
           ))
         }
       </div>
+      {
+        scope === 'me'
+          ? (
+            <div className="flex justify-center gap-8">
+              {
+                page > 1
+                  ? (
+                    <Button
+                      variant="flat"
+                      onClick={() => router.push(`/timeline?scope=${scope}&type=${type}&page=${page - 1}`)}
+                    >
+                      上一页
+                    </Button>
+                  )
+                  : null
+              }
+              <Button
+                variant="flat"
+                onClick={() => router.push(`/timeline?scope=${scope}&type=${type}&page=${page + 1}`)}
+              >
+                下一页
+              </Button>
+            </div>
+          )
+          : null
+      }
     </motion.div>
   );
 }
