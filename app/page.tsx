@@ -14,7 +14,7 @@ import { useUserCollections } from '~/lib/bangumi/user';
 
 import { transformSubjectTypeToJSX } from '~/utils';
 
-import { SubjectType } from '~/types/bangumi/subjects';
+import { SubjectType } from '~/types/bangumi/subject';
 
 export default function Collection() {
   const [offset, setOffset] = useQueryState(

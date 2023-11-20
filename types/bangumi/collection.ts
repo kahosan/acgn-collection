@@ -1,4 +1,4 @@
-import type { SlimSubject, SubjectType } from './subjects';
+import type { SlimSubject, SubjectType } from './subject';
 
 export enum CollectionTypeForAnime {
   '想看' = 1,

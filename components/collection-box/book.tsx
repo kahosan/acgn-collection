@@ -7,9 +7,9 @@ import { useState } from 'react';
 
 import { useUserCollectionModify } from '~/lib/bangumi/user';
 
-import type { Subject } from '~/types/bangumi/subjects';
+import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection } from '~/types/bangumi/collection';
-import type { EpisodesPayload } from '~/types/bangumi/episodes';
+import type { EpisodesPayload } from '~/types/bangumi/episode';
 
 interface Props {
   subject: Subject

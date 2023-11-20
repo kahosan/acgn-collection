@@ -20,11 +20,11 @@ import { useIsMobile } from '~/hooks/use-mobile';
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';
 import { useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
 
-import type { Subject } from '~/types/bangumi/subjects';
+import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection } from '~/types/bangumi/collection';
 import { CollectionTypeForAnime } from '~/types/bangumi/collection';
-import type { Episode, EpisodesPayload } from '~/types/bangumi/episodes';
-import { EpisodesType, EpisodeCollectionType } from '~/types/bangumi/episodes';
+import type { Episode, EpisodesPayload } from '~/types/bangumi/episode';
+import { EpisodesType, EpisodeCollectionType } from '~/types/bangumi/episode';
 
 interface Props {
   subject: Subject

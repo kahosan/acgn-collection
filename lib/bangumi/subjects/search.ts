@@ -3,7 +3,7 @@ import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import { useToken } from '~/hooks/use-token';
 
-import type { LegacySearchSubject, SearchPayload, SearchSubject } from '~/types/bangumi/subjects';
+import type { LegacySearchSubject, SearchPayload, SearchSubject } from '~/types/bangumi/subject';
 
 export const useSearch = (payload: SearchPayload, offset: number, limit?: number) => {
   const [token] = useToken();

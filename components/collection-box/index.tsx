@@ -13,8 +13,8 @@ import { match } from 'ts-pattern';
 import { useUserCollection } from '~/lib/bangumi/user';
 import { HTTPError } from '~/lib/fetcher';
 
-import { SubjectType } from '~/types/bangumi/subjects';
-import type { Subject } from '~/types/bangumi/subjects';
+import { SubjectType } from '~/types/bangumi/subject';
+import type { Subject } from '~/types/bangumi/subject';
 
 interface Props {
   subject: Subject

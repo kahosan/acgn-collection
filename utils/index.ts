@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { match } from 'ts-pattern';
 import { CollectionTypeForAnime, CollectionTypeForBook, CollectionTypeForGame, CollectionTypeForMusic } from '~/types/bangumi/collection';
 
-import { SubjectType } from '~/types/bangumi/subjects';
+import { SubjectType } from '~/types/bangumi/subject';
 
 export const isBrowser = typeof window !== 'undefined';
 

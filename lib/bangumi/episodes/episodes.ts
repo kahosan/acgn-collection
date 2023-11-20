@@ -3,7 +3,7 @@ import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import { useToken } from '~/hooks/use-token';
 
-import type { Episodes, EpisodesPayload } from '~/types/bangumi/episodes';
+import type { Episodes, EpisodesPayload } from '~/types/bangumi/episode';
 
 export const useEpisodes = (payload: EpisodesPayload) => {
   const [token] = useToken();

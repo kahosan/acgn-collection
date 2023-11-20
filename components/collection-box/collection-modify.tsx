@@ -11,7 +11,7 @@ import ModifyModal from './modal';
 
 import { useUserCollectionModify } from '~/lib/bangumi/user';
 
-import type { Subject } from '~/types/bangumi/subjects';
+import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection, UserCollectionModifyPayload } from '~/types/bangumi/collection';
 
 interface Props {

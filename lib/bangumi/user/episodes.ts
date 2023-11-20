@@ -5,7 +5,7 @@ import { HTTPError, fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 import { toast } from 'sonner';
 import { useToken } from '~/hooks/use-token';
 
-import type { UserEpisode, UserEpisodePatchPayload, UserEpisodePayload } from '~/types/bangumi/episodes';
+import type { UserEpisode, UserEpisodePatchPayload, UserEpisodePayload } from '~/types/bangumi/episode';
 
 export const useUserEpisodes = (payload: UserEpisodePayload, subjectId: number) => {
   const [token] = useToken();

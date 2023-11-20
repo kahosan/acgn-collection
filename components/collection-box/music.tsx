@@ -1,4 +1,4 @@
-import type { Subject } from '~/types/bangumi/subjects';
+import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection } from '~/types/bangumi/collection';
 
 interface Props {

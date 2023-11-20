@@ -1,4 +1,4 @@
-import type { SubjectType } from './subjects';
+import type { SubjectType } from './subject';
 
 export interface Relation {
   id: number

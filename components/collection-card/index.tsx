@@ -7,8 +7,8 @@ import 'rc-rate/assets/index.css';
 
 import clsx from 'clsx';
 
-import type { SlimSubject } from '~/types/bangumi/subjects';
-import { SubjectType } from '~/types/bangumi/subjects';
+import type { SlimSubject } from '~/types/bangumi/subject';
+import { SubjectType } from '~/types/bangumi/subject';
 
 interface Props {
   subject: {

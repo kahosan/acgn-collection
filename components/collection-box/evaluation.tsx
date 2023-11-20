@@ -3,7 +3,7 @@ import 'rc-rate/assets/index.css';
 import { Chip, Link, Divider } from '@nextui-org/react';
 
 import type { UserCollection } from '~/types/bangumi/collection';
-import type { Subject } from '~/types/bangumi/subjects';
+import type { Subject } from '~/types/bangumi/subject';
 
 interface Props {
   userCollection: UserCollection

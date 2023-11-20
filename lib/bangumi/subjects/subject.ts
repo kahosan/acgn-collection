@@ -3,7 +3,7 @@ import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import { useToken } from '~/hooks/use-token';
 
-import type { Subject } from '~/types/bangumi/subjects';
+import type { Subject } from '~/types/bangumi/subject';
 
 export const useSubject = (id: string) => {
   const [token] = useToken();

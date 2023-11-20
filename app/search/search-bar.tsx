@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 
 import { transformSubjectTypeToJSX } from '~/utils';
 
-import { SubjectType } from '~/types/bangumi/subjects';
+import { SubjectType } from '~/types/bangumi/subject';
 
 interface Props {
   payload: { keyword: string, type: string, api: string }

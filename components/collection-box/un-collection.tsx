@@ -6,7 +6,7 @@ import { transformCollectionTypeToJSX } from '~/utils';
 
 import { useUserCollectionModify } from '~/lib/bangumi/user';
 
-import type { SubjectType } from '~/types/bangumi/subjects';
+import type { SubjectType } from '~/types/bangumi/subject';
 
 interface Props {
   subjectId: number
