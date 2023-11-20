@@ -9,6 +9,8 @@ import { Summary, Tags, Infomation, Relations, Characters } from '~/components/c
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
+import { convertSpecialChar } from '~/utils';
+
 import { SubjectType } from '~/types/bangumi/subject';
 
 interface Props {
@@ -38,7 +40,7 @@ export default function Subject({ params }: Props) {
         <div className="w-full grid grid-rows-[auto_1fr]">
           <div>
             <a href={`https://bgm.tv/subject/${data.id}`} className="font-medium text-xl hover:opacity-60 transition-opacity" target="_blank" rel="noreferrer">
-              {data.name}
+              {convertSpecialChar(data.name)}
               <small className="ml-1 opacity-50 text-xs">{data.platform}</small>
             </a>
             <Divider className="mt-2 mb-4" />

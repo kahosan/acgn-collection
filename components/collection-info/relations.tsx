@@ -7,6 +7,8 @@ import { useMemo } from 'react';
 
 import { useRelations } from '~/lib/bangumi/subjects';
 
+import { convertSpecialChar } from '~/utils';
+
 import type { Relation } from '~/types/bangumi/relation';
 
 interface Props {
@@ -57,7 +59,7 @@ export default function Relations({ subjectId }: Props) {
                         onLoad={e => { e.currentTarget.style.opacity = '1'; }}
                       />
                     </div>
-                    <p className="text-xs mt-1 line-clamp-3">{item.name}</p>
+                    <p className="text-xs mt-1 line-clamp-3">{convertSpecialChar(item.name)}</p>
                   </Link>
                 ))
               }

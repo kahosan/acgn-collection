@@ -6,6 +6,15 @@ import { SubjectType } from '~/types/bangumi/subject';
 
 export const isBrowser = typeof window !== 'undefined';
 
+export const convertSpecialChar = (str: string) => {
+  return str.replaceAll('&nbsp;', ' ')
+    .replaceAll('&amp;', '&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#39;', '\'');
+};
+
 export const compose = <T>(...args: [...composer: Array<((arg: T) => T) | false>, init: T]) => {
   if (args.length === 0) throw new TypeError('compose requires at least one argument');
   const last = args.pop() as T;
