@@ -9,7 +9,7 @@ interface Props {
   }>
   className?: string
 }
-export default function InfoBox({ infos, className }: Props) {
+export default function Infomation({ infos, className }: Props) {
   return infos.map(info => (
     <div key={info.key} className={clsx('', className)}>
       <div className="opacity-60 text-sm">{info.key}：</div>

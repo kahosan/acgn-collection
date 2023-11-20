@@ -4,10 +4,8 @@ import Image from 'next/image';
 import { Divider } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
-import Tags from '~/components/collection-info/tags';
 import CollectionBox from '~/components/collection-box';
-import InfoBox from '~/components/collection-info/info-box';
-import Summary from '~/components/collection-info/summary';
+import { Summary, Tags, Infomation } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
@@ -48,7 +46,7 @@ export default function Subject({ params }: Props) {
       </div>
       <div className="mt-5 flex flex-wrap sm:flex-nowrap gap-4">
         <div className="bg-card w-full sm:max-w-[18rem] sm:min-w-[18rem]">
-          <InfoBox infos={data.infobox} />
+          <Infomation infos={data.infobox} />
         </div>
         <div className="w-full flex flex-col gap-4">
           <div className="bg-card">
