@@ -5,9 +5,11 @@ import { Divider } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
-import { Summary, Tags, Infomation, Relations } from '~/components/collection-info';
+import { Summary, Tags, Infomation, Relations, Characters } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
+
+import { SubjectType } from '~/types/bangumi/subject';
 
 interface Props {
   params: { id: string }
@@ -57,6 +59,16 @@ export default function Subject({ params }: Props) {
             <div className="mb-2 dark:text-blue-200 text-blue-400">大家将「{data.name}」标注为</div>
             <Tags tags={data.tags} />
           </div>
+          {
+            data.type !== SubjectType.音乐 && data.type !== SubjectType.三次元
+              ? (
+                <div className="bg-card">
+                  <div className="mb-2 dark:text-blue-200 text-blue-400">角色介绍</div>
+                  <Characters subjectId={data.id} />
+                </div>
+              )
+              : null
+          }
           <div className="bg-card">
             <div className="mb-2 dark:text-blue-200 text-blue-400">关联条目</div>
             <Relations subjectId={data.id} />
