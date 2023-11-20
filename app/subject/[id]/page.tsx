@@ -5,7 +5,7 @@ import { Divider } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
-import { Summary, Tags, Infomation } from '~/components/collection-info';
+import { Summary, Tags, Infomation, Relations } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
@@ -44,8 +44,8 @@ export default function Subject({ params }: Props) {
           <CollectionBox subject={data} />
         </div>
       </div>
-      <div className="mt-5 flex flex-wrap sm:flex-nowrap gap-4">
-        <div className="bg-card w-full sm:max-w-[18rem] sm:min-w-[18rem]">
+      <div className="mt-5 sm:flex gap-4">
+        <div className="bg-card w-full sm:max-w-[18rem] sm:min-w-[18rem] mb-4 sm:mb-0 self-start">
           <Infomation infos={data.infobox} />
         </div>
         <div className="w-full flex flex-col gap-4">
@@ -56,6 +56,10 @@ export default function Subject({ params }: Props) {
           <div className="bg-card">
             <div className="mb-2 dark:text-blue-200 text-blue-400">大家将「{data.name}」标注为</div>
             <Tags tags={data.tags} />
+          </div>
+          <div className="bg-card">
+            <div className="mb-2 dark:text-blue-200 text-blue-400">关联条目</div>
+            <Relations subjectId={data.id} />
           </div>
         </div>
       </div>
