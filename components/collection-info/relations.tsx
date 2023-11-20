@@ -1,7 +1,7 @@
 import { Link } from '@nextui-org/react';
 import Image from 'next/image';
 import { useMemo } from 'react';
-import { useRelations } from '~/lib/bangumi/subjects/relation';
+import { useRelations } from '~/lib/bangumi/subjects';
 import type { Relation } from '~/types/bangumi/relation';
 import { RelationsSkeleton } from './skeleton';
 
