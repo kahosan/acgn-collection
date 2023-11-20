@@ -3,6 +3,9 @@ import Providers from '~/providers';
 import localFont from 'next/font/local';
 import { Suspense } from 'react';
 
+// TODO wait official fix
+import { ScrollRestorer } from 'next-scroll-restorer';
+
 import Header from '~/components/header';
 
 import type { Metadata } from 'next';
@@ -63,6 +66,7 @@ export default function RootLayout({
           <Suspense>
             <main className="max-w-8xl mx-auto py-4 px-6">
               {children}
+              <ScrollRestorer />
             </main>
           </Suspense>
         </Providers>
