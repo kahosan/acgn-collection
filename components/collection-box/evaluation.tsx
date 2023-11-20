@@ -36,7 +36,7 @@ export default function Evaluation({ subject, userCollection }: Props) {
           <Chip radius="sm" color="primary" startContent={<div className="p-2">评分数</div>}>{subject.rating.total}</Chip>
           <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subject.rating.score}</Chip>
         </div>
-        <Divider className="my-2 max-w-[8rem]" />
+        <Divider className="mt-2.5 mb-1 max-w-[8rem]" />
         <Link href={`https://bgm.tv/subject/${subject.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
       </div>
     </>
