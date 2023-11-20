@@ -30,38 +30,41 @@ export default function Relations({ subjectId }: Props) {
   if (!relations || isLoading) return <RelationsSkeleton />;
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-4">
       {
-        Object.entries(relations).sort(([, a], [, b]) => a.length - b.length).map(([relation, items]) => (
-          <div key={relation} className="px-2 pb-1 rounded-md bg-slate-200/40 dark:bg-zinc-800">
-            <small className="opacity-70">{relation}</small>
-            <div className="flex flex-wrap gap-2">
-              {
-                items.map(item => (
-                  <Link
-                    color="foreground"
-                    key={item.id}
-                    className="w-20 block"
-                    href={`/subject/${item.id}`}
-                  >
-                    <div className="relative p-2 rounded-md h-20 w-20">
-                      <Image
-                        src={item.images.small || 'https://placehold.co/64x64@3x.webp?text=No%20Image'}
-                        alt={item.name}
-                        className="object-cover bg-center transition-all opacity-20 duration-300 rounded-md"
-                        priority
-                        fill
-                        sizes="100%"
-                        onLoad={e => { e.currentTarget.style.opacity = '1'; }}
-                      />
-                    </div>
-                    <p className="text-xs mt-1 line-clamp-3">{item.name}</p>
-                  </Link>
-                ))
-              }
+        Object
+          .entries(relations)
+          .sort(([, a], [, b]) => a.length - b.length)
+          .map(([relation, items]) => (
+            <div key={relation}>
+              <small className="opacity-70">{relation}</small>
+              <div className="flex flex-wrap gap-6">
+                {
+                  items.map(item => (
+                    <Link
+                      color="foreground"
+                      key={item.id}
+                      className="w-20 block"
+                      href={`/subject/${item.id}`}
+                    >
+                      <div className="relative p-2 rounded-md h-20 w-20">
+                        <Image
+                          src={item.images.small || 'https://placehold.co/64x64@3x.webp?text=No%20Image'}
+                          alt={item.name}
+                          className="object-cover bg-center transition-all opacity-20 duration-300 rounded-md"
+                          priority
+                          fill
+                          sizes="100%"
+                          onLoad={e => { e.currentTarget.style.opacity = '1'; }}
+                        />
+                      </div>
+                      <p className="text-xs mt-1 line-clamp-3">{item.name}</p>
+                    </Link>
+                  ))
+                }
+              </div>
             </div>
-          </div>
-        ))
+          ))
       }
     </div>
   );
