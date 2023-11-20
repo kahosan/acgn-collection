@@ -7,8 +7,7 @@ import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';
 import CollectionCard from '~/components/collection-card';
 
-import { useSearchParams } from 'next/navigation';
-import { parseAsInteger, useQueryState } from 'next-usequerystate';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useLegacySearch, useSearch } from '~/lib/bangumi/subjects';
 
@@ -22,11 +21,10 @@ export default function Search() {
   const type = searchParams.get('type') ?? '7';
   const keyword = searchParams.get('keyword') ?? '';
 
-  const [offset, setOffset] = useQueryState(
-    'offset',
-    parseAsInteger
-      .withDefault(0)
-  );
+  const _offset = searchParams.get('offset') ?? '0';
+  const offset = Number.parseInt(_offset, 10);
+
+  const router = useRouter();
 
   const payload: SearchPayload = {
     keyword: decodeURIComponent(keyword),
@@ -44,7 +42,7 @@ export default function Search() {
 
   return (
     <div>
-      <SearchBar key={keyword} payload={{ keyword: payload.keyword, type, api }} />
+      <SearchBar key={keyword} payload={{ keyword, type, api }} />
       {
         data?.data.length === 0
           ? <div className="text-center text-gray-500 mt-[20rem]">没有更多了</div>
@@ -64,7 +62,13 @@ export default function Search() {
                     <CollectionCard subject={subject} key={subject.id} mobileMask showType />
                   ))}
                 </div>
-                <Pagination offset={offset} limit={20} setOffset={setOffset} total={api === 'new' ? data.total : legacyData.results} />
+                <Pagination
+                  offset={offset}
+                  limit={20}
+                  setOffset={offset => {
+                    router.push(`/?keyword=${payload.keyword}&type=${type}&offset=${offset}`);
+                  }}
+                  total={api === 'new' ? data.total : legacyData.results} />
               </motion.div>
             ))
       }

@@ -8,7 +8,6 @@ import Pagination from '~/components/pagination';
 import CollectionCard from '~/components/collection-card';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { parseAsInteger, useQueryState } from 'next-usequerystate';
 
 import { useUserCollections } from '~/lib/bangumi/user';
 
@@ -17,21 +16,12 @@ import { transformSubjectTypeToJSX } from '~/utils';
 import { SubjectType } from '~/types/bangumi/subject';
 
 export default function Collection() {
-  const [offset, setOffset] = useQueryState(
-    'offset',
-    parseAsInteger
-      .withDefault(0)
-  );
-
   const type = useSearchParams().get('type') ?? '2';
-  const router = useRouter();
 
-  // TODO：获取到了旧的 type，可能是 next 14 的问题
-  // const [type, setType] = useQueryState<SubjectType>(
-  //   'type',
-  //   parseAsInteger
-  //     .withDefault(SubjectType.动画)
-  // );
+  const _offset = useSearchParams().get('offset') ?? '0';
+  const offset = Number.parseInt(_offset, 10);
+
+  const router = useRouter();
 
   const { data, isLoading, error } = useUserCollections({
     subject_type: +type,
@@ -55,8 +45,7 @@ export default function Collection() {
           selectedKeys={[type]}
           disallowEmptySelection
           onChange={e => {
-            setOffset(0);
-            router.push(`/?type=${e.target.value}`);
+            router.push(`/?type=${e.target.value}&offset=0`);
           }}
         >
           {
@@ -85,7 +74,13 @@ export default function Collection() {
                     <CollectionCard key={collection.subject_id} subject={collection.subject} mobileMask />
                   ))}
                 </div>
-                <Pagination offset={offset} setOffset={setOffset} limit={10} total={data.total} />
+                <Pagination
+                  offset={offset}
+                  setOffset={offset => {
+                    router.push(`/?type=${type}&offset=${offset}`);
+                  }}
+                  limit={10}
+                  total={data.total} />
               </motion.div>
             )
           )

@@ -4,28 +4,22 @@ import { Select, SelectItem, Tab, Tabs } from '@nextui-org/react';
 
 import TimelinePosts from './posts';
 
-import { parseAsString, useQueryState } from 'next-usequerystate';
-import type { ParserBuilder } from 'next-usequerystate';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useUser } from '~/hooks/use-user';
 
 import { useTimeline } from '~/lib/bangumi/timeline';
 
-import { timelineTypeMap, type TimelinePayload, type TimelineScope, type TimelineType } from '~/types/bangumi/timeline';
+import { timelineTypeMap } from '~/types/bangumi/timeline';
+import type { TimelineScope, TimelinePayload, TimelineType } from '~/types/bangumi/timeline';
 
 export default function Timeline() {
   const user = useUser();
-  const [scope, setScope] = useQueryState(
-    'scope',
-    (parseAsString as ParserBuilder<TimelineScope>)
-      .withDefault('all')
-  );
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const [type, setType] = useQueryState(
-    'type',
-    (parseAsString as ParserBuilder<TimelineType>)
-      .withDefault('')
-  );
+  const scope = searchParams.get('scope') ?? 'all';
+  const type = searchParams.get('type') ?? '';
 
   const payload: TimelinePayload = {
     userId: scope === 'me' ? user.data?.username : undefined,
@@ -44,7 +38,7 @@ export default function Timeline() {
           selectedKey={scope}
           aria-label="options"
           onSelectionChange={key => {
-            setScope(key as TimelineScope);
+            router.push(`/timeline?scope=${key}&type=${type}`);
           }}
         >
           <Tab key="all" title="全站" />
@@ -56,7 +50,7 @@ export default function Timeline() {
           aria-label="type options"
           className="hidden md:block"
           onSelectionChange={key => {
-            setType(key as TimelineType);
+            router.push(`/timeline?scope=${scope}&type=${key}`);
           }}
         >
           {
@@ -76,19 +70,23 @@ export default function Timeline() {
           selectedKeys={[type]}
           disallowEmptySelection
           onChange={e => {
-            setType(e.target.value as TimelineType);
+            router.push(`/timeline?scope=${scope}&type=${e.target.value}`);
           }}
         >
           {
             timelineTypeMap.map(type => (
-              <SelectItem key={type.label} value={type.label} onPress={() => setType(type.label)}>
+              <SelectItem
+                key={type.label}
+                value={type.label}
+                onPress={() => router.push(`/timeline?scope=${scope}&type=${type.label}`)}
+              >
                 {type.text}
               </SelectItem>
             ))
           }
         </Select>
       </div>
-      <TimelinePosts data={data} isLoading={isLoading} scope={scope} user={user.data} />
+      <TimelinePosts data={data} isLoading={isLoading} scope={scope as TimelineScope} user={user.data} />
     </>
   );
 }

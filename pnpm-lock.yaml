@@ -35,9 +35,6 @@ dependencies:
   next-themes:
     specifier: ^0.2.1
     version: 0.2.1(next@14.0.3)(react-dom@18.2.0)(react@18.2.0)
-  next-usequerystate:
-    specifier: ^1.12.2
-    version: 1.12.2(next@14.0.3)
   rc-rate:
     specifier: ^2.12.0
     version: 2.12.0(react-dom@18.2.0)(react@18.2.0)
@@ -6314,10 +6311,6 @@ packages:
   /minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
-  /mitt@3.0.1:
-    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
-    dev: false
-
   /mixme@0.5.10:
     resolution: {integrity: sha512-5H76ANWinB1H3twpJ6JY8uvAtpmFvHNArpilJAjXRKXSDDLPIMoZArw5SH0q9z+lLs8IrMw7Q2VWpWimFKFT1Q==}
     engines: {node: '>= 8.0.0'}
@@ -6380,15 +6373,6 @@ packages:
       next: 14.0.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /next-usequerystate@1.12.2(next@14.0.3):
-    resolution: {integrity: sha512-CkXN7vE0AeoytrwYsjtDT7IgKKU/fT6ebVG+5b6l5wVzWAt/jAoWjwWneA++xE5oTZnR8kgXYiqonXh0sJb7zA==}
-    peerDependencies:
-      next: '>=13.4 <14.0.2 || ^14.0.3'
-    dependencies:
-      mitt: 3.0.1
-      next: 14.0.3(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /next@14.0.3(react-dom@18.2.0)(react@18.2.0):
