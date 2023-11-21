@@ -43,7 +43,9 @@ export default function Login() {
 
   return (
     <main className="mt-24 max-w-lg mx-auto">
-      <h1 className="mb-14 text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-red-300">ACGN Collection</h1>
+      <h1 className="mb-14 text-center text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-red-300">
+        ACGN Collection
+      </h1>
       <p className="text-sm opacity-50">
         你可以在
         <Link className="text-sm" href="https://next.bgm.tv/demo/access-token" target="_blank">这里</Link>
