@@ -24,7 +24,7 @@ export default function Character({ subjectId }: Props) {
   }, [data]);
 
   if (error) throw error;
-  if (!characters || isLoading)
+  if (!characters || !data || isLoading)
     return <CharactersSkeleton />;
 
   return (
@@ -84,7 +84,7 @@ export default function Character({ subjectId }: Props) {
       </div>
       <div className="text-right flex-1">
         {
-          characters.length > 8
+          data.length > 8
             ? (
               <Link
                 href={`https://bgm.tv/subject/${subjectId}/characters`}
