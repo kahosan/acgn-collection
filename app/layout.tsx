@@ -1,7 +1,8 @@
 import Providers from '~/providers';
 
-import localFont from 'next/font/local';
 import { Suspense } from 'react';
+import localFont from 'next/font/local';
+import { Analytics } from '@vercel/analytics/react';
 
 // TODO wait official fix
 import { ScrollRestorer } from 'next-scroll-restorer';
@@ -66,6 +67,7 @@ export default function RootLayout({
           <Suspense>
             <main className="max-w-8xl mx-auto py-4 px-6">
               {children}
+              <Analytics />
               <ScrollRestorer />
             </main>
           </Suspense>

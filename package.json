@@ -18,6 +18,7 @@
     "@iconify-json/mdi": "^1.1.55",
     "@nextui-org/react": "^2.2.9",
     "@nextui-org/theme": "^2.1.17",
+    "@vercel/analytics": "^1.1.1",
     "clsx": "^2.0.0",
     "framer-motion": "^10.16.4",
     "jotai": "^2.4.3",
