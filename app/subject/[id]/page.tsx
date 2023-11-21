@@ -50,7 +50,7 @@ export default function Subject({ params }: Props) {
       </div>
       <div className="mt-5 sm:flex gap-4">
         <div className="bg-card w-full sm:max-w-[18rem] sm:min-w-[18rem] mb-4 sm:mb-0 self-start">
-          <Infomation infos={data.infobox} />
+          <Infomation infos={data.infobox} collection={data.collection} subjectId={data.id} />
         </div>
         <div className="w-full flex flex-col gap-4">
           <div className="bg-card">
