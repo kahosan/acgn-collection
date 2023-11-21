@@ -28,7 +28,7 @@ export default function Infomation({ infos, collection, subjectId, className }: 
         infos.map(info => (
           <div key={info.key} className={clsx('', className)}>
             <div className="opacity-60 text-sm">{info.key}：</div>
-            <div className="text-sm">
+            <div className="text-sm break-all">
               {
                 Array.isArray(info.value)
                   ? info.value.map(item => item.v)
