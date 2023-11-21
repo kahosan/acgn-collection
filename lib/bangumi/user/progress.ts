@@ -14,7 +14,17 @@ const fetcher = async ([url, token]: [string, string], { arg }: { arg: UserProgr
   for (const [key, value] of Object.entries(arg))
     formData.append(key, value);
 
-  await fetch(url, { method: 'POST', headers, body: formData });
+  const res = await fetch(url, { method: 'POST', headers, body: formData });
+
+  const data = res.headers.get('Content-Type')?.includes('application/json')
+    ? await res.json()
+    : await res.text();
+
+  if ('code' in data && data.code !== 202)
+    throw new Error(data.error);
+
+  if (!res.ok)
+    throw new Error('请求失败');
 };
 
 export const useUserProgressUpdate = (subjectId: number) => {

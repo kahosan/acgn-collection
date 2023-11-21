@@ -65,5 +65,5 @@ export interface UserEpisodePatchPayload {
 
 export interface UserProgressPayload {
   watched_eps: number
-  watched_vols: number
+  watched_vols?: number
 }

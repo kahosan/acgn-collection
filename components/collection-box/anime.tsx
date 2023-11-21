@@ -12,12 +12,14 @@ import {
 import Evaluation from './evaluation';
 import CollectionModify from './collection-modify';
 
+import { toast } from 'sonner';
 import { match } from 'ts-pattern';
 import { useCallback, useMemo, useState } from 'react';
 
 import { useIsMobile } from '~/hooks/use-mobile';
 
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';
+import { useUserProgressUpdate } from '~/lib/bangumi/user/progress';
 import { useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
 
 import type { Subject } from '~/types/bangumi/subject';
@@ -38,7 +40,6 @@ export default function AnimeBox({ subject, userCollection, userCollectionMutate
       <Episodes
         key={userCollection.ep_status}
         payload={{ subject_id: subject.id, type: EpisodesType.本篇 }}
-        totalEpisode={subject.eps}
         watchedEpisode={userCollection.ep_status}
         collectionType={userCollection.type}
         userCollectionMutate={userCollectionMutate}
@@ -55,13 +56,12 @@ export default function AnimeBox({ subject, userCollection, userCollectionMutate
 
 interface EpisodesProps {
   payload: EpisodesPayload
-  totalEpisode: number
   watchedEpisode: number
   collectionType: CollectionTypeForAnime
   userCollectionMutate: () => void
 }
 
-function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userCollectionMutate }: EpisodesProps) {
+function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutate }: EpisodesProps) {
   const { data, error } = useEpisodes(payload);
   const {
     data: userData,
@@ -69,18 +69,19 @@ function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userC
   } = useUserEpisodes(payload, payload.subject_id);
 
   const { handleUpdate, isMutating } = useUserEpisodesPatch(payload.subject_id);
+  const { handleUpdate: progressUpdate, isMutating: isProgressMutating } = useUserProgressUpdate(payload.subject_id);
 
   const episodes = useMemo(() => {
     if (!data || !userData) return;
-    const res: Array<Episode & { collectionType: EpisodeCollectionType }> = [];
+    const main: Array<Episode & { collectionType: EpisodeCollectionType }> = [];
 
     for (const ep of data.data) {
       const userEp = userData.data.find(e => e.episode.id === ep.id);
       if (userEp)
-        res.push({ ...ep, collectionType: userEp.type });
+        main.push({ ...ep, collectionType: userEp.type });
     }
 
-    return res;
+    return main;
   }, [data, userData]);
 
   const isMobile = useIsMobile();
@@ -90,60 +91,34 @@ function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userC
     ep: 0
   });
 
+  // TODO 这里不做 SP 的处理，因为用 v0 还是 legacy 的 API 都没办法对 SP 进行操作
   const handleUpdateEpisodeCollectionType = useCallback((key: EpisodeCollectionType, ep: number, type?: EpisodeCollectionType) => {
-    if ((type && type === key) || isMutating)
+    if ((type && type === key) || isMutating || isProgressMutating)
       return;
+
+    if (!Number.isInteger(ep)) {
+      toast.error('请输入正确的集数');
+      return;
+    }
 
     const refreshData = () => {
       userCollectionMutate();
-      userDataMutate(
-        userData
-          ? {
-            ...userData,
-            data: userData.data.map(e => match(key)
-              .when(
-                k => EpisodeCollectionType.看到 === k && ep < watchedEpisode,
-                () => ({ ...e, type: EpisodeCollectionType.看过 })
-              )
-              .when(
-                k => EpisodeCollectionType.看到 === k && ep < watchedEpisode && ep < e.episode.ep,
-                () => ({ ...e, type: EpisodeCollectionType.撤销 })
-              )
-              .when(
-                () => e.episode.ep === ep,
-                () => ({ ...e, type: key })
-              )
-              .otherwise(() => e))
-          }
-          : undefined
-      );
+      userDataMutate();
     };
 
-    match(key)
-      .when(k => EpisodeCollectionType.看到 === k && ep < watchedEpisode, () => {
-        // 集数小于当前观看进度时，将其它集数设为未收藏状态
-        const episodeId = episodes?.filter(e => e.ep > ep).map(e => e.id) ?? [];
-        handleUpdate({
-          episode_id: episodeId,
-          type: EpisodeCollectionType.撤销
-        }, refreshData);
-      })
-      .when(k => EpisodeCollectionType.看到 === k, () => {
-        const episodeId = episodes?.filter(e => e.ep <= ep).map(e => e.id) ?? [];
-        handleUpdate({
-          episode_id: episodeId,
-          type: EpisodeCollectionType.看过
-        }, refreshData);
-      })
-      .otherwise(() => {
-        const id = episodes?.find(e => e.ep === ep)?.id;
-        const episodeId = id ? [id] : [];
-        handleUpdate({
-          episode_id: episodeId,
-          type: key
-        }, refreshData);
-      });
-  }, [episodes, handleUpdate, isMutating, userCollectionMutate, userData, userDataMutate, watchedEpisode]);
+    if (key === EpisodeCollectionType.看到) {
+      progressUpdate({
+        watched_eps: ep
+      }, refreshData);
+    } else {
+      const id = episodes?.find(e => e.ep === ep)?.id;
+      const episodeId = id ? [id] : [];
+      handleUpdate({
+        episode_id: episodeId,
+        type: key
+      }, refreshData);
+    }
+  }, [episodes, handleUpdate, isMutating, isProgressMutating, progressUpdate, userCollectionMutate, userDataMutate]);
 
   if (error) throw error;
 
@@ -153,7 +128,7 @@ function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userC
       {
         !episodes
           ? <Skeleton className="rounded-lg h-[4rem] w-full" />
-          : episodes.filter(e => e.type === EpisodesType.本篇).map(episode => (
+          : episodes.map(episode => (
             <Tooltip
               key={episode.id}
               isOpen={isMobile ? openState.isOpen && openState.ep === episode.ep : undefined}
@@ -222,11 +197,7 @@ function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userC
                   }));
                 }}
               >
-                {
-                  episode.ep >= 10
-                    ? episode.ep
-                    : `0${episode.ep}`
-                }
+                {episode.ep >= 10 ? episode.ep : `0${episode.ep}`}
               </Button>
             </Tooltip>
           ))
@@ -245,7 +216,7 @@ function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userC
                     variant="faded"
                     radius="sm"
                     endContent={
-                      <span className="text-small">/{totalEpisode}</span>
+                      <span className="text-small">/{episodes?.length}</span>
                     }
                     classNames={{
                       innerWrapper: 'items-baseline'
@@ -254,7 +225,7 @@ function Episodes({ payload, totalEpisode, watchedEpisode, collectionType, userC
                   <Button
                     radius="sm"
                     variant="faded"
-                    isLoading={isMutating}
+                    isLoading={isMutating || isProgressMutating}
                     onPress={() => handleUpdateEpisodeCollectionType(EpisodeCollectionType.看到, Number.parseInt(episode, 10))}
                   >
                     更新
