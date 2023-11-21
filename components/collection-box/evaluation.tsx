@@ -12,7 +12,7 @@ interface Props {
 
 export default function Evaluation({ subject, userCollection }: Props) {
   return (
-    <>
+    <div>
       <div>
         <div className="text-sm pb-1.5">我的评价</div>
         <Rate
@@ -29,7 +29,7 @@ export default function Evaluation({ subject, userCollection }: Props) {
         />
       </div>
 
-      <div>
+      <div className="mt-2">
         <div className="text-sm pb-1.5">社区评价</div>
         <div className="flex flex-row gap-2">
           <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subject.rating.rank}</Chip>
@@ -39,6 +39,6 @@ export default function Evaluation({ subject, userCollection }: Props) {
         <Divider className="mt-2.5 mb-1 max-w-[8rem]" />
         <Link href={`https://bgm.tv/subject/${subject.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
       </div>
-    </>
+    </div>
   );
 }
