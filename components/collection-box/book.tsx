@@ -69,8 +69,6 @@ function Episodes({ payload, totalEpisode, watchedEpisode, totalVolume, watchedV
     }, userCollectionMutate);
   };
 
-  // TODO fix api
-
   return (
     <div>
       <div className="text-small pb-1.5">观看进度管理</div>
