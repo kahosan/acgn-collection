@@ -30,7 +30,7 @@ export type RequestInitWithBase = RequestInit & { base?: string | URL };
 export async function fetcher<T>(key: string | [string, string | RequestInitWithBase], { arg }: { arg?: Record<string, any> } = {}) {
   const headers = new Headers();
 
-  const [url] = typeof key === 'string' ? [key] : key;
+  const [_url] = typeof key === 'string' ? [key] : key;
 
   let token: string | undefined;
   const options: RequestInitWithBase = {};
@@ -55,7 +55,14 @@ export async function fetcher<T>(key: string | [string, string | RequestInitWith
     headers.set('Content-Type', 'application/json');
   }
 
-  const res = await fetch(options.base === '/' ? url : new URL(url, BASE_URL), {
+  let url: string | URL = new URL(_url, BASE_URL);
+
+  if (options.base && options.base !== '/')
+    url = new URL(_url, options.base);
+  else if (options.base === '/')
+    url = _url;
+
+  const res = await fetch(url, {
     ...options,
     headers
   });

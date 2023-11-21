@@ -34,7 +34,7 @@ export const useLegacySearch = (payload: SearchPayload, offset: number, limit?: 
   const _type = payload.filter?.type;
   const type = _type?.length === 1 ? _type.at(0) ?? '' : '';
   return useSWRImmutable<LegacySearchSubject, Error>(
-    [`/search/api?keyword=${payload.keyword}&max_results=${limit ?? ''}&start=${offset}&type=${type}`, { base: '/' }],
+    [`/search/subject/${payload.keyword}?max_results=${limit ?? ''}&start=${offset}&type=${type}`, { base: 'https://bgmapi.kahosan.workers.dev' }],
     fetcher,
     {
       onError(error) {
