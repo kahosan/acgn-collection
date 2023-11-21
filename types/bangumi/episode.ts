@@ -62,3 +62,8 @@ export interface UserEpisodePatchPayload {
   episode_id: number[]
   type: EpisodeCollectionType
 }
+
+export interface UserProgressPayload {
+  watched_eps: number
+  watched_vols: number
+}

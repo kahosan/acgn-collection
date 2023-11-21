@@ -1,11 +1,11 @@
-import { Button, Input, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
+import { Button, Input } from '@nextui-org/react';
 
 import Evaluation from './evaluation';
 import CollectionModify from './collection-modify';
 
 import { useState } from 'react';
 
-import { useUserCollectionModify } from '~/lib/bangumi/user';
+import { useUserProgressUpdate } from '~/lib/bangumi/user/progress';
 
 import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection } from '~/types/bangumi/collection';
@@ -55,7 +55,7 @@ interface EpisodesProps {
 }
 
 function Episodes({ payload, totalEpisode, watchedEpisode, totalVolume, watchedVolume, userCollectionMutate }: EpisodesProps) {
-  const { handleModify, isMutating } = useUserCollectionModify(payload.subject_id);
+  const { handleUpdate, isMutating } = useUserProgressUpdate(payload.subject_id);
 
   const [episode, setEpisode] = useState(watchedEpisode.toString());
   const [volume, setVolume] = useState(watchedVolume.toString());
@@ -63,9 +63,9 @@ function Episodes({ payload, totalEpisode, watchedEpisode, totalVolume, watchedV
   const handleSave = () => {
     if (isMutating) return;
 
-    handleModify({
-      ep_status: +episode,
-      vol_status: +volume
+    handleUpdate({
+      watched_eps: +episode,
+      watched_vols: +volume
     }, userCollectionMutate);
   };
 
@@ -96,21 +96,14 @@ function Episodes({ payload, totalEpisode, watchedEpisode, totalVolume, watchedV
             />
             {type === 'Vol'
               ? (
-                <Popover>
-                  <PopoverTrigger>
-                    <Button
-                      radius="sm"
-                      variant="faded"
-                      isLoading={isMutating}
-                      onPress={() => handleSave}
-                    >
-                      保存
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="px-4">
-                    API 实现有问题，暂时不启用
-                  </PopoverContent>
-                </Popover>
+                <Button
+                  radius="sm"
+                  variant="faded"
+                  isLoading={isMutating}
+                  onPress={() => handleSave()}
+                >
+                  保存
+                </Button>
               )
               : null}
           </div>
