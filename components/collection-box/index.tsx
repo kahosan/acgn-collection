@@ -39,7 +39,7 @@ export default function CollectionBox({ subject }: Props) {
     >
       {
         !data
-          ? <UnCollection subjectId={subject.id} subjectType={subject.type} mutate={mutate} />
+          ? <UnCollection subject={subject} mutate={mutate} />
           : match(subject.type)
             .with(SubjectType.书籍, () => <BookBox {...componentProps} userCollection={data} />)
             .with(SubjectType.动画, () => <AnimeBox {...componentProps} userCollection={data} />)

@@ -1,4 +1,12 @@
-import { Button, ButtonGroup, Checkbox, Input, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea } from '@nextui-org/react';
+import {
+  Button, ButtonGroup,
+  Checkbox,
+  Chip,
+  Input,
+  Textarea,
+  Popover, PopoverContent, PopoverTrigger,
+  Tab, Tabs
+} from '@nextui-org/react';
 
 import { useState } from 'react';
 
@@ -6,21 +14,20 @@ import { transformCollectionTypeToJSX } from '~/utils';
 
 import { useUserCollectionModify } from '~/lib/bangumi/user';
 
-import type { SubjectType } from '~/types/bangumi/subject';
+import type { Subject } from '~/types/bangumi/subject';
 
 interface Props {
-  subjectId: number
-  subjectType: SubjectType
+  subject: Subject
   mutate: () => void
 }
 
-export default function UnCollection({ subjectId, subjectType, mutate }: Props) {
+export default function UnCollection({ subject, mutate }: Props) {
   const [selected, setSelected] = useState<number>(1); // CollectionType - /types/bangumi/collection 查看详细定义
   const [tags, setTags] = useState<string[]>([]);
   const [comment, setComment] = useState<string>('');
   const [isPrivate, setIsPrivate] = useState(false);
 
-  const { handleModify, isMutating } = useUserCollectionModify(subjectId);
+  const { handleModify, isMutating } = useUserCollectionModify(subject.id);
 
   const handleCollection = () => {
     handleModify({
@@ -32,7 +39,17 @@ export default function UnCollection({ subjectId, subjectType, mutate }: Props) 
   };
 
   return (
-    <div className="grid gap-4 sm:gap-0 h-full">
+    <div className="grid gap-4 sm:gap-2 h-full">
+
+      <div>
+        <div className="text-sm pb-1.5">社区评价</div>
+        <div className="flex flex-row gap-2">
+          <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subject.rating.rank}</Chip>
+          <Chip radius="sm" color="primary" startContent={<div className="p-2">评分数</div>}>{subject.rating.total}</Chip>
+          <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subject.rating.score}</Chip>
+        </div>
+      </div>
+
       <div>
         <div className="text-small pb-1.5">收藏类型</div>
         <Tabs
@@ -45,7 +62,7 @@ export default function UnCollection({ subjectId, subjectType, mutate }: Props) 
               (type, label) => (
                 <Tab key={type} title={label} />
               ),
-              subjectType
+              subject.type
             )
           }
         </Tabs>
