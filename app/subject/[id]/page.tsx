@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Divider } from '@nextui-org/react';
+import { Divider, Link } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
@@ -39,11 +39,16 @@ export default function Subject({ params }: Props) {
         </div>
         <div className="w-full grid grid-rows-[auto_1fr]">
           <div>
-            <a href={`https://bgm.tv/subject/${data.id}`} className="font-medium text-xl hover:opacity-60 transition-opacity" target="_blank" rel="noreferrer">
+            <Link
+              href={`https://bgm.tv/subject/${data.id}`}
+              color="foreground"
+              className="font-medium text-xl"
+              isExternal
+            >
               {convertSpecialChar(data.name)}
-              <small className="ml-1 opacity-50 text-xs">{data.platform}</small>
-            </a>
-            <Divider className="mt-2 mb-4" />
+            </Link>
+            <small className="ml-1 opacity-50 text-xs">{data.platform}</small>
+            <Divider className="mt-2 mb-3" />
           </div>
           <CollectionBox subject={data} />
         </div>
