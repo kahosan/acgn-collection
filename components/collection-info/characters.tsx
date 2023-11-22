@@ -29,7 +29,7 @@ export default function Character({ subjectId }: Props) {
 
   return (
     <div>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(11.5rem,auto))] gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(11.5rem,auto))] gap-4">
         {
           characters.map(character => (
             <div key={character.id} className="flex gap-2 flex-auto">
@@ -59,7 +59,7 @@ export default function Character({ subjectId }: Props) {
                   </Chip>
                 </Link>
                 <Divider className="my-1" />
-                <Link color="foreground" href={`https://bgm.tv/person/${character.actors.at(0)?.id ?? ''}`} isExternal>
+                <Link color="foreground" className="w-full" href={`https://bgm.tv/person/${character.actors.at(0)?.id ?? ''}`} isExternal>
                   <Chip
                     className="text-xs rounded-sm mr-1 bg-blue-400/70"
                     classNames={{
