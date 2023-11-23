@@ -42,12 +42,12 @@ export default function Subject({ params }: Props) {
             <Link
               href={`https://bgm.tv/subject/${data.id}`}
               color="foreground"
-              className="font-medium text-xl"
+              className="font-medium text-xl max-w-max inline"
               isExternal
             >
               {convertSpecialChar(data.name)}
+              <span className="ml-1 opacity-50 text-xs">{data.platform}</span>
             </Link>
-            <small className="ml-1 opacity-50 text-xs">{data.platform}</small>
             <Divider className="mt-2 mb-3" />
           </div>
           <CollectionBox subject={data} />
