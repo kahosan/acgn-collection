@@ -137,11 +137,12 @@ function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutat
                   <Link
                     href={`https://bgm.tv/ep/${episode.id}`}
                     color="foreground"
+                    className="w-full gap-1"
                     size="sm"
                     showAnchorIcon
                     isExternal
                   >
-                    {episode.name || '暂无标题'}
+                    <span className="truncate w-full">{episode.name || '暂无标题'}</span>
                   </Link>
                   <Divider className="my-2" />
                   <div>
@@ -172,7 +173,7 @@ function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutat
                         )
                         : null
                     }
-                    {episode.name_cn ? <p>中文标题：{episode.name_cn}</p> : null}
+                    {episode.name_cn ? <p className="truncate">中文标题：{episode.name_cn}</p> : null}
                     <p>首播：{episode.airdate}</p>
                     {episode.duration ? <p>时长：{episode.duration}</p> : null}
                   </div>
