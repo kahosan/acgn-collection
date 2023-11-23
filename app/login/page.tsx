@@ -22,17 +22,19 @@ export default function Login() {
     try {
       setIsLoading(true);
 
+      const trimmedToken = token.trim();
+
       // Auth Provider will redirect to /
       const data = await fetcher<UserInfo>(
         [
           '/login/api',
-          { base: '/', headers: { Authorization: `Bearer ${token}` } }
+          { base: '/', headers: { Authorization: `Bearer ${trimmedToken}` } }
         ]
       );
 
       toast(`欢迎 ${data.username}!`);
 
-      _setToken(token);
+      _setToken(trimmedToken);
       setIsLoading(false);
     } catch (e) {
       setIsLoading(false);
