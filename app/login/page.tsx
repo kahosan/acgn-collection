@@ -5,6 +5,10 @@ import { permanentRedirect } from 'next/navigation';
 
 import { options } from '~/lib/auth';
 
+export const metadata = {
+  title: '登入至 ACGN Collection'
+};
+
 export default async function Login() {
   const session = await getServerSession(options);
   if (session?.token)

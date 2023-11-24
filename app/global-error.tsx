@@ -18,6 +18,7 @@ export default function GlobalError({ error }: { error: Error }) {
 
   return (
     <html className={theme ?? ''}>
+      <title>Error</title>
       <body>
         <div className="mt-40 max-w-xl mx-auto p-4">
           <div>

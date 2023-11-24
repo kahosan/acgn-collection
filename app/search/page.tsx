@@ -13,7 +13,6 @@ import { useLegacySearch, useSearch } from '~/lib/bangumi/subjects';
 
 import type { SearchPayload } from '~/types/bangumi/subject';
 
-// enhance search filter
 export default function Search() {
   const searchParams = useSearchParams();
 
