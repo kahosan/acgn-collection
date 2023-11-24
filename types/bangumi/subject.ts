@@ -22,16 +22,6 @@ export interface SearchPayload {
 
 // response
 
-export type Calendar = Array<{
-  weekday: {
-    en: string
-    cn: string
-    ja: string
-    id: number
-  }
-  items: LegacySubject[]
-}>;
-
 export interface LegacySubject {
   id: number
   url: string

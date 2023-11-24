@@ -4,7 +4,7 @@ import { CollectionTypeForAnime, CollectionTypeForBook, CollectionTypeForGame, C
 
 import { SubjectType } from '~/types/bangumi/subject';
 
-export const isBrowser = typeof window !== 'undefined';
+export const isBrowser = typeof self !== 'undefined';
 
 export const convertSpecialChar = (str: string) => {
   return str.replaceAll('&nbsp;', ' ')
@@ -58,4 +58,12 @@ export const transformCollectionTypeToJSX = <T extends React.ReactNode>(cb: (typ
     .filter(type => Number.isInteger(Number.parseInt(type, 10)))
     .map(type => Number.parseInt(type, 10))
     .map(type => cb(type, collectionType[type]));
+};
+
+export const transformEnumToJSX = <R extends React.ReactNode, T>(cb: (key: number, value: string) => R, type: T, other: Record<string, string> = {}) => {
+  return Object.keys({ ...type, ...other })
+    .filter(key => Number.isInteger(Number.parseInt(key, 10)))
+    .map(key => Number.parseInt(key, 10))
+    // @ts-expect-error -- T is a enum
+    .map(key => cb(key, type[key]));
 };

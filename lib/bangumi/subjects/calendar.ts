@@ -1,7 +1,7 @@
 import useSWRImmutable from 'swr/immutable';
 import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
-import type { Calendar } from '~/types/bangumi/subject';
+import type { Calendar } from '~/types/bangumi/calendar';
 
 export const useCalendar = () => useSWRImmutable<Calendar, Error>(
   '/calendar',

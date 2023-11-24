@@ -51,7 +51,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
         <CardBody className="flex flex-row gap-4 p-5">
           <div className="relative min-h-[14rem] max-h-[14rem] min-w-[9rem] max-w-[9rem] sm:min-w-[10rem] sm:max-w-[10rem]">
             <NextImage
-              src={(subject.images?.medium ?? subject.image) || 'https://placehold.co/160x224/png'}
+              src={(subject.images?.large ?? subject.image) || 'https://placehold.co/160x224/png'}
               alt={subject.name}
               className="object-cover bg-center bg-zinc-300 dark:bg-zinc-700 opacity-20 transition-all duration-300 rounded-md w-auto h-auto"
               priority

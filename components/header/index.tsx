@@ -23,10 +23,12 @@ import ToggleTheme from './toggle-theme';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import clsx from 'clsx';
 
 const navItems = {
-  '/': '首页',
-  '/timeline': '时间胶囊'
+  '/': '收藏',
+  '/timeline': '时间胶囊',
+  '/calendar': '每日放送'
 };
 
 export default function Header() {
@@ -34,11 +36,6 @@ export default function Header() {
   const { data } = useSession();
 
   const pn = usePathname();
-
-  const logout = () => {
-    // Auth Provider will redirect to /login
-    signOut();
-  };
 
   if (pn.startsWith('/login')) return null;
 
@@ -56,7 +53,14 @@ export default function Header() {
             <NavbarItem
               key={path}
             >
-              <Link as={NextLink} color="foreground" className="opacity-75 font-[500] mt-0.5" href={path}>{name}</Link>
+              <Link
+                as={NextLink}
+                color="foreground"
+                className={clsx('opacity-75 font-[500] mt-0.5', pn === path && 'opacity-100')}
+                href={path}
+              >
+                {name}
+              </Link>
             </NavbarItem>
           ))
         }
@@ -97,7 +101,7 @@ export default function Header() {
                 主题
               </DropdownItem>
             </DropdownSection>
-            <DropdownItem key="logout" color="danger" className="text-danger" onPress={logout}>
+            <DropdownItem key="logout" color="danger" className="text-danger" onPress={() => signOut()}>
               登出
             </DropdownItem>
           </DropdownMenu>
