@@ -70,9 +70,16 @@ export default function Collection() {
                 transition={{ ease: 'easeInOut', duration: 0.3 }}
               >
                 <div className="grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8">
-                  {data.data.map(collection => (
-                    <CollectionCard key={collection.subject_id} subject={collection.subject} mobileMask />
-                  ))}
+                  {
+                    data.data.map(collection => (
+                      <motion.div
+                        key={collection.subject_id}
+                        layout
+                      >
+                        <CollectionCard subject={collection.subject} mobileMask />
+                      </motion.div>
+                    ))
+                  }
                 </div>
                 <Pagination
                   offset={offset}
