@@ -27,7 +27,7 @@ export default function SearchBar({ payload }: Props) {
 
   return (
     <div className="mb-4">
-      <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
+      <div className="flex flex-col sm:flex-row gap-4">
         <Tabs
           radius="sm"
           selectedKey={payload.api}
