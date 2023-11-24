@@ -8,7 +8,7 @@ import { useToken } from '~/hooks/use-token';
 import type { UserEpisode, UserEpisodePatchPayload, UserEpisodePayload } from '~/types/bangumi/episode';
 
 export const useUserEpisodes = (payload: UserEpisodePayload, subjectId: number) => {
-  const [token] = useToken();
+  const token = useToken();
 
   return useSWRImmutable<UserEpisode>(
     token ? [`/v0/users/-/collections/${subjectId}/episodes`, token] : null,
@@ -22,7 +22,7 @@ export const useUserEpisodes = (payload: UserEpisodePayload, subjectId: number) 
 };
 
 export const useUserEpisodesPatch = (subjectId: number) => {
-  const [token] = useToken();
+  const token = useToken();
 
   const { trigger, isMutating } = useSWRMutation(
     token

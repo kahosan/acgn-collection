@@ -7,8 +7,8 @@ import { useToken } from '~/hooks/use-token';
 import type { UserCollections, UserCollectionsPayload } from '~/types/bangumi/collection';
 
 export const useUserCollections = (payload: UserCollectionsPayload) => {
-  const [token] = useToken();
-  const { data: user } = useUser();
+  const token = useToken();
+  const user = useUser();
 
   const params = new URLSearchParams();
 

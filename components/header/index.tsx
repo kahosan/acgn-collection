@@ -21,11 +21,8 @@ import HearderSearch from './search';
 import ToggleTheme from './toggle-theme';
 
 import { useState } from 'react';
-import { useSetAtom } from 'jotai';
 import { usePathname } from 'next/navigation';
-
-import { useUser } from '~/hooks/use-user';
-import { tokenAtom } from '~/hooks/use-token';
+import { signOut, useSession } from 'next-auth/react';
 
 const navItems = {
   '/': '首页',
@@ -33,19 +30,17 @@ const navItems = {
 };
 
 export default function Header() {
-  const { data, error } = useUser();
-  const setToken = useSetAtom(tokenAtom);
   const [isOpen, setIsOpen] = useState(false);
+  const { data } = useSession();
 
   const pn = usePathname();
 
   const logout = () => {
     // Auth Provider will redirect to /login
-    setToken(null);
+    signOut();
   };
 
-  if (pn === '/login') return null;
-  if (error) throw error;
+  if (pn.startsWith('/login')) return null;
 
   return (
     <Navbar isMenuOpen={isOpen} onMenuOpenChange={setIsOpen} maxWidth="full" isBordered>
@@ -76,8 +71,8 @@ export default function Header() {
               as="button"
               className="transition-transform min-w-max"
               color="danger"
-              name={data?.username}
-              src={data?.avatar.small ?? 'https://placehold.co/32x32'}
+              name={data?.user.username}
+              src={data?.user.avatar.small ?? 'https://placehold.co/32x32'}
               size="sm"
             />
           </DropdownTrigger>
@@ -86,7 +81,7 @@ export default function Header() {
               <DropdownItem
                 as="a"
                 key="bangumi-home"
-                href={`https://bgm.tv/user/${data?.username ?? ''}`}
+                href={`https://bgm.tv/user/${data?.user.username ?? ''}`}
               >
                 Bangumi 主页
               </DropdownItem>

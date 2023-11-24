@@ -6,7 +6,7 @@ import { useToken } from '~/hooks/use-token';
 import type { Episodes, EpisodesPayload } from '~/types/bangumi/episode';
 
 export const useEpisodes = (payload: EpisodesPayload) => {
-  const [token] = useToken();
+  const token = useToken();
   const params = new URLSearchParams();
 
   for (const [key, value] of Object.entries(payload))

@@ -6,7 +6,7 @@ import { useToken } from '~/hooks/use-token';
 import type { Subject } from '~/types/bangumi/subject';
 
 export const useSubject = (id: string) => {
-  const [token] = useToken();
+  const token = useToken();
 
   return useSWRImmutable<Subject, Error>(
     token ? [`/v0/subjects/${id}`, token] : null,

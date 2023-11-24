@@ -28,7 +28,7 @@ const fetcher = async ([url, token]: [string, string], { arg }: { arg: UserProgr
 };
 
 export const useUserProgressUpdate = (subjectId: number) => {
-  const [token] = useToken();
+  const token = useToken();
 
   const { trigger, isMutating } = useSWRMutation(
     token

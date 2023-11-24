@@ -25,7 +25,7 @@ export default function Timeline() {
   const page = Number.parseInt(_page, 10);
 
   const payload: TimelinePayload = {
-    userId: scope === 'me' ? user.data?.username : undefined,
+    userId: scope === 'me' ? user?.username : undefined,
     type: type as TimelineType,
     page: scope === 'me' ? page : 1
   };
@@ -95,7 +95,7 @@ export default function Timeline() {
         scope={scope as TimelineScope}
         page={page}
         type={type}
-        user={user.data}
+        user={user}
       />
     </>
   );

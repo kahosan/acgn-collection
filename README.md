@@ -16,3 +16,4 @@ WIP
 
 - https://github.com/bangumi/api
 - https://github.com/czy0729/Bangumi
+- https://github.com/Zebeqo/Bangumi

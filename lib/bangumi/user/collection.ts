@@ -7,8 +7,8 @@ import { useToken } from '~/hooks/use-token';
 import type { UserCollection } from '~/types/bangumi/collection';
 
 export const useUserCollection = (subjectId: number) => {
-  const [token] = useToken();
-  const { data: user } = useUser();
+  const token = useToken();
+  const user = useUser();
 
   const { data, isLoading, mutate, error } = useSWRImmutable<UserCollection, Error>(
     (user?.username && token) ? [`/v0/users/${user.username}/collections/${subjectId}`, token] : null,
