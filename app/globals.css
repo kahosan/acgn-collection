@@ -6,6 +6,9 @@
   .bg-card {
     @apply p-4 bg-zinc-50 dark:bg-zinc-800/40 rounded-large;
   }
+  .grid-card {
+    @apply grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8;
+  }
 }
 
 .dark, [data-theme="dark"] {

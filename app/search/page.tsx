@@ -55,7 +55,7 @@ export default function Search() {
                 transition={{ ease: 'easeInOut', duration: 0.3 }}
               >
                 <div
-                  className="grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8"
+                  className="grid-card"
                 >
                   {(api === 'new' ? data.data : legacyData.list).map(subject => (
                     <CollectionCard subject={subject} key={subject.id} mobileMask showType />
