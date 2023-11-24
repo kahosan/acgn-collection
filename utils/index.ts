@@ -41,8 +41,7 @@ export const transformSubjectTypeToJSX = <T>(cb: (type: number) => T, other: Rec
   return Object.keys({ ...SubjectType, ...other })
     .filter(type => Number.isInteger(Number.parseInt(type, 10)))
     .map(type => Number.parseInt(type, 10))
-    .map(type => cb(type))
-    .reverse();
+    .map(type => cb(type));
 };
 
 export const getCollectionTypeBySubjectType = (subjectType: SubjectType) => match<1 | 2 | 3 | 4 | 6>(subjectType)
@@ -53,7 +52,7 @@ export const getCollectionTypeBySubjectType = (subjectType: SubjectType) => matc
   .with(4, () => CollectionTypeForGame)
   .exhaustive();
 
-export const transformCollectionTypeToJSX = (cb: (type: number, label: string) => React.ReactNode, subjectType: SubjectType, other: Record<string, string> = {}) => {
+export const transformCollectionTypeToJSX = <T extends React.ReactNode>(cb: (type: number, label: string) => T, subjectType: SubjectType, other: Record<string, string> = {}) => {
   const collectionType = getCollectionTypeBySubjectType(subjectType);
   return Object.keys({ ...collectionType, ...other })
     .filter(type => Number.isInteger(Number.parseInt(type, 10)))
