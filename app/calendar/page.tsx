@@ -17,7 +17,8 @@ import { Weekday } from '~/types/bangumi/calendar';
 export default function Calendar() {
   const { data, isLoading, error } = useCalendar();
 
-  const [date, setDate] = useState(() => new Date().getDay());
+  const today = new Date().getDay();
+  const [date, setDate] = useState(() => (today === 0 ? 7 : today));
 
   const subjects = useMemo(() => {
     return data?.find(({ weekday }) => weekday.id === date)?.items;
@@ -64,7 +65,7 @@ export default function Calendar() {
                       key={subject.id}
                       layout
                     >
-                      <CollectionCard subject={{ ...subject, score: subject.rating?.score }} mobileMask showType />
+                      <CollectionCard subject={{ ...subject, score: subject.rating?.score }} mobileMask />
                     </motion.div>
                   ))
                 }

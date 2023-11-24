@@ -122,7 +122,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
               }
             </div>
             <div className="opacity-70 text-sm line-clamp-4">
-              {(subject.short_summary ?? subject.summary ?? '').trim() || '暂无简介'}
+              {(subject.short_summary ?? subject.summary ?? '').trim()}
             </div>
           </div>
         </CardBody>
