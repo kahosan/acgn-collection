@@ -4,6 +4,9 @@ import type { JWT } from 'next-auth/jwt';
 import type { UserInfo } from '~/types/bangumi/user';
 
 export const options: NextAuthOptions = {
+  session: {
+    maxAge: 604800 // 7 days
+  },
   providers: [
     {
       id: 'bangumi',
@@ -39,8 +42,7 @@ export const options: NextAuthOptions = {
   }
 };
 
-// eslint-disable-next-line unused-imports/no-unused-vars -- https://github.com/nextauthjs/next-auth/issues/7558
-async function refreshAccessToken(token: JWT) {
+export async function refreshAccessToken(token: JWT) {
   try {
     const res = await fetch('https://bgm.tv/oauth/access_token', {
       method: 'POST',
@@ -58,7 +60,7 @@ async function refreshAccessToken(token: JWT) {
     const data = await res.json();
 
     if (!res.ok)
-      throw data;
+      throw new Error(data.error_description);
 
     return {
       ...token,
@@ -67,8 +69,6 @@ async function refreshAccessToken(token: JWT) {
       refreshToken: data.refresh_token
     };
   } catch (error) {
-    const { error_description } = error as { error_description: string };
-    console.error(error_description);
-    return token;
+    console.error(error);
   }
 }
