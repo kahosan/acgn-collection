@@ -20,10 +20,12 @@ import NextLink from 'next/link';
 import HearderSearch from './search';
 import ToggleTheme from './toggle-theme';
 
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { signOut, useSession } from 'next-auth/react';
 import clsx from 'clsx';
+import { useState } from 'react';
+import { signOut } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
+
+import { useUser } from '~/hooks/use-user';
 
 const navItems = {
   '/': '收藏',
@@ -33,7 +35,7 @@ const navItems = {
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { data } = useSession();
+  const user = useUser();
 
   const pn = usePathname();
 
@@ -75,8 +77,8 @@ export default function Header() {
               as="button"
               className="transition-transform min-w-max"
               color="danger"
-              name={data?.user.username}
-              src={data?.user.avatar.small ?? 'https://placehold.co/32x32'}
+              name={user?.username}
+              src={user?.avatar.small ?? 'https://placehold.co/32x32'}
               size="sm"
             />
           </DropdownTrigger>
@@ -85,7 +87,7 @@ export default function Header() {
               <DropdownItem
                 as="a"
                 key="bangumi-home"
-                href={`https://bgm.tv/user/${data?.user.username ?? ''}`}
+                href={`https://bgm.tv/user/${user?.username ?? ''}`}
               >
                 Bangumi 主页
               </DropdownItem>
