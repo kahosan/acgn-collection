@@ -18,9 +18,9 @@ export default function Character({ subjectId }: Props) {
     if (!data) return;
 
     return data
-      .slice(0, 8)
       .filter(character => character.type === CharacterType.角色)
-      .sort(character => (character.relation === '主角' ? -1 : 1));
+      .sort(character => (character.relation === '主角' ? -1 : 1))
+      .slice(0, 8);
   }, [data]);
 
   if (error) throw error;
