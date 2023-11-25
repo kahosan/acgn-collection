@@ -19,7 +19,7 @@ interface Props {
 
 export default function BookBox({ subject, userCollection, userCollectionMutate }: Props) {
   return (
-    <div className="grid gap-4 sm:gap-0 h-full">
+    <>
       {
         userCollection.type === 1
           ? null
@@ -41,7 +41,7 @@ export default function BookBox({ subject, userCollection, userCollectionMutate 
       <div className="self-end">
         <CollectionModify subject={subject} userCollection={userCollection} userCollectionMutate={userCollectionMutate} />
       </div>
-    </div>
+    </>
   );
 }
 

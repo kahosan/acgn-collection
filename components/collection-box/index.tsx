@@ -40,13 +40,19 @@ export default function CollectionBox({ subject }: Props) {
       {
         !data
           ? <UnCollection subject={subject} mutate={mutate} />
-          : match(subject.type)
-            .with(SubjectType.书籍, () => <BookBox {...componentProps} userCollection={data} />)
-            .with(SubjectType.动画, () => <AnimeBox {...componentProps} userCollection={data} />)
-            .with(SubjectType.音乐, () => <MusicBox {...componentProps} userCollection={data} />)
-            .with(SubjectType.游戏, () => <GameBox {...componentProps} userCollection={data} />)
-            .with(SubjectType.三次元, () => <RealBox {...componentProps} userCollection={data} />)
-            .otherwise(() => null)
+          : (
+            <div className="grid gap-4 sm:gap-2 h-full">
+              {
+                match(subject.type)
+                  .with(SubjectType.书籍, () => <BookBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.动画, () => <AnimeBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.音乐, () => <MusicBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.游戏, () => <GameBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.三次元, () => <RealBox {...componentProps} userCollection={data} />)
+                  .otherwise(() => null)
+              }
+            </div>
+          )
       }
     </motion.div>
   );

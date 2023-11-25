@@ -36,7 +36,7 @@ interface Props {
 
 export default function AnimeBox({ subject, userCollection, userCollectionMutate }: Props) {
   return (
-    <div className="grid gap-4 sm:gap-2 h-full">
+    <>
       <Episodes
         key={userCollection.ep_status}
         payload={{ subject_id: subject.id, type: EpisodesType.本篇 }}
@@ -50,7 +50,7 @@ export default function AnimeBox({ subject, userCollection, userCollectionMutate
       <div className="self-end">
         <CollectionModify subject={subject} userCollection={userCollection} userCollectionMutate={userCollectionMutate} />
       </div>
-    </div>
+    </>
   );
 }
 
