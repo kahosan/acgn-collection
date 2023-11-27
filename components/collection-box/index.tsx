@@ -33,31 +33,29 @@ export default function CollectionBox({ subject }: Props) {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <CollectionTypeLabel userCollection={data} />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        {
-          !data
-            ? <UnCollection subject={subject} mutate={mutate} />
-            : (
-              <div className="grid gap-4 sm:gap-2 h-full">
-                {
-                  match(subject.type)
-                    .with(SubjectType.书籍, () => <BookBox {...componentProps} userCollection={data} />)
-                    .with(SubjectType.动画, () => <AnimeBox {...componentProps} userCollection={data} />)
-                    .with(SubjectType.音乐, () => <MusicBox {...componentProps} userCollection={data} />)
-                    .with(SubjectType.游戏, () => <GameBox {...componentProps} userCollection={data} />)
-                    .with(SubjectType.三次元, () => <RealBox {...componentProps} userCollection={data} />)
-                    .otherwise(() => null)
-                }
-              </div>
-            )
-        }
-      </motion.div>
-    </>
+      {
+        !data
+          ? <UnCollection subject={subject} mutate={mutate} />
+          : (
+            <div className="grid gap-4 sm:gap-2 h-full">
+              {
+                match(subject.type)
+                  .with(SubjectType.书籍, () => <BookBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.动画, () => <AnimeBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.音乐, () => <MusicBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.游戏, () => <GameBox {...componentProps} userCollection={data} />)
+                  .with(SubjectType.三次元, () => <RealBox {...componentProps} userCollection={data} />)
+                  .otherwise(() => null)
+              }
+            </div>
+          )
+      }
+    </motion.div>
   );
 }
