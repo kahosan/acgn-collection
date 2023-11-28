@@ -154,6 +154,14 @@ function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutat
                             onSelectionChange={key => handleUpdateEpisodeCollectionType(+key, episode.ep, episode.collectionType)}
                             size="sm"
                             variant="bordered"
+                            color={
+                              match(episode.collectionType)
+                                .returnType<'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'>()
+                                .with(EpisodeCollectionType.看过, () => 'primary')
+                                .with(EpisodeCollectionType.想看, () => 'danger')
+                                .with(EpisodeCollectionType.抛弃, () => 'secondary')
+                                .otherwise(() => 'default')
+                            }
                             className="mb-2"
                             classNames={{
                               tabList: 'rounded-md'
