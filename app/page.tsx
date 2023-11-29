@@ -41,7 +41,7 @@ export default function Collection() {
           radius="sm"
           variant="underlined"
           selectedKey={subjectType}
-          onSelectionChange={t => router.push(`/?subject-type=${t}&offset=0`)}
+          onSelectionChange={t => router.push(`/?subject-type=${t}&collection-type=${collectionType}`)}
           classNames={{
             base: 'w-full sm:w-auto',
             tabList: 'w-full sm:w-auto',
@@ -86,10 +86,10 @@ export default function Collection() {
                   value={type}
                   onClick={() => {
                     if (+collectionType === type) {
-                      router.push(`/?subject-type=${subjectType}&offset=0`);
+                      router.push(`/?subject-type=${subjectType}`);
                       return;
                     }
-                    router.push(`/?subject-type=${subjectType}&collection-type=${type}&offset=0`);
+                    router.push(`/?subject-type=${subjectType}&collection-type=${type}`);
                   }}
                 >
                   {label}
@@ -126,10 +126,11 @@ export default function Collection() {
                 <Pagination
                   offset={offset}
                   setOffset={offset => {
-                    router.push(`/?subject-type=${subjectType}&offset=${offset}`);
+                    router.push(`/?subject-type=${subjectType}&collection-type=${collectionType}&offset=${offset}`);
                   }}
                   limit={10}
-                  total={data.total} />
+                  total={data.total}
+                />
               </motion.div>
             )
           )
