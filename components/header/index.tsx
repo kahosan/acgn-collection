@@ -29,8 +29,8 @@ import { useUser } from '~/hooks/use-user';
 
 const navItems = {
   '/': '收藏',
-  '/timeline': '时间胶囊',
-  '/calendar': '每日放送'
+  '/calendar': '每日放送',
+  '/timeline': '时间胶囊'
 };
 
 export default function Header() {
