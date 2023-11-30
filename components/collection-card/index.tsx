@@ -2,13 +2,11 @@ import NextLink from 'next/link';
 import NextImage from 'next/image';
 import { Card, CardBody, Chip, Link, Tooltip } from '@nextui-org/react';
 
-import Rate from 'rc-rate';
-import 'rc-rate/assets/index.css';
-
 import clsx from 'clsx';
+import { match } from 'ts-pattern';
 
-import type { SlimSubject } from '~/types/bangumi/subject';
 import { SubjectType } from '~/types/bangumi/subject';
+import type { SlimSubject } from '~/types/bangumi/subject';
 
 interface Props {
   subject: {
@@ -17,6 +15,8 @@ interface Props {
     name_cn: string
     image?: string
     images?: SlimSubject['images']
+    date?: string
+    air_date?: string
     score?: number
     short_summary?: string
     summary?: string
@@ -59,6 +59,38 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
               sizes="100%"
               onLoad={e => { e.currentTarget.style.opacity = '1'; }}
             />
+            {
+              showType
+                ? (
+                  <Chip
+                    size="sm"
+                    className={clsx(
+                      'rounded-none rounded-tl-md rounded-br-sm text-white',
+                      'shadow-sm shadow-black',
+                      match(subject.type)
+                        .with(SubjectType.书籍, () => 'bg-orange-500')
+                        .with(SubjectType.动画, () => 'bg-blue-500')
+                        .with(SubjectType.音乐, () => 'bg-red-500')
+                        .with(SubjectType.游戏, () => 'bg-indigo-500')
+                        .with(SubjectType.三次元, () => 'bg-gray-500')
+                        .otherwise(() => 'bg-gray-500')
+                    )}
+                    startContent={
+                      <div
+                        className={clsx('text-medium mr-1', {
+                          'i-mdi-book-open-outline': subject.type === SubjectType.书籍,
+                          'i-mdi-movie-outline': subject.type === SubjectType.动画,
+                          'i-mdi-music-note-eighth': subject.type === SubjectType.音乐,
+                          'i-mdi-gamepad-variant-outline': subject.type === SubjectType.游戏,
+                          'i-mdi-television-classic': subject.type === SubjectType.三次元
+                        })} />
+                    }
+                  >
+                    <div className="text-xs">{SubjectType[subject.type]}</div>
+                  </Chip>
+                )
+                : null
+            }
           </div>
           <div className="flex flex-col justify-between gap-2 overflow-hidden w-[25rem]">
             <div>
@@ -67,59 +99,12 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                   {subject.name_cn || subject.name}
                 </Link>
               </Tooltip>
-              {
-                subject.score
-                  ? (
-                    <div className="mt-2">
-                      <p className="font-bold italic">评分：{subject.score}</p>
-                      <Rate
-                        className="[&_li.rc-rate-star-zero.rc-rate-star]:text-[#f8b0405c] [&_li.rc-rate-star.rc-rate-star-half]:text-[#f8b0405c]"
-                        defaultValue={subject.score / 2}
-                        character={
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
-                          </svg>
-                        }
-                        disabled
-                        allowHalf
-                      />
-                    </div>
-                  )
-                  : null
-              }
-              {
-                showType
-                  ? (
-                    <Chip
-                      variant="flat"
-                      radius="sm"
-                      size="sm"
-                      className="mt-2 p-2"
-                      color={
-                        clsx({
-                          warning: subject.type === SubjectType.书籍,
-                          primary: subject.type === SubjectType.动画,
-                          danger: subject.type === SubjectType.音乐,
-                          success: subject.type === SubjectType.游戏,
-                          default: subject.type === SubjectType.三次元
-                        }) as 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
-                      }
-                      startContent={
-                        <div
-                          className={clsx('text-medium mr-1', {
-                            'i-mdi-book-open-outline': subject.type === SubjectType.书籍,
-                            'i-mdi-movie-outline': subject.type === SubjectType.动画,
-                            'i-mdi-music-note-eighth': subject.type === SubjectType.音乐,
-                            'i-mdi-gamepad-variant-outline': subject.type === SubjectType.游戏,
-                            'i-mdi-television-classic': subject.type === SubjectType.三次元
-                          })} />
-                      }
-                    >
-                      <div className="text-xs">{SubjectType[subject.type]}</div>
-                    </Chip>
-                  )
-                  : null
-              }
+              <div className="mt-2 text-sm opacity-90 font-medium">
+                放送 {subject.date || subject.air_date || '暂无'}
+              </div>
+              <div className="mt-2 text-sm opacity-90 font-medium">
+                评分 {subject.score ?? '暂无'}
+              </div>
             </div>
             <div className="opacity-70 text-sm line-clamp-4">
               {(subject.short_summary ?? subject.summary ?? '').trim()}
