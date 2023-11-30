@@ -61,7 +61,7 @@ interface EpisodesProps {
   userCollectionMutate: () => void
 }
 
-function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutate }: EpisodesProps) {
+export function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutate }: EpisodesProps) {
   const { data, error } = useEpisodes(payload);
   const {
     data: userData,
