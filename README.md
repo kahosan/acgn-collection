@@ -1,16 +1,14 @@
 <h1 align="center">ACGN Collection</h1>
 
-<!-- <picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/image/normal-dark.png">
-  <img alt="normal" src=".github/image/normal.png">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/image/dark.png">
+  <img alt="normal" src=".github/image/light.png">
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/image/edit-dark.png">
-  <img alt="edit" src=".github/image/edit.png">
-</picture> -->
+## 做什么的
 
-WIP
+主要用来方便自己检索、没事看看、管理这方面的收藏，并不会去完全复刻 Bangumi
+
 
 # Thanks
 
