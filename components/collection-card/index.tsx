@@ -95,7 +95,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
           <div className="flex flex-col justify-between gap-2 overflow-hidden w-[25rem]">
             <div>
               <Tooltip content={subject.name_cn || subject.name}>
-                <Link as={NextLink} href={`/subject/${subject.id}`} color="foreground" className="block font-medium text-xl max-w-[100%] truncate">
+                <Link as={NextLink} href={`/subject/${subject.id}`} color="foreground" className="block font-medium text-xl max-w-max truncate">
                   {subject.name_cn || subject.name}
                 </Link>
               </Tooltip>
