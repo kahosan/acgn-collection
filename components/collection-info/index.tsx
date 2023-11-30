@@ -7,3 +7,5 @@ export { default as Tags } from './tags';
 export { default as Relations } from './relations';
 
 export { default as Characters } from './characters';
+
+export { default as TrackList } from './track-list';

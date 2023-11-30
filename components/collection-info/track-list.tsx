@@ -10,7 +10,7 @@ interface Props {
   subjectId: number
 }
 
-export function TrackList({ subjectId }: Props) {
+export default function TrackList({ subjectId }: Props) {
   const { data, isLoading, error } = useEpisodes({ subject_id: subjectId });
 
   const tracksObj = useMemo(() => {

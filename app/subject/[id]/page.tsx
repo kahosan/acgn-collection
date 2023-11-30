@@ -5,14 +5,13 @@ import { Divider, Link } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
-import { Summary, Tags, Infomation, Relations, Characters } from '~/components/collection-info';
+import { Summary, Tags, Infomation, Relations, Characters, TrackList } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
 import { convertSpecialChar } from '~/utils';
 
 import { SubjectType } from '~/types/bangumi/subject';
-import { TrackList } from '~/components/collection-info/track-list';
 
 interface Props {
   params: { id: string }
