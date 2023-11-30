@@ -12,6 +12,7 @@ import { useSubject } from '~/lib/bangumi/subjects';
 import { convertSpecialChar } from '~/utils';
 
 import { SubjectType } from '~/types/bangumi/subject';
+import { TrackList } from '~/components/collection-info/track-list';
 
 interface Props {
   params: { id: string }
@@ -68,6 +69,16 @@ export default function Subject({ params }: Props) {
               <div className="mb-2 dark:text-blue-200 text-blue-400">大家将「{data.name}」标注为</div>
               <Tags tags={data.tags} />
             </div>
+            {
+              data.type === SubjectType.音乐
+                ? (
+                  <div className="bg-card">
+                    <div className="mb-2 dark:text-blue-200 text-blue-400">曲目列表</div>
+                    <TrackList subjectId={data.id} />
+                  </div>
+                )
+                : null
+            }
             {
               data.type !== SubjectType.音乐 && data.type !== SubjectType.三次元
                 ? (
