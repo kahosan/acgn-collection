@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tab, Tabs } from '@nextui-org/react';
+import { DropdownItem, Tab, Tabs } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';
+import OptionsMenu from '~/components/options-menu';
 import CollectionCard from '~/components/collection-card';
 
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -55,49 +56,31 @@ export default function Collection() {
             ))
           }
         </Tabs>
-
-        <Dropdown
-          radius="sm"
-          classNames={{
-            content: 'min-w-[6rem] text-center'
-          }}
+        <OptionsMenu
+          ariaLabel="collection-type-menu"
+          selectedKeys={[collectionType]}
+          endContent={<div className="i-mdi-filter-outline text-sm min-w-unit-3" />}
+          triggerContent="筛选"
         >
-          <DropdownTrigger>
-            <Button
-              radius="sm"
-              variant="bordered"
-              endContent={<div className="i-mdi-filter-outline text-sm min-w-unit-3" />}
-              className="max-sm:px-unit-3 max-sm:min-w-unit-16 max-sm:h-unit-8 max-sm:text-tiny max-sm:gap-unit-2"
-            >
-              筛选
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="collection-type-menu"
-            variant="light"
-            selectedKeys={[collectionType]}
-            selectionMode="single"
-          >
-            {
-              transformCollectionTypeToJSX((type, label) => (
-                <DropdownItem
-                  key={type}
-                  aria-label={label}
-                  value={type}
-                  onClick={() => {
-                    if (+collectionType === type) {
-                      router.push(`/?subject-type=${subjectType}`);
-                      return;
-                    }
-                    router.push(`/?subject-type=${subjectType}&collection-type=${type}`);
-                  }}
-                >
-                  {label}
-                </DropdownItem>
-              ), +subjectType)
-            }
-          </DropdownMenu>
-        </Dropdown>
+          {
+            transformCollectionTypeToJSX((type, label) => (
+              <DropdownItem
+                key={type}
+                aria-label={label}
+                value={type}
+                onClick={() => {
+                  if (+collectionType === type) {
+                    router.push(`/?subject-type=${subjectType}`);
+                    return;
+                  }
+                  router.push(`/?subject-type=${subjectType}&collection-type=${type}`);
+                }}
+              >
+                {label}
+              </DropdownItem>
+            ), +subjectType)
+          }
+        </OptionsMenu>
       </div>
       {
         data?.data.length === 0
