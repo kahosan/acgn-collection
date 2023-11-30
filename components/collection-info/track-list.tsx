@@ -1,6 +1,9 @@
 import { Chip, Link } from '@nextui-org/react';
+
 import { useMemo } from 'react';
+
 import { useEpisodes } from '~/lib/bangumi/episodes';
+
 import type { Episode } from '~/types/bangumi/episode';
 
 interface Props {

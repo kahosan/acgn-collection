@@ -1,7 +1,8 @@
+import Evaluation from './evaluation';
+import CollectionModify from './collection-modify';
+
 import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection } from '~/types/bangumi/collection';
-import CollectionModify from './collection-modify';
-import Evaluation from './evaluation';
 
 interface Props {
   subject: Subject
