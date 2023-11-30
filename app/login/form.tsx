@@ -28,7 +28,7 @@ export default function LoginForm() {
       size="lg"
       className="w-[100%] mt-4 font-medium"
     >
-      登入
+      从 Bangumi 登入
     </Button>
   );
 }
