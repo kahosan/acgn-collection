@@ -94,7 +94,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                       variant="flat"
                       radius="sm"
                       size="sm"
-                      className="mt-2"
+                      className="mt-2 p-2"
                       color={
                         clsx({
                           warning: subject.type === SubjectType.书籍,
@@ -106,7 +106,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                       }
                       startContent={
                         <div
-                          className={clsx('text-medium', {
+                          className={clsx('text-medium mr-1', {
                             'i-mdi-book-open-outline': subject.type === SubjectType.书籍,
                             'i-mdi-movie-outline': subject.type === SubjectType.动画,
                             'i-mdi-music-note-eighth': subject.type === SubjectType.音乐,
@@ -115,7 +115,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                           })} />
                       }
                     >
-                      <small className="pl-1">{SubjectType[subject.type]}</small>
+                      <div className="text-xs">{SubjectType[subject.type]}</div>
                     </Chip>
                   )
                   : null
