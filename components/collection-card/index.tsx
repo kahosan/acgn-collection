@@ -103,7 +103,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                 放送 {subject.date || subject.air_date || '暂无'}
               </div>
               <div className="mt-2 text-sm opacity-90 font-medium">
-                评分 {subject.score ?? '暂无'}
+                评分 {subject.score?.toFixed(1) ?? '暂无'}
               </div>
             </div>
             <div className="opacity-70 text-sm line-clamp-4">

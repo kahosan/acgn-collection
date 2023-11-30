@@ -34,7 +34,7 @@ export default function Evaluation({ subject, userCollection }: Props) {
         <div className="flex flex-row gap-2">
           <Chip radius="sm" color="secondary" startContent={<div className="p-2">排名</div>}>{subject.rating.rank}</Chip>
           <Chip radius="sm" color="primary" startContent={<div className="p-2">评分数</div>}>{subject.rating.total}</Chip>
-          <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subject.rating.score}</Chip>
+          <Chip radius="sm" color="danger" startContent={<div className="p-2">用户评分</div>}>{subject.rating.score.toFixed(1)}</Chip>
         </div>
         <Divider className="mt-2.5 mb-1 max-w-[8rem]" />
         <Link href={`https://bgm.tv/subject/${subject.id}/stats`} isExternal showAnchorIcon size="sm">全站用户评价</Link>
