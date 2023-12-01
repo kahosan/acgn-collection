@@ -5,7 +5,7 @@ import { Divider, Link } from '@nextui-org/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
-import { Summary, Tags, Infomation, Relations, Characters, TrackList } from '~/components/collection-info';
+import { Summary, Tags, Infomation, Relations, Characters, TrackList, Reviews, Boards, Comments } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
@@ -91,6 +91,18 @@ export default function Subject({ params }: Props) {
             <div className="bg-card">
               <div className="mb-2 dark:text-blue-200 text-blue-400">关联条目</div>
               <Relations subjectId={data.id} />
+            </div>
+            <div className="bg-card">
+              <div className="mb-2 dark:text-blue-200 text-blue-400">评论</div>
+              <Reviews subjectId={data.id} />
+            </div>
+            <div className="bg-card">
+              <div className="mb-2 dark:text-blue-200 text-blue-400">讨论版</div>
+              <Boards subjectId={data.id} />
+            </div>
+            <div className="bg-card">
+              <div className="mb-2 dark:text-blue-200 text-blue-400">吐槽</div>
+              <Comments subjectId={data.id} />
             </div>
           </div>
         </div>
