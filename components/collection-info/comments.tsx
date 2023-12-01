@@ -38,7 +38,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
                   <div className="flex items-center justify-between mb-1 w-full">
                     <Link
                       href={`https://bgm.tv/${comment.user.href}`}
-                      className="font-medium text-xs dark:text-blue-300 text-blue-400 block"
+                      className="font-medium sm:text-sm text-xs dark:text-blue-300 text-blue-400 block"
                       isExternal
                     >
                       {comment.user.name}

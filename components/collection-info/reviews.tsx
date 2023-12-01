@@ -19,34 +19,36 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
 
   return (
     <>
-      {
-        data.slice(0, 5).map(review => (
-          <div key={review.id} className="mb-6 [&:nth-child(6)]:mb-0">
-            <Image
-              src={review.user.avatar}
-              alt="avatar"
-              width={62}
-              height={62}
-              className="float-left mr-2 rounded-md"
-            />
-            <Link
-              href={`https://bgm.tv/blog/${review.id}`}
-              className="font-medium text-lg dark:text-blue-300 text-blue-400 block"
-              isExternal
-            >
-              {review.title}
-            </Link>
-            <div className="text-xs opacity-80 my-0.5 mb-1">
-              来自
-              {' '}
-              <Link href={`https://bgm.tv/${review.user.href}`} color="foreground" className="text-xs" isExternal>{review.user.name}</Link>
-              {' '}
-              {review.time}
+      <div className="[&_:last-child]:mb-0">
+        {
+          data.slice(0, 5).map(review => (
+            <div key={review.id} className="mb-6">
+              <Image
+                src={review.user.avatar}
+                alt="avatar"
+                width={62}
+                height={62}
+                className="float-left mr-2 rounded-md"
+              />
+              <Link
+                href={`https://bgm.tv/blog/${review.id}`}
+                className="font-medium text-lg dark:text-blue-300 text-blue-400 block"
+                isExternal
+              >
+                {review.title}
+              </Link>
+              <div className="text-xs opacity-80 my-0.5 mb-1">
+                来自
+                {' '}
+                <Link href={`https://bgm.tv/${review.user.href}`} color="foreground" className="text-xs" isExternal>{review.user.name}</Link>
+                {' '}
+                {review.time}
+              </div>
+              <p className="break-all text-sm">{review.content}</p>
             </div>
-            <p className="break-all text-sm">{review.content}</p>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
       <div className="w-full text-right">
         <Link
           href={`https://bgm.tv/subject/${subjectId}/reviews`}

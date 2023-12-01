@@ -18,10 +18,10 @@ export default function Boards({ subjectId }: { subjectId: number }) {
 
   return (
     <>
-      <div>
+      <div className="[&_:last-child]:mb-0">
         {
           data.slice(0, 6).map(board => (
-            <div key={board.id} className="mb-4 [&:nth-child(6)]:mb-0">
+            <div key={board.id} className="mb-4">
               <Link
                 href={`https://bgm.tv/subject/topic/${board.id}`}
                 className="font-medium dark:text-blue-300 text-blue-400 block"
