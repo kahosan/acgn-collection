@@ -38,7 +38,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
                   <div className="flex items-center justify-between mb-1 w-full">
                     <Link
                       href={`https://bgm.tv/${comment.user.href}`}
-                      className="font-medium text-sm dark:text-blue-300 text-blue-400 block"
+                      className="font-medium text-xs dark:text-blue-300 text-blue-400 block"
                       isExternal
                     >
                       {comment.user.name}
@@ -47,7 +47,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
                       {comment.published.replace('@', '').trim()}
                     </small>
                   </div>
-                  <div className="p-2 rounded-md bg-slate-200 dark:bg-gray-700/70 max-w-max">
+                  <div className="p-2 text-sm rounded-md bg-slate-200 dark:bg-gray-700/70 max-w-max">
                     {comment.comment}
                   </div>
                 </div>
