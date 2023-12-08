@@ -42,7 +42,7 @@ export default withAuth(
     const session = await encode({
       secret: process.env.NEXTAUTH_SECRET ?? '',
       token: _token,
-      maxAge: (_token.expires - Date.now()) / 1000
+      maxAge: (_token.expires - Date.now()) / 1000 + 43200 // 多添加半天的有效期
     });
 
     req.cookies.set(sessionCookie, session);

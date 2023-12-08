@@ -26,7 +26,7 @@ export const options: NextAuthOptions = {
       if (account && user) { // init
         return {
           token: account.access_token,
-          expires: account.expires_at ? Date.now() + account.expires_at * 1000 : undefined,
+          expires: account.expires_at ? account.expires_at * 1000 : undefined,
           refreshToken: account.refresh_token,
           user
         };
