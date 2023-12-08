@@ -206,7 +206,7 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
                   }));
                 }}
               >
-                {episode.ep >= 10 ? episode.ep : `0${episode.ep}`}
+                {episode.sort >= 10 ? episode.sort : `0${episode.sort}`}
               </Button>
             </Tooltip>
           ))
