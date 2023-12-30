@@ -54,6 +54,7 @@ export default function CollectionModify({ subject, userCollection, userCollecti
       </div>
 
       <ModifyModal
+        key={userCollection.type}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         onClose={onClose}

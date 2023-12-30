@@ -20,7 +20,7 @@ import { useIsMobile } from '~/hooks/use-mobile';
 
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';
 import { useUserProgressUpdate } from '~/lib/bangumi/user/progress';
-import { useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
+import { useUserCollectionModify, useUserEpisodes, useUserEpisodesPatch } from '~/lib/bangumi/user';
 
 import type { Subject } from '~/types/bangumi/subject';
 import type { UserCollection } from '~/types/bangumi/collection';
@@ -68,8 +68,11 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
     mutate: userDataMutate
   } = useUserEpisodes(payload, payload.subject_id);
 
-  const { handleUpdate, isMutating } = useUserEpisodesPatch(payload.subject_id);
-  const { handleUpdate: progressUpdate, isMutating: isProgressMutating } = useUserProgressUpdate(payload.subject_id);
+  const { handleUpdate, isMutating: m1 } = useUserEpisodesPatch(payload.subject_id);
+  const { handleUpdate: progressUpdate, isMutating: m2 } = useUserProgressUpdate(payload.subject_id);
+  const { handleModify, isMutating: m3 } = useUserCollectionModify(payload.subject_id);
+
+  const isMutating = m1 || m2 || m3;
 
   const episodes = useMemo(() => {
     if (!data || !userData) return;
@@ -93,7 +96,7 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
 
   // TODO 这里不做 SP 的处理，因为用 v0 还是 legacy 的 API 都没办法对 SP 进行操作
   const handleUpdateEpisodeCollectionType = useCallback((key: EpisodeCollectionType, ep: number, type?: EpisodeCollectionType) => {
-    if ((type && type === key) || isMutating || isProgressMutating)
+    if ((type && type === key) || isMutating)
       return;
 
     if (!Number.isInteger(ep)) {
@@ -105,6 +108,12 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
       userCollectionMutate();
       userDataMutate();
     };
+
+    const lastEpisode = episodes?.at(-1)?.sort;
+
+    // 如果是最后一集，更新收藏为「看过」
+    if ((key === EpisodeCollectionType.看到 || key === EpisodeCollectionType.看过) && ep === lastEpisode)
+      handleModify({ type: 2 }, refreshData);
 
     if (key === EpisodeCollectionType.看到) {
       progressUpdate({
@@ -118,7 +127,7 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
         type: key
       }, refreshData);
     }
-  }, [episodes, handleUpdate, isMutating, isProgressMutating, progressUpdate, userCollectionMutate, userDataMutate]);
+  }, [episodes, handleModify, handleUpdate, isMutating, progressUpdate, userCollectionMutate, userDataMutate]);
 
   if (error) throw error;
 
@@ -186,7 +195,8 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
                     {episode.duration ? <p>时长：{episode.duration}</p> : null}
                   </div>
                 </div>
-              }>
+              }
+            >
               <Button
                 className="m-1 min-h-unit-3.5 min-w-max"
                 size="sm"
@@ -234,7 +244,7 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
                   <Button
                     radius="sm"
                     variant="faded"
-                    isLoading={isMutating || isProgressMutating}
+                    isLoading={isMutating}
                     onPress={() => handleUpdateEpisodeCollectionType(EpisodeCollectionType.看到, Number.parseInt(episode, 10))}
                   >
                     更新
