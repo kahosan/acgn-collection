@@ -1,6 +1,6 @@
-import NextLink from 'next/link';
+import Link from 'next/link';
 import NextImage from 'next/image';
-import { Card, CardBody, Chip, Link, Tooltip } from '@nextui-org/react';
+import { Card, CardBody, Chip, Tooltip } from '@nextui-org/react';
 
 import clsx from 'clsx';
 import { match } from 'ts-pattern';
@@ -94,7 +94,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
         <div className="flex flex-col justify-between gap-2 overflow-hidden w-[25rem]">
           <div>
             <Tooltip content={subject.name_cn || subject.name}>
-              <Link as={NextLink} href={`/subject/${subject.id}`} color="foreground" className="block font-medium text-xl max-w-max truncate">
+              <Link href={`/subject/${subject.id}`} className="block font-medium text-xl max-w-max truncate">
                 {subject.name_cn || subject.name}
               </Link>
             </Tooltip>
