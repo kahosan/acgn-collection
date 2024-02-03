@@ -6,9 +6,10 @@ module.exports = [
   ...kaho({ ts: { tsconfigPath: './tsconfig.json' }, react: true }),
   ...node({ files: ['./eslint.config.js'] }),
   {
-    files: ['*.ts', '*.tsx'],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {
-      '@typescript-eslint/no-unsafe-enum-comparison': 'off'
+      '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+      '@eslint-react/naming-convention/filename-extension': 'off'
     }
   }
 ];

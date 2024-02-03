@@ -1,3 +1,4 @@
+/* eslint-disable @eslint-react/jsx/no-array-index-key -- skeleton */
 import { Skeleton } from '@nextui-org/react';
 
 export function RelationsSkeleton() {

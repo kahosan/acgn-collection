@@ -1,7 +1,5 @@
-/* eslint-disable react/no-children-prop -- */
+/* eslint-disable @eslint-react/react/no-children-prop -- providers */
 'use client';
-
-import React from 'react';
 
 import { Provider as JotaiProvider } from 'jotai';
 import { NextUIProvider } from '@nextui-org/react';
