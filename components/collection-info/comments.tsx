@@ -1,5 +1,6 @@
-import { Link } from '@nextui-org/react';
 import Image from 'next/image';
+import { Fragment } from 'react';
+import { Link } from '@nextui-org/react';
 
 import useSWRImmutable from 'swr/immutable';
 import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
@@ -19,10 +20,10 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
 
   return (
     <>
-      <div className="grid grid-rows-10 gap-4">
+      <div className="grid gap-8">
         {
           data.slice(0, 10).map(comment => (
-            <div key={comment.comment}>
+            <Fragment key={comment.comment}>
               <div className="flex gap-2">
                 <div className="relative min-w-[48px] h-[48px]">
                   <Image
@@ -52,7 +53,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </Fragment>
           ))
         }
       </div>
