@@ -28,11 +28,11 @@ export default function Subject({ params }: Props) {
       <title>{data.name}</title>
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col sm:flex-row gap-4 bg-card relative">
-          <div className="relative min-h-[28rem] max-h-[28rem] min-w-full sm:min-w-[18rem] w-[18rem]">
+          <div className="relative min-h-[28rem] max-h-[28rem] min-w-full sm:min-w-[18rem] w-[18rem] bg-zinc-300 dark:bg-zinc-700 rounded-md">
             <Image
               src={data.images.medium || 'https://placehold.co/288x448.webp?text=No%20Image'}
               alt={data.name}
-              className="object-cover bg-center bg-zinc-300 dark:bg-zinc-700 opacity-20 transition-all duration-300 rounded-md w-auto h-auto"
+              className="object-cover bg-center opacity-0 transition-all duration-300 rounded-md w-auto h-auto"
               priority
               fill
               sizes="100%"
