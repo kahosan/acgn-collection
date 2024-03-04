@@ -1,4 +1,4 @@
-/* eslint-disable @eslint-react/react/no-children-prop -- providers */
+/* eslint-disable @eslint-react/no-children-prop -- */
 'use client';
 
 import { Provider as JotaiProvider } from 'jotai';

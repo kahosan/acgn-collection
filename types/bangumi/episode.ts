@@ -1,19 +1,19 @@
 export enum EpisodesType {
-  '本篇' = 0,
-  'SP' = 1,
-  'OP' = 2,
-  'ED' = 3,
+  本篇 = 0,
+  SP = 1,
+  OP = 2,
+  ED = 3,
   '预告/宣传/广告' = 4,
-  'MAD' = 5,
-  '其他' = 6
+  MAD = 5,
+  其他 = 6
 }
 
 export enum EpisodeCollectionType {
-  '撤销' = 0, // 未收藏
-  '想看' = 1,
-  '看过' = 2,
-  '看到' = 5,
-  '抛弃' = 3
+  撤销 = 0, // 未收藏
+  想看 = 1,
+  看过 = 2,
+  看到 = 5,
+  抛弃 = 3
 }
 
 export interface EpisodesPayload {

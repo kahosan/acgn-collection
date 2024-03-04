@@ -1,9 +1,9 @@
 export enum SubjectType {
-  '书籍' = 1,
-  '动画' = 2,
-  '音乐' = 3,
-  '游戏' = 4,
-  '三次元' = 6
+  书籍 = 1,
+  动画 = 2,
+  音乐 = 3,
+  游戏 = 4,
+  三次元 = 6
 }
 
 // request
@@ -44,16 +44,16 @@ export interface LegacySubject {
   rating?: {
     total: number
     count: {
-      '10': number
-      '9': number
-      '8': number
-      '7': number
-      '6': number
-      '5': number
-      '4': number
-      '3': number
-      '2': number
-      '1': number
+      10: number
+      9: number
+      8: number
+      7: number
+      6: number
+      5: number
+      4: number
+      3: number
+      2: number
+      1: number
     }
     score: number
   }
@@ -85,16 +85,16 @@ export interface Subject {
     rank: number
     total: number
     count: {
-      '1': number
-      '2': number
-      '3': number
-      '4': number
-      '5': number
-      '6': number
-      '7': number
-      '8': number
-      '9': number
-      '10': number
+      1: number
+      2: number
+      3: number
+      4: number
+      5: number
+      6: number
+      7: number
+      8: number
+      9: number
+      10: number
     }
     score: number
   }

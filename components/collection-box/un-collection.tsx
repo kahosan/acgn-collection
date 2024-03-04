@@ -55,7 +55,7 @@ export default function UnCollection({ subject, mutate }: Props) {
         <Tabs
           fullWidth
           selectedKey={selected.toString()}
-          onSelectionChange={(key) => setSelected(Number.parseInt(key.toString(), 10))}
+          onSelectionChange={key => setSelected(Number.parseInt(key.toString(), 10))}
         >
           {
             transformCollectionTypeToJSX(

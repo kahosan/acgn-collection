@@ -1,7 +1,7 @@
 export enum PersonType {
-  '个人' = 1,
-  '公司' = 2,
-  '组合' = 3
+  个人 = 1,
+  公司 = 2,
+  组合 = 3
 }
 
 export interface Person {

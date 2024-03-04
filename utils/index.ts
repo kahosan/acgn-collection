@@ -24,7 +24,7 @@ export const compose = <T>(...args: [...composer: Array<((arg: T) => T) | false>
 export const atomWithLocalStorage = <T extends string | null>(key: string) => {
   const baseAtom = atom(isBrowser ? localStorage.getItem(key) : null);
   return atom(
-    (get) => get(baseAtom),
+    get => get(baseAtom),
     (_get, set, value: T) => {
       if (isBrowser && value) {
         set(baseAtom, value);

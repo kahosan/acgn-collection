@@ -1,10 +1,10 @@
 import type { Person } from './person';
 
 export enum CharacterType {
-  '角色' = 1,
-  '机体' = 2,
-  '舰船' = 3,
-  '组织' = 4
+  角色 = 1,
+  机体 = 2,
+  舰船 = 3,
+  组织 = 4
 }
 
 export interface Character {

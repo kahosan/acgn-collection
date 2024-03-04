@@ -32,7 +32,7 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
           <Tabs
             fullWidth
             selectedKey={selected.toString()}
-            onSelectionChange={(key) => setSelected(Number.parseInt(key.toString(), 10))}
+            onSelectionChange={key => setSelected(Number.parseInt(key.toString(), 10))}
           >
             {
               transformCollectionTypeToJSX(
