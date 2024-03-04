@@ -11,7 +11,9 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "install": "simple-git-hooks"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.7.4",
@@ -42,10 +44,15 @@
     "eslint": "^8.56.0",
     "eslint-config-kaho": "2.0.11",
     "postcss": "^8.4.33",
+    "simple-git-hooks": "^2.10.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=18.17.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run lint",
+    "pre-push": "npm run lint:fix"
   }
 }

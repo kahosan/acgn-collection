@@ -85,6 +85,9 @@ devDependencies:
   postcss:
     specifier: ^8.4.33
     version: 8.4.33
+  simple-git-hooks:
+    specifier: ^2.10.0
+    version: 2.10.0
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -6435,6 +6438,12 @@ packages:
   /signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+    dev: true
+
+  /simple-git-hooks@2.10.0:
+    resolution: {integrity: sha512-TtCytVYfV77pILCkzVxpOSgYKHQyaO7fBI/iwG5bLGb0dIo/v/K1Y1IZ5DN40RQu6WNNJiN0gkuRvSYjxOhFog==}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /simple-swizzle@0.2.2:
