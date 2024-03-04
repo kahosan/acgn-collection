@@ -1,7 +1,6 @@
 import Providers from '~/providers';
 
 import { Suspense } from 'react';
-import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
 
 // TODO wait official fix
@@ -43,41 +42,6 @@ export const metadata: Metadata = {
   icons: 'https://unpkg.com/xfb/favicon/favicon.ico'
 };
 
-const harmonyOsSansSc = localFont({
-  src: [
-    {
-      path: '../public/fonts/HarmonyOS_Sans_SC_Thin.woff2',
-      weight: '100',
-      style: 'normal'
-    },
-    {
-      path: '../public/fonts/HarmonyOS_Sans_SC_Light.woff2',
-      weight: '300',
-      style: 'normal'
-    },
-    {
-      path: '../public/fonts/HarmonyOS_Sans_SC_Regular.woff2',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: '../public/fonts/HarmonyOS_Sans_SC_Medium.woff2',
-      weight: '500',
-      style: 'normal'
-    },
-    {
-      path: '../public/fonts/HarmonyOS_Sans_SC_Bold.woff2',
-      weight: '700',
-      style: 'normal'
-    },
-    {
-      path: '../public/fonts/HarmonyOS_Sans_SC_Black.woff2',
-      weight: '900',
-      style: 'normal'
-    }
-  ]
-});
-
 export default function RootLayout({
   children
 }: {
@@ -85,7 +49,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={harmonyOsSansSc.className}>
+      <body>
         <Providers>
           <Header />
           <Suspense>
