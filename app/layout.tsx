@@ -49,7 +49,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body>
+      <head>
+        <link rel="stylesheet" href="https://hmos.dongs.xyz/css/harmonyos_sans_sc.css" />
+      </head>
+      <body className="font-['HarmonyOS_Sans_SC']">
         <Providers>
           <Header />
           <Suspense>
