@@ -99,7 +99,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
               </Link>
             </Tooltip>
             <div className="mt-2 text-sm opacity-90 font-medium">
-              {subject.type === SubjectType.书籍 || subject.type === SubjectType.游戏 ? '发售' : '放送'}
+              {(subject.type === SubjectType.书籍 || subject.type === SubjectType.游戏) ? '发售' : '放送'}
               {' '}
               {subject.date || subject.air_date || '暂无'}
             </div>
