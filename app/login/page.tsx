@@ -6,7 +6,7 @@ import { permanentRedirect } from 'next/navigation';
 import { options } from '~/lib/auth';
 
 export const metadata = {
-  title: '登入至 ACGN Collection'
+  title: '登入'
 };
 
 export default async function Login() {
