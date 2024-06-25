@@ -3,9 +3,6 @@ import Providers from '~/providers';
 import { Suspense } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
-// TODO wait official fix
-import { ScrollRestorer } from 'next-scroll-restorer';
-
 import Header from '~/components/header';
 
 import type { Metadata } from 'next';
@@ -59,7 +56,6 @@ export default function RootLayout({
             <main className="max-w-8xl mx-auto py-4 px-6">
               {children}
               <Analytics />
-              <ScrollRestorer />
             </main>
           </Suspense>
         </Providers>
