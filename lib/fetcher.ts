@@ -9,6 +9,7 @@ export class HTTPError extends Error {
   status: number;
   constructor(message: string, data: ErrorResponse, status: number) {
     super(message);
+    this.name = 'HTTPError';
     this.data = data;
     this.status = status;
   }

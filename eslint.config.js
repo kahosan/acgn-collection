@@ -1,15 +1,18 @@
 'use strict';
 
-const { kaho, node } = require('eslint-config-kaho');
+const { kaho } = require('eslint-config-kaho');
 
-module.exports = [
-  ...kaho({ ts: { tsconfigPath: './tsconfig.json' }, react: true }),
-  ...node({ files: ['./eslint.config.js'] }),
+module.exports = kaho().then(config => [
+  ...config,
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['app/**/*.tsx'],
     rules: {
-      '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+      'react-refresh/only-export-components': 'off'
+    }
+  },
+  {
+    rules: {
       '@eslint-react/naming-convention/filename-extension': 'off'
     }
   }
-];
+]);

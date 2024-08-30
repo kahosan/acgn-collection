@@ -40,9 +40,8 @@ export default function CollectionBox({ subject }: Props) {
     >
       <CollectionTypeLabel userCollection={data} />
       {
-        !data
-          ? <UnCollection subject={subject} mutate={mutate} />
-          : (
+        data
+          ? (
             <div className="grid gap-4 sm:gap-2 h-full">
               {
                 match(subject.type)
@@ -55,6 +54,7 @@ export default function CollectionBox({ subject }: Props) {
               }
             </div>
           )
+          : <UnCollection subject={subject} mutate={mutate} />
       }
     </motion.div>
   );

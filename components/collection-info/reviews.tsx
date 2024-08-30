@@ -4,10 +4,10 @@ import { Link } from '@nextui-org/react';
 import useSWRImmutable from 'swr/immutable';
 import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
-import type { Reviews } from '~/types/bangumi/reviews';
+import type { Reviews as SubjectReviews } from '~/types/bangumi/reviews';
 
 export default function Reviews({ subjectId }: { subjectId: number }) {
-  const { data, isLoading } = useSWRImmutable<Reviews>(
+  const { data, isLoading } = useSWRImmutable<SubjectReviews>(
     [`/reviews?subjectId=${subjectId}`, { base: 'https://acgn-collection-workers.kahosan.workers.dev' }],
     fetcher,
     {

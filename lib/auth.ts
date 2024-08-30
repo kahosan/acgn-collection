@@ -1,6 +1,8 @@
 import type { NextAuthOptions } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 
+import process from 'node:process';
+
 import type { UserInfo } from '~/types/bangumi/user';
 
 export const options: NextAuthOptions = {

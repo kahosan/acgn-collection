@@ -5,7 +5,7 @@ interface Props {
   selectedKeys: string[]
   triggerContent: React.ReactNode
   endContent?: React.ReactNode
-  children: JSX.Element[]
+  children: React.JSX.Element[]
 }
 
 export default function OptionsMenu({ ariaLabel, selectedKeys, triggerContent, endContent, children }: Props) {

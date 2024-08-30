@@ -63,9 +63,9 @@ export default function Infomation({ infos, collection, subjectId, className }: 
                 }
               </Link>
               {
-                key !== 'doing'
-                  ? '、'
-                  : null
+                key === 'doing'
+                  ? null
+                  : '、'
               }
             </div>
           ))

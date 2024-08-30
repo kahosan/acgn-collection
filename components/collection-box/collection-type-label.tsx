@@ -25,9 +25,9 @@ export default function CollectionTypeLabel({ userCollection }: Props) {
       )}
     >
       {
-        !userCollection
-          ? '未收藏'
-          : getCollectionTypeBySubjectType(userCollection.subject_type)[userCollection.type]
+        userCollection
+          ? getCollectionTypeBySubjectType(userCollection.subject_type)[userCollection.type]
+          : '未收藏'
       }
     </div>
   );

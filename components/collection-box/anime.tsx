@@ -135,9 +135,8 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
     <div>
       <div className="text-small pb-1.5">观看进度管理</div>
       {
-        !episodes
-          ? <Skeleton className="rounded-lg h-[4rem] w-full" />
-          : episodes.map(episode => (
+        episodes
+          ? episodes.map(episode => (
             <Tooltip
               key={episode.id}
               isOpen={isMobile ? openState.isOpen && openState.ep === episode.ep : undefined}
@@ -220,10 +219,12 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
               </Button>
             </Tooltip>
           ))
+          : <Skeleton className="rounded-lg h-[4rem] w-full" />
       }
       {
-        collectionType !== CollectionTypeForAnime.想看
-          ? (
+        collectionType === CollectionTypeForAnime.想看
+          ? null
+          : (
             <>
               <Divider className="mt-2 mb-3 w-52" />
               <div className="w-[10.5rem]">
@@ -253,7 +254,6 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
               </div>
             </>
           )
-          : null
       }
     </div>
   );
