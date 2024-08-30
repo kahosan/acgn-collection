@@ -4,8 +4,6 @@ import { encode, getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-import process from 'node:process';
-
 import { refreshAccessToken } from './lib/auth';
 
 function secureCheck(cookie: string) {
