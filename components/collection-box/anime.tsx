@@ -238,9 +238,6 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
                     endContent={
                       <span className="text-small">/{episodes?.length}</span>
                     }
-                    classNames={{
-                      innerWrapper: 'items-baseline'
-                    }}
                   />
                   <Button
                     radius="sm"

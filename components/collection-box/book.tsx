@@ -88,9 +88,6 @@ function Episodes({ payload, totalEpisode, watchedEpisode, totalVolume, watchedV
                 <span className="text-small">/{type === 'Chap' ? totalEpisode : totalVolume}</span>
               }
               className="w-[8rem]"
-              classNames={{
-                innerWrapper: 'items-baseline'
-              }}
             />
             {type === 'Vol'
               ? (
