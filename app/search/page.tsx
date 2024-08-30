@@ -57,7 +57,7 @@ export default function Search() {
                 <div
                   className="grid-card"
                 >
-                  {(api === 'new' ? data.data : legacyData.list).map(subject => (
+                  {(api === 'new' ? data.data : legacyData.list ?? []).map(subject => (
                     <CollectionCard subject={subject} key={subject.id} mobileMask showType />
                   ))}
                 </div>

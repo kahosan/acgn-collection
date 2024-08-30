@@ -143,7 +143,7 @@ export interface SearchSubject {
 
 export interface LegacySearchSubject {
   results: number
-  list: Array<{
+  list?: Array<{
     id: number
     url: string
     type: number
