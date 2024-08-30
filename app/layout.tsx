@@ -10,10 +10,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: {
-    default: 'ACGN Collection',
-    template: '%s & ACGN Collection'
-  },
+  title: 'ACGN Collection',
   description: '使用 Bangumi API 的 ACGN 收藏夹',
   keywords: [
     'ACGN Collection',
