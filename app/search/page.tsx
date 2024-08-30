@@ -36,6 +36,8 @@ export default function Search() {
   const { data, isLoading, error } = useSearch(payload, offset, 20);
   const { data: legacyData, isLoading: legacyIsLoading, error: legacyError } = useLegacySearch(payload, offset, 20);
 
+  const result = (api === 'new' ? data?.data : legacyData?.list);
+
   if (error) throw error;
   if (legacyError) throw legacyError;
 
@@ -57,17 +59,20 @@ export default function Search() {
                 <div
                   className="grid-card"
                 >
-                  {(api === 'new' ? data.data : legacyData.list ?? []).map(subject => (
+                  {result?.map(subject => (
                     <CollectionCard subject={subject} key={subject.id} mobileMask showType />
                   ))}
                 </div>
-                <Pagination
-                  offset={offset}
-                  limit={20}
-                  setOffset={offset => {
-                    router.push(`/?keyword=${payload.keyword}&type=${type}&offset=${offset}`);
-                  }}
-                  total={api === 'new' ? data.total : legacyData.results} />
+                {result?.length ? (
+                  <Pagination
+                    offset={offset}
+                    limit={20}
+                    setOffset={offset => {
+                      router.push(`/?keyword=${payload.keyword}&type=${type}&offset=${offset}`);
+                    }}
+                    total={api === 'new' ? data.total : legacyData.results}
+                  />
+                ) : null}
               </motion.div>
             ))
       }
