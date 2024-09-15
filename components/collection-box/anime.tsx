@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { match } from 'ts-pattern';
 import { useCallback, useMemo, useState } from 'react';
 
+import clsx from 'clsx';
 import { useIsMobile } from '~/hooks/use-mobile';
 
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';
@@ -74,18 +75,22 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
 
   const isMutating = m1 || m2 || m3;
 
+  const [expandEp, setExpandEp] = useState(false);
   const episodes = useMemo(() => {
     if (!data || !userData) return;
-    const main: Array<Episode & { collectionType: EpisodeCollectionType }> = [];
+    const collect: Array<Episode & { collectionType: EpisodeCollectionType }> = [];
 
     for (const ep of data.data) {
       const userEp = userData.data.find(e => e.episode.id === ep.id);
       if (userEp)
-        main.push({ ...ep, collectionType: userEp.type });
+        collect.push({ ...ep, collectionType: userEp.type });
     }
 
-    return main;
-  }, [data, userData]);
+    if (collect.length > 24 && !expandEp)
+      return collect.slice(0, 24);
+
+    return collect;
+  }, [data, expandEp, userData]);
 
   const isMobile = useIsMobile();
   const [episode, setEpisode] = useState(watchedEpisode.toString());
@@ -136,89 +141,100 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
       <div className="text-small pb-1.5">观看进度管理</div>
       {
         episodes
-          ? episodes.map(episode => (
-            <Tooltip
-              key={episode.id}
-              isOpen={isMobile ? openState.isOpen && openState.ep === episode.ep : undefined}
-              content={
-                <div className="min-w-[12rem] max-w-[20rem] p-2">
-                  <Link
-                    href={`https://bgm.tv/ep/${episode.id}`}
-                    color="foreground"
-                    className="w-full gap-1"
+          ? (
+            <div className="grid gap-1 grid-cols-[repeat(auto-fill,minmax(3rem,1fr))]">
+              {episodes.map(episode => (
+                <Tooltip
+                  key={episode.id}
+                  isOpen={isMobile ? openState.isOpen && openState.ep === episode.ep : undefined}
+                  content={
+                    <div className="min-w-[12rem] max-w-[20rem] p-2">
+                      <Link
+                        href={`https://bgm.tv/ep/${episode.id}`}
+                        color="foreground"
+                        className="w-full gap-1"
+                        size="sm"
+                        showAnchorIcon
+                        isExternal
+                      >
+                        <span className="truncate w-full">{episode.name || '暂无标题'}</span>
+                      </Link>
+                      <Divider className="my-2" />
+                      <div>
+                        {
+                          collectionType === CollectionTypeForAnime.在看
+                            ? (
+                              <Tabs
+                                selectedKey={episode.collectionType.toString()}
+                                onSelectionChange={key => handleUpdateEpisodeCollectionType(+key, episode.ep, episode.collectionType)}
+                                size="sm"
+                                variant="bordered"
+                                color={
+                                  match(episode.collectionType)
+                                    .returnType<'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'>()
+                                    .with(EpisodeCollectionType.看过, () => 'primary')
+                                    .with(EpisodeCollectionType.想看, () => 'danger')
+                                    .with(EpisodeCollectionType.抛弃, () => 'secondary')
+                                    .otherwise(() => 'default')
+                                }
+                                className="mb-2"
+                                classNames={{
+                                  tabList: 'rounded-md'
+                                }}
+                              >
+                                {
+                                  Object.keys(EpisodeCollectionType)
+                                    .filter(type => Number.isInteger(Number.parseInt(type, 10)))
+                                    .map(type => Number.parseInt(type, 10))
+                                    .map(type => (
+                                      episode.collectionType === EpisodeCollectionType.撤销 && type === 0
+                                        ? <Tab key={type} title="未收藏" />
+                                        : <Tab key={type} title={EpisodeCollectionType[type]} />
+                                    ))
+                                }
+                              </Tabs>
+                            )
+                            : null
+                        }
+                        {episode.name_cn ? <p className="truncate">中文标题：{episode.name_cn}</p> : null}
+                        <p>首播：{episode.airdate}</p>
+                        {episode.duration ? <p>时长：{episode.duration}</p> : null}
+                      </div>
+                    </div>
+                  }
+                >
+                  <Button
+                    className="m-1 min-h-unit-3.5 min-w-max"
                     size="sm"
-                    showAnchorIcon
-                    isExternal
-                  >
-                    <span className="truncate w-full">{episode.name || '暂无标题'}</span>
-                  </Link>
-                  <Divider className="my-2" />
-                  <div>
-                    {
-                      collectionType === CollectionTypeForAnime.在看
-                        ? (
-                          <Tabs
-                            selectedKey={episode.collectionType.toString()}
-                            onSelectionChange={key => handleUpdateEpisodeCollectionType(+key, episode.ep, episode.collectionType)}
-                            size="sm"
-                            variant="bordered"
-                            color={
-                              match(episode.collectionType)
-                                .returnType<'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'>()
-                                .with(EpisodeCollectionType.看过, () => 'primary')
-                                .with(EpisodeCollectionType.想看, () => 'danger')
-                                .with(EpisodeCollectionType.抛弃, () => 'secondary')
-                                .otherwise(() => 'default')
-                            }
-                            className="mb-2"
-                            classNames={{
-                              tabList: 'rounded-md'
-                            }}
-                          >
-                            {
-                              Object.keys(EpisodeCollectionType)
-                                .filter(type => Number.isInteger(Number.parseInt(type, 10)))
-                                .map(type => Number.parseInt(type, 10))
-                                .map(type => (
-                                  episode.collectionType === EpisodeCollectionType.撤销 && type === 0
-                                    ? <Tab key={type} title="未收藏" />
-                                    : <Tab key={type} title={EpisodeCollectionType[type]} />
-                                ))
-                            }
-                          </Tabs>
-                        )
-                        : null
+                    radius="sm"
+                    color={
+                      match(episode.collectionType)
+                        .returnType<'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'>()
+                        .with(EpisodeCollectionType.看过, () => 'primary')
+                        .with(EpisodeCollectionType.想看, () => 'danger')
+                        .with(EpisodeCollectionType.抛弃, () => 'secondary')
+                        .otherwise(() => 'default')
                     }
-                    {episode.name_cn ? <p className="truncate">中文标题：{episode.name_cn}</p> : null}
-                    <p>首播：{episode.airdate}</p>
-                    {episode.duration ? <p>时长：{episode.duration}</p> : null}
-                  </div>
-                </div>
-              }
-            >
-              <Button
-                className="m-1 min-h-unit-3.5 min-w-max"
-                size="sm"
-                radius="sm"
-                color={
-                  match(episode.collectionType)
-                    .returnType<'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'>()
-                    .with(EpisodeCollectionType.看过, () => 'primary')
-                    .with(EpisodeCollectionType.想看, () => 'danger')
-                    .with(EpisodeCollectionType.抛弃, () => 'secondary')
-                    .otherwise(() => 'default')
-                }
-                onPress={() => {
-                  setOpenState(p => ({
-                    isOpen: p.ep === episode.ep ? !p.isOpen : true,
-                    ep: episode.ep
-                  }));
-                }}
-              >
-                {episode.sort >= 10 ? episode.sort : `0${episode.sort}`}
-              </Button>
-            </Tooltip>
-          ))
+                    onPress={() => {
+                      setOpenState(p => ({
+                        isOpen: p.ep === episode.ep ? !p.isOpen : true,
+                        ep: episode.ep
+                      }));
+                    }}
+                  >
+                    {episode.sort >= 10 ? episode.sort : `0${episode.sort}`}
+                  </Button>
+                </Tooltip>
+              ))}
+              {(data && data.data.length > 24)
+                ? (
+                  <Button className="m-1 min-h-unit-3.5 min-w-max" size="sm" radius="sm" onPress={() => setExpandEp(p => !p)}>
+                    <div className={clsx(expandEp ? 'i-mdi-arrow-top' : 'i-mdi-arrow-bottom')} />
+                  </Button>
+                )
+                : null}
+            </div>
+          )
           : <Skeleton className="rounded-lg h-[4rem] w-full" />
       }
       {
@@ -227,27 +243,26 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
           : (
             <>
               <Divider className="mt-2 mb-3 w-52" />
-              <div className="w-[10.5rem]">
-                <div className="flex gap-2">
-                  <Input
-                    labelPlacement="outside"
-                    value={episode /** 太草台了，input 不能给 number */}
-                    onValueChange={v => setEpisode(v)}
-                    variant="faded"
-                    radius="sm"
-                    endContent={
-                      <span className="text-small">/{episodes?.length}</span>
-                    }
-                  />
-                  <Button
-                    radius="sm"
-                    variant="faded"
-                    isLoading={isMutating}
-                    onPress={() => handleUpdateEpisodeCollectionType(EpisodeCollectionType.看到, Number.parseInt(episode, 10))}
-                  >
-                    更新
-                  </Button>
-                </div>
+              <div className="flex gap-2">
+                <Input
+                  labelPlacement="outside"
+                  value={episode /** 太草台了，input 不能给 number */}
+                  onValueChange={v => setEpisode(v)}
+                  variant="faded"
+                  radius="sm"
+                  className="max-w-[6rem]"
+                  endContent={
+                    <span className="text-small min-w-max">／{data?.data.length}</span>
+                  }
+                />
+                <Button
+                  radius="sm"
+                  variant="faded"
+                  isLoading={isMutating}
+                  onPress={() => handleUpdateEpisodeCollectionType(EpisodeCollectionType.看到, Number.parseInt(episode, 10))}
+                >
+                  更新
+                </Button>
               </div>
             </>
           )
