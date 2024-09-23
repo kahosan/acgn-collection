@@ -44,13 +44,13 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
-        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/harmonyos-sans?styles=171350,171348,171349,171347,171346" />
+        <link rel="stylesheet" href="https://cdn.baiwulin.com/font/harmonyos-fonts/css/harmonyos_sans_sc.css" />
       </head>
-      <body className="font-['HarmonyOS Sans']">
+      <body className="font-['HarmonyOS_Sans_SC']">
         <Providers>
           <Header />
           <Suspense>
-            <main className="max-w-8xl mx-auto py-4 px-6">
+            <main className="mx-auto py-4 px-6">
               {children}
               <Analytics />
             </main>
