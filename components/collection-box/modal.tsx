@@ -1,5 +1,6 @@
-import { Button, ButtonGroup, Checkbox, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea } from '@nextui-org/react';
+import { Button, ButtonGroup, Checkbox, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea, Tooltip } from '@nextui-org/react';
 
+import clsx from 'clsx';
 import { useState } from 'react';
 
 import { transformCollectionTypeToJSX } from '~/utils';
@@ -15,14 +16,28 @@ interface Props {
   isMutating: boolean
 }
 
+const ratingTexts = [
+  '不忍直视',
+  '很差',
+  '差',
+  '较差',
+  '不过不失',
+  '还行',
+  '推荐',
+  '力荐',
+  '神作',
+  '超神作'
+];
+
 export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollection, handleUpdate, isMutating }: Props) {
   const [selected, setSelected] = useState(userCollection.type);
   const [isPrivate, setIsPrivate] = useState(userCollection.private);
 
   const [tags, setTags] = useState(userCollection.tags);
   const [comment, setComment] = useState(userCollection.comment ?? '');
+  const [rating, setRating] = useState(userCollection.rate);
 
-  const handleModify = () => handleUpdate({ comment, tags: tags.length ? tags : undefined, type: selected, private: isPrivate }, onClose);
+  const handleModify = () => handleUpdate({ comment, tags: tags.length ? tags : undefined, type: selected, private: isPrivate, rate: rating }, onClose);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose} radius="sm" placement="center">
@@ -43,6 +58,30 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
               )
             }
           </Tabs>
+
+          <Divider />
+
+          <div>
+            <label className="text-sm">我的评价</label>
+            <ButtonGroup
+              className="grid grid-cols-10 mt-1.5"
+              size="sm"
+              variant="flat"
+              isIconOnly
+            >
+              {Array.from({ length: 10 }, (_, i) => i + 1).map(_rating => (
+                <Tooltip key={_rating} content={ratingTexts[_rating - 1]}>
+                  <Button
+                    className={clsx('w-auto', rating === _rating && 'bg-primary text-white')}
+                    value={rating}
+                    onPress={() => setRating(_rating)}
+                  >
+                    {_rating}
+                  </Button>
+                </Tooltip>
+              ))}
+            </ButtonGroup>
+          </div>
 
           <Input
             label="标签"
