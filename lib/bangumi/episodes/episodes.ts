@@ -18,6 +18,7 @@ export const useEpisodes = (payload: EpisodesPayload) => {
     {
       onError(error) {
         fetcherErrorHandler(error, '获取剧集信息失败');
+        throw error;
       }
     }
   );

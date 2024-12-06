@@ -11,11 +11,11 @@ interface Props {
 }
 
 export default function TrackList({ subjectId }: Props) {
-  const { data, isLoading, error } = useEpisodes({ subject_id: subjectId });
+  const { data, isLoading } = useEpisodes({ subject_id: subjectId });
 
   const tracksObj = useMemo(() => {
     return data?.data.reduce<Record<number, Episode[]>>((obj, track) => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- ts
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- ts
       if (!obj[track.disc]) obj[track.disc] = [];
       obj[track.disc].push(track);
 
@@ -23,7 +23,6 @@ export default function TrackList({ subjectId }: Props) {
     }, {});
   }, [data?.data]);
 
-  if (error) throw error;
   if (!tracksObj || isLoading) return null;
 
   return (

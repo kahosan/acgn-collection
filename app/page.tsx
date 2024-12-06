@@ -25,14 +25,12 @@ export default function Collection() {
 
   const router = useRouter();
 
-  const { data, isLoading, error } = useUserCollections({
+  const { data, isLoading } = useUserCollections({
     subject_type: +subjectType,
     type: +collectionType,
     offset,
     limit: 10
   });
-
-  if (error) throw error;
 
   return (
     <div>

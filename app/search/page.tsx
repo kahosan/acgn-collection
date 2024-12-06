@@ -33,13 +33,10 @@ export default function Search() {
     }
   };
 
-  const { data, isLoading, error } = useSearch(payload, offset, 20);
-  const { data: legacyData, isLoading: legacyIsLoading, error: legacyError } = useLegacySearch(payload, offset, 20);
+  const { data, isLoading } = useSearch(payload, offset, 20);
+  const { data: legacyData, isLoading: legacyIsLoading } = useLegacySearch(payload, offset, 20);
 
   const result = (api === 'new' ? data?.data : legacyData?.list);
-
-  if (error) throw error;
-  if (legacyError) throw legacyError;
 
   return (
     <div>

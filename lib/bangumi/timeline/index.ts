@@ -10,6 +10,7 @@ export const useTimeline = (payload: TimelinePayload) => useSWR<Timeline, Error>
   {
     onError(error) {
       fetcherErrorHandler(error, '获取时间胶囊失败');
+      throw error;
     }
   }
 );

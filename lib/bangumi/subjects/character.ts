@@ -13,6 +13,7 @@ export const useCharacters = (subjectId: number) => {
     {
       onError(e) {
         fetcherErrorHandler(e, '获取角色列表失败');
+        throw e;
       }
     }
   );

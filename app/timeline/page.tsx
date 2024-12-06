@@ -30,9 +30,7 @@ export default function Timeline() {
     page: scope === 'me' ? page : 1
   };
 
-  const { data, isLoading, error } = useTimeline(payload);
-
-  if (error) throw error;
+  const { data, isLoading } = useTimeline(payload);
 
   return (
     <>

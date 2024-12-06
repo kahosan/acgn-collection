@@ -14,6 +14,7 @@ export const useRelations = (subjectId: number) => {
     {
       onError(e) {
         fetcherErrorHandler(e, '获取关联条目失败');
+        throw e;
       }
     }
   );

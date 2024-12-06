@@ -18,9 +18,8 @@ interface Props {
 }
 
 export default function Subject({ params }: Props) {
-  const { data, isLoading, error } = useSubject(params.id);
+  const { data, isLoading } = useSubject(params.id);
 
-  if (error) throw error;
   if (!data || isLoading) return <Loading />;
 
   return (

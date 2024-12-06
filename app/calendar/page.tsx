@@ -26,7 +26,7 @@ const sortOptions = {
 type SortKeys = keyof typeof sortOptions;
 
 export default function Calendar() {
-  const { data, isLoading, error } = useCalendar();
+  const { data, isLoading } = useCalendar();
 
   const searchParams = useSearchParams();
 
@@ -49,8 +49,6 @@ export default function Calendar() {
           .exhaustive()
       );
   }, [data, day, sort]);
-
-  if (error) throw error;
 
   return (
     <>

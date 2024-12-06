@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function Character({ subjectId }: Props) {
-  const { data, isLoading, error } = useCharacters(subjectId);
+  const { data, isLoading } = useCharacters(subjectId);
 
   const characters = useMemo(() => {
     if (!data) return;
@@ -23,7 +23,6 @@ export default function Character({ subjectId }: Props) {
       .slice(0, 8);
   }, [data]);
 
-  if (error) throw error;
   if (!characters || !data || isLoading)
     return <CharactersSkeleton />;
 

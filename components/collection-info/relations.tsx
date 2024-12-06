@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function Relations({ subjectId }: Props) {
-  const { data, isLoading, error } = useRelations(subjectId);
+  const { data, isLoading } = useRelations(subjectId);
 
   const [showAll, setShowAll] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -49,7 +49,6 @@ export default function Relations({ subjectId }: Props) {
     return Object.entries(groupData).sort(([, a], [, b]) => a.length - b.length);
   }, [data]);
 
-  if (error) throw error;
   if (!relations || isLoading) return <RelationsSkeleton />;
 
   return (

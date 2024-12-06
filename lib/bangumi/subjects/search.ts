@@ -25,6 +25,7 @@ export const useSearch = (payload: SearchPayload, offset: number, limit?: number
     {
       onError(error) {
         fetcherErrorHandler(error, '搜索失败');
+        throw error;
       }
     }
   );
@@ -39,6 +40,7 @@ export const useLegacySearch = (payload: SearchPayload, offset: number, limit?: 
     {
       onError(error) {
         fetcherErrorHandler(error, '搜索失败');
+        throw error;
       }
     }
   );

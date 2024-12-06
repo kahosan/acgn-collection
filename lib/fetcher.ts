@@ -21,6 +21,7 @@ export const fetcherErrorHandler = (error: Error, message?: string) => {
     toast.error(text);
     console.error(error);
   } else {
+    error.message = '请求 API 错误，请稍后再试';
     toast.error(message ?? error.message);
     console.error(error);
   }

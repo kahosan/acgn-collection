@@ -52,7 +52,8 @@ export default function SearchBar({ payload }: Props) {
           endContent={
             <div
               className="cursor-pointer i-mdi-magnify text-lg"
-              onClick={() => handleSearch(payload.api)} />
+              onClick={() => handleSearch(payload.api)}
+            />
           }
           radius="sm"
           labelPlacement="outside"

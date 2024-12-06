@@ -63,7 +63,7 @@ interface EpisodesProps {
 }
 
 export function Episodes({ payload, watchedEpisode, collectionType, userCollectionMutate }: EpisodesProps) {
-  const { data, error } = useEpisodes(payload);
+  const { data } = useEpisodes(payload);
   const {
     data: userData,
     mutate: userDataMutate
@@ -133,8 +133,6 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
       }, refreshData);
     }
   }, [episodes, handleModify, handleUpdate, isMutating, progressUpdate, userCollectionMutate, userDataMutate]);
-
-  if (error) throw error;
 
   return (
     <div>

@@ -1,4 +1,5 @@
-import { startTransition, useLayoutEffect, useState } from 'react';
+import { startTransition, useState } from 'react';
+import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
 
 export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);

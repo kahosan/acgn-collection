@@ -15,12 +15,13 @@ export const useUserCollections = (payload: UserCollectionsPayload) => {
   for (const [key, value] of Object.entries(payload))
     params.set(key, value);
 
-  const { data, isLoading, mutate, error } = useSWR<UserCollections, Error>(
+  const { data, isLoading, mutate } = useSWR<UserCollections, Error>(
     (user?.username && token) ? [`/v0/users/${user.username}/collections?${params.toString()}`, token] : null,
     fetcher,
     {
       onError(error) {
         fetcherErrorHandler(error, '收藏获取失败');
+        throw error;
       }
     }
   );
@@ -28,7 +29,6 @@ export const useUserCollections = (payload: UserCollectionsPayload) => {
   return {
     data,
     isLoading,
-    mutate,
-    error
+    mutate
   };
 };

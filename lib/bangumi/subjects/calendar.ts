@@ -9,6 +9,7 @@ export const useCalendar = () => useSWRImmutable<Calendar, Error>(
   {
     onError(error) {
       fetcherErrorHandler(error, '每日放送获取失败');
+      throw error;
     }
   }
 );

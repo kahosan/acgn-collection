@@ -82,7 +82,8 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                         'i-mdi-music-note-eighth': subject.type === SubjectType.音乐,
                         'i-mdi-gamepad-variant-outline': subject.type === SubjectType.游戏,
                         'i-mdi-television-classic': subject.type === SubjectType.三次元
-                      })} />
+                      })}
+                    />
                   }
                 >
                   <div className="text-xs">{SubjectType[subject.type]}</div>

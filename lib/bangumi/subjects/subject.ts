@@ -14,6 +14,7 @@ export const useSubject = (id: string) => {
     {
       onError(error) {
         fetcherErrorHandler(error, '获取条目失败');
+        throw error;
       }
     }
   );
