@@ -30,14 +30,20 @@ const ratingTexts = [
 ];
 
 export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollection, handleUpdate, isMutating }: Props) {
-  const [selected, setSelected] = useState(userCollection.type);
-  const [isPrivate, setIsPrivate] = useState(userCollection.private);
+  const [collectionData, setCollectionData] = useState<UserCollectionModifyPayload>({
+    comment: userCollection.comment,
+    tags: userCollection.tags,
+    type: userCollection.type,
+    private: userCollection.private,
+    rate: userCollection.rate
+  });
+  const { comment, tags, type, private: isPrivate, rate } = collectionData;
 
-  const [tags, setTags] = useState(userCollection.tags);
-  const [comment, setComment] = useState(userCollection.comment ?? '');
-  const [rating, setRating] = useState(userCollection.rate);
+  function updateCollectionData<T extends keyof UserCollectionModifyPayload>(field: T, value: UserCollectionModifyPayload[T]) {
+    setCollectionData(data => ({ ...data, [field]: value }));
+  };
 
-  const handleModify = () => handleUpdate({ comment, tags: tags.length ? tags : undefined, type: selected, private: isPrivate, rate: rating }, onClose);
+  const handleModify = () => handleUpdate({ comment, tags: tags?.length ? tags : undefined, type, private: isPrivate, rate }, onClose);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose} radius="sm" placement="center">
@@ -46,8 +52,8 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
         <ModalBody>
           <Tabs
             fullWidth
-            selectedKey={selected.toString()}
-            onSelectionChange={key => setSelected(Number.parseInt(key.toString(), 10))}
+            selectedKey={type?.toString()}
+            onSelectionChange={key => updateCollectionData('type', Number.parseInt(key.toString(), 10))}
           >
             {
               transformCollectionTypeToJSX(
@@ -69,12 +75,12 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
               variant="flat"
               isIconOnly
             >
-              {Array.from({ length: 10 }, (_, i) => i + 1).map(_rating => (
-                <Tooltip key={_rating} content={ratingTexts[_rating - 1]}>
+              {Array.from({ length: 10 }, (_, i) => i + 1 /** 这里使用 0 + 1 从 1 开始 */).map(_rating => (
+                <Tooltip key={_rating} content={ratingTexts[_rating - 1] /** 这里使用数组下标，从 0 开始 */}>
                   <Button
-                    className={clsx('w-auto', rating === _rating && 'bg-primary text-white')}
-                    value={rating}
-                    onPress={() => setRating(_rating)}
+                    className={clsx('w-auto', rate === _rating && 'bg-primary text-white')}
+                    value={rate}
+                    onPress={() => updateCollectionData('rate', _rating)}
                   >
                     {_rating}
                   </Button>
@@ -91,8 +97,8 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
             classNames={{
               mainWrapper: 'flex-auto'
             }}
-            value={tags.join(' ')}
-            onValueChange={v => setTags(v.split(' '))}
+            value={tags?.join(' ')}
+            onValueChange={v => updateCollectionData('tags', v.split(' '))}
           />
 
           <Textarea
@@ -103,8 +109,8 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
             classNames={{
               input: 'h-[60px]'
             }}
-            value={comment}
-            onValueChange={v => setComment(v)}
+            value={comment || ''}
+            onValueChange={v => updateCollectionData('comment', v)}
           />
 
         </ModalBody>
@@ -121,7 +127,7 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
                 </Button>
               </PopoverTrigger>
               <PopoverContent>
-                <Checkbox size="sm" isSelected={isPrivate} onValueChange={() => setIsPrivate(p => !p)}>
+                <Checkbox size="sm" isSelected={isPrivate} onValueChange={() => updateCollectionData('private', !isPrivate)}>
                   独属于我的 Moment
                 </Checkbox>
               </PopoverContent>
