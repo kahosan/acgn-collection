@@ -13,7 +13,9 @@ module.exports = kaho().then(config => [
   {
     rules: {
       '@eslint-react/naming-convention/filename-extension': 'off',
-      'n/prefer-global/process': 'off'
+      'n/prefer-global/process': 'off',
+      'sukka/no-chain-array-higher-order-functions': 'off',
+      'arrow-body-style': 'off'
     }
   }
 ]);
