@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @config "../tailwind.config.ts"; 
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -27,6 +28,10 @@
   }
   .grid-card {
     @apply grid sm:grid-cols-[repeat(auto-fill,minmax(25rem,auto))] grid-cols-[repeat(auto-fill,minmax(20rem,auto))] gap-8;
+  }
+
+  button, [role="button"] {
+    cursor: pointer;
   }
 }
 

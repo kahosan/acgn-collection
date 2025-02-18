@@ -60,7 +60,7 @@ export default function Character({ subjectId }: Props) {
                 <Divider className="my-1" />
                 <Link color="foreground" className="w-full" href={`https://bgm.tv/person/${character.actors.at(0)?.id ?? ''}`} isExternal>
                   <Chip
-                    className="text-xs rounded-xs mr-1 bg-blue-400/70"
+                    className="text-xs rounded-xs mr-1 bg-blue-400 text-white"
                     classNames={{
                       base: 'h-max',
                       content: 'p-0'

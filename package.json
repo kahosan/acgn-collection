@@ -21,7 +21,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@vercel/analytics": "^1.4.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.13.1",
+    "framer-motion": "^12.4.3",
     "jotai": "^2.10.3",
     "next": "14.2.7",
     "next-auth": "^4.24.10",
@@ -46,7 +46,7 @@
     "foxact": "^0.2.43",
     "postcss": "^8.4.49",
     "simple-git-hooks": "^2.11.1",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4.0.6",
     "typescript": "^5.7.2"
   },
   "packageManager": "pnpm@9.14.4",

@@ -1,4 +1,19 @@
-import { Button, ButtonGroup, Checkbox, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea, Tooltip } from '@heroui/react';
+import {
+  Button, ButtonGroup,
+  Checkbox,
+  Divider,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Tab, Tabs,
+  Textarea,
+  Tooltip
+} from '@heroui/react';
 
 import { clsx } from 'clsx';
 import { useState } from 'react';
@@ -89,14 +104,12 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
             </ButtonGroup>
           </div>
 
-          <Input
+          {/* TODO: replace to input, but https://github.com/heroui-inc/heroui/pull/4656#issuecomment-2662206314 */}
+          <Textarea
             label="标签"
             placeholder="请输入标签，以空格分隔"
             labelPlacement="outside"
             radius="sm"
-            classNames={{
-              mainWrapper: 'flex-auto'
-            }}
             value={tags?.join(' ')}
             onValueChange={v => updateCollectionData('tags', v.split(' '))}
           />
