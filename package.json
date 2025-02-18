@@ -19,39 +19,46 @@
     "@egoist/tailwindcss-icons": "^1.9.0",
     "@heroui/react": "https://pkg.pr.new/@heroui/react@4656",
     "@iconify-json/mdi": "^1.2.3",
-    "@vercel/analytics": "^1.4.1",
+    "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.3",
-    "jotai": "^2.10.3",
+    "jotai": "^2.12.1",
     "next": "14.2.7",
-    "next-auth": "^4.24.10",
-    "next-themes": "^0.4.3",
-    "rc-rate": "^2.13.0",
+    "next-auth": "^4.24.11",
+    "next-themes": "^0.4.4",
+    "rc-rate": "^2.13.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "sharp": "^0.33.5",
-    "sonner": "^1.7.0",
-    "swr": "^2.2.5",
-    "ts-pattern": "^5.5.0"
+    "sonner": "^1.7.4",
+    "swr": "^2.3.2",
+    "ts-pattern": "^5.6.2"
   },
   "devDependencies": {
     "@eslint-sukka/node": "^6.14.1",
     "@eslint-sukka/react": "^6.14.1",
-    "@tailwindcss/postcss": "^4.0.0",
-    "@types/node": "^20.17.9",
+    "@tailwindcss/postcss": "^4.0.6",
+    "@types/node": "^20.17.19",
     "@types/react": "18.3.13",
     "@types/react-dom": "18.3.1",
-    "eslint": "^9.16.0",
+    "eslint": "^9.20.1",
     "eslint-config-kaho": "3.5.2",
-    "foxact": "^0.2.43",
-    "postcss": "^8.4.49",
+    "foxact": "^0.2.44",
+    "postcss": "^8.5.2",
     "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^4.0.6",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@10.4.1",
   "engines": {
     "node": ">=20.16.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@heroui/shared-utils",
+      "sharp",
+      "simple-git-hooks"
+    ]
   },
   "simple-git-hooks": {
     "pre-commit": "npm run lint",
