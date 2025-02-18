@@ -57,6 +57,7 @@ export default function Header() {
             >
               <Link
                 as={NextLink}
+                isDisabled={pn === path}
                 color="foreground"
                 className={clsx('opacity-75 font-[500] mt-0.5', pn === path && 'opacity-100')}
                 href={path}
