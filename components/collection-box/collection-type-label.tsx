@@ -13,15 +13,14 @@ export default function CollectionTypeLabel({ userCollection }: Props) {
   return (
     <div
       className={clsx(
-        'absolute left-[12px] top-3 py-0.5 px-2.5 rounded-xs rounded-tl-md rounded-br-md text-sm font-medium text-white',
-        'drop-shadow-[1px_1px_2px_black]',
+        'absolute left-[12px] top-3 py-0.5 px-2.5 rounded-xs rounded-tl-md rounded-br-md text-sm font-medium',
         match(userCollection?.type)
-          .with(1, () => 'bg-red-500')
-          .with(2, () => 'bg-blue-500')
-          .with(3, () => 'bg-indigo-500')
-          .with(4, () => 'bg-orange-500')
-          .with(5, () => 'bg-stone-500')
-          .otherwise(() => 'bg-gray-500')
+          .with(1, () => 'bg-red-400 text-red-100 drop-shadow-[2px_3px_3px_#c71c1c]')
+          .with(2, () => 'bg-blue-400 text-blue-100 drop-shadow-[2px_3px_3px_#3c82d2]')
+          .with(3, () => 'bg-indigo-400 text-indigo-100 drop-shadow-[2px_3px_3px_#5057ac]')
+          .with(4, () => 'bg-orange-400 text-orange-100 drop-shadow-[2px_3px_3px_#de7500]')
+          .with(5, () => 'bg-stone-400 text-stone-100 drop-shadow-[2px_3px_3px_#9a938e]')
+          .otherwise(() => 'bg-gray-400 text-gray-100 drop-shadow-[2px_3px_3px_gray]')
       )}
     >
       {
