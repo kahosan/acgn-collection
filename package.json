@@ -16,10 +16,10 @@
     "email": "me@hitorinbc.com"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "^1.8.1",
-    "@iconify-json/mdi": "^1.2.1",
-    "@nextui-org/react": "^2.4.8",
-    "@nextui-org/theme": "^2.2.11",
+    "@egoist/tailwindcss-icons": "^1.9.0",
+    "@heroui/react": "2.6.14",
+    "@heroui/theme": "2.4.6",
+    "@iconify-json/mdi": "^1.2.3",
     "@vercel/analytics": "^1.4.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.13.1",

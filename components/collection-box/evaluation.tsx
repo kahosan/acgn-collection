@@ -1,6 +1,6 @@
 import Rate from 'rc-rate';
 import 'rc-rate/assets/index.css';
-import { Chip, Link, Divider } from '@nextui-org/react';
+import { Chip, Link, Divider } from '@heroui/react';
 
 import type { UserCollection } from '~/types/bangumi/collection';
 import type { Subject } from '~/types/bangumi/subject';

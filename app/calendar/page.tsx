@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DropdownItem, Tab, Tabs } from '@nextui-org/react';
+import { DropdownItem, Tab, Tabs } from '@heroui/react';
 
 import Loading from '~/components/loading';
 import OptionsMenu from '~/components/options-menu';
@@ -84,7 +84,7 @@ export default function Calendar() {
                 key={key}
                 aria-label={key}
                 value={key}
-                onClick={() => router.push(`/calendar?day=${day}&sort=${key}`)}
+                onPress={() => router.push(`/calendar?day=${day}&sort=${key}`)}
               >
                 {value}
               </DropdownItem>

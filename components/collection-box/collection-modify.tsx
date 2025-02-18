@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   useDisclosure
-} from '@nextui-org/react';
+} from '@heroui/react';
 
 import ModifyModal from './modal';
 

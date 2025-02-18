@@ -1,4 +1,4 @@
-import { Divider, Input, Select, SelectItem } from '@nextui-org/react';
+import { Divider, Input, Select, SelectItem } from '@heroui/react';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';

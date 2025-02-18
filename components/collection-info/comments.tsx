@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Fragment } from 'react';
-import { Link } from '@nextui-org/react';
+import { Link } from '@heroui/react';
 
 import useSWRImmutable from 'swr/immutable';
 import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';

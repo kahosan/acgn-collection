@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Divider, Link } from '@nextui-org/react';
+import { Divider, Link } from '@heroui/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';

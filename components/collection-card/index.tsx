@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 import NextImage from 'next/image';
-import { Card, CardBody, Chip, Link, Tooltip } from '@nextui-org/react';
+import { Card, CardBody, Chip, Link, Tooltip } from '@heroui/react';
 
 import { clsx } from 'clsx';
 import { match } from 'ts-pattern';

@@ -1,5 +1,5 @@
 /* eslint-disable @eslint-react/no-array-index-key -- */
-import { Skeleton } from '@nextui-org/react';
+import { Skeleton } from '@heroui/react';
 
 export function RelationsSkeleton() {
   return (

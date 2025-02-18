@@ -1,4 +1,4 @@
-import { Divider, Link } from '@nextui-org/react';
+import { Divider, Link } from '@heroui/react';
 
 import { clsx } from 'clsx';
 import { match } from 'ts-pattern';

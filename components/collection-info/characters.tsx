@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Chip, Divider, Link } from '@nextui-org/react';
+import { Chip, Divider, Link } from '@heroui/react';
 
 import { useCharacters } from '~/lib/bangumi/subjects';
 

@@ -7,7 +7,7 @@ import {
   Tab,
   Tabs,
   Tooltip
-} from '@nextui-org/react';
+} from '@heroui/react';
 
 import Evaluation from './evaluation';
 import CollectionModify from './collection-modify';

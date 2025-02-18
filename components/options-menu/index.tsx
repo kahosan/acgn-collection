@@ -1,4 +1,4 @@
-import { Dropdown, DropdownTrigger, Button, DropdownMenu } from '@nextui-org/react';
+import { Dropdown, DropdownTrigger, Button, DropdownMenu } from '@heroui/react';
 
 interface Props {
   ariaLabel: string

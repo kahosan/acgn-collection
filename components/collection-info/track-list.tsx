@@ -1,4 +1,4 @@
-import { Chip, Link } from '@nextui-org/react';
+import { Chip, Link } from '@heroui/react';
 
 import { useMemo } from 'react';
 

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Link } from '@nextui-org/react';
+import { Link } from '@heroui/react';
 
 import { RelationsSkeleton } from './skeleton';
 

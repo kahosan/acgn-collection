@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Avatar, Button, Card, CardBody, CardFooter, Divider, Link } from '@nextui-org/react';
+import { Avatar, Button, Card, CardBody, CardFooter, Divider, Link } from '@heroui/react';
 
 import Loading from '~/components/loading';
 
@@ -101,7 +101,7 @@ export default function TimelinePosts({ data, user, scope, page, type, isLoading
                   ? (
                     <Button
                       variant="flat"
-                      onClick={() => router.push(`/timeline?scope=${scope}&type=${type}&page=${page - 1}`)}
+                      onPress={() => router.push(`/timeline?scope=${scope}&type=${type}&page=${page - 1}`)}
                     >
                       上一页
                     </Button>
@@ -110,7 +110,7 @@ export default function TimelinePosts({ data, user, scope, page, type, isLoading
               }
               <Button
                 variant="flat"
-                onClick={() => router.push(`/timeline?scope=${scope}&type=${type}&page=${page + 1}`)}
+                onPress={() => router.push(`/timeline?scope=${scope}&type=${type}&page=${page + 1}`)}
               >
                 下一页
               </Button>

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DropdownItem, Tab, Tabs } from '@nextui-org/react';
+import { DropdownItem, Tab, Tabs } from '@heroui/react';
 
 import Loading from '~/components/loading';
 import Pagination from '~/components/pagination';
@@ -66,7 +66,7 @@ export default function Collection() {
                 key={type}
                 aria-label={label}
                 value={type}
-                onClick={() => {
+                onPress={() => {
                   if (+collectionType === type) {
                     router.push(`/?subject-type=${subjectType}`);
                     return;

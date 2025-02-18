@@ -6,7 +6,7 @@ import {
   Textarea,
   Popover, PopoverContent, PopoverTrigger,
   Tab, Tabs
-} from '@nextui-org/react';
+} from '@heroui/react';
 
 import { useState } from 'react';
 

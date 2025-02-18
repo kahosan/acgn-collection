@@ -1,4 +1,4 @@
-import { Input, Tab, Tabs } from '@nextui-org/react';
+import { Input, Tab, Tabs } from '@heroui/react';
 
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Select, SelectItem, Tab, Tabs } from '@nextui-org/react';
+import { Select, SelectItem, Tab, Tabs } from '@heroui/react';
 
 import TimelinePosts from './posts';
 
