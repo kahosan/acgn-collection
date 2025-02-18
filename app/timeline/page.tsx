@@ -78,7 +78,6 @@ export default function Timeline() {
             timelineTypeMap.map(type => (
               <SelectItem
                 key={type.label}
-                value={type.label}
                 onPress={() => router.push(`/timeline?scope=${scope}&type=${type.label}`)}
               >
                 {type.text}

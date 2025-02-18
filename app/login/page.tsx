@@ -16,7 +16,7 @@ export default async function Login() {
 
   return (
     <main className="mt-40 max-w-lg mx-auto">
-      <h1 className="mb-8 text-center text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-red-300">
+      <h1 className="mb-8 text-center text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-red-300">
         ACGN Collection
       </h1>
       <LoginForm />

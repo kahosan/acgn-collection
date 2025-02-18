@@ -41,7 +41,7 @@ export default function HearderSearch() {
       >
         {
           transformSubjectTypeToJSX(type => (
-            <SelectItem key={type} value={type} aria-label={SubjectType[type]}>
+            <SelectItem key={type} aria-label={SubjectType[type]}>
               {{ ...SubjectType, 7: '全部' }[type]}
             </SelectItem>
           ), { 7: '全部' })

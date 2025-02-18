@@ -1,9 +1,7 @@
-import type { Config } from 'tailwindcss';
-
 import { heroui } from '@heroui/react';
 import { iconsPlugin, getIconCollections } from '@egoist/tailwindcss-icons';
 
-const config: Config = {
+const config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',

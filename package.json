@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.9.0",
-    "@heroui/react": "2.6.14",
-    "@heroui/theme": "2.4.6",
+    "@heroui/react": "https://pkg.pr.new/@heroui/react@4656",
     "@iconify-json/mdi": "^1.2.3",
     "@vercel/analytics": "^1.4.1",
     "clsx": "^2.1.1",
@@ -38,16 +37,16 @@
   "devDependencies": {
     "@eslint-sukka/node": "^6.14.1",
     "@eslint-sukka/react": "^6.14.1",
+    "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^20.17.9",
     "@types/react": "18.3.13",
     "@types/react-dom": "18.3.1",
-    "autoprefixer": "^10.4.20",
     "eslint": "^9.16.0",
     "eslint-config-kaho": "3.5.2",
     "foxact": "^0.2.43",
     "postcss": "^8.4.49",
     "simple-git-hooks": "^2.11.1",
-    "tailwindcss": "^3.4.16",
+    "tailwindcss": "^4.0.0",
     "typescript": "^5.7.2"
   },
   "packageManager": "pnpm@9.14.4",

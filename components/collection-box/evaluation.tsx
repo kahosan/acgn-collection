@@ -16,7 +16,7 @@ export default function Evaluation({ subject, userCollection }: Props) {
       <div>
         <div className="text-sm pb-1.5">我的评价</div>
         <Rate
-          className="[&_li.rc-rate-star-zero.rc-rate-star]:text-[#f8b0405c] [&_li.rc-rate-star.rc-rate-star-half]:text-[#f8b0405c]"
+          className="[&_li.rc-rate-star-zero.rc-rate-star]:!text-[#f8b0405c] [&_li.rc-rate-star.rc-rate-star-half]:!text-[#f8b0405c]"
           value={userCollection.rate}
           count={10}
           character={

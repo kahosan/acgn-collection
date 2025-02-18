@@ -65,7 +65,7 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                   size="sm"
                   className={clsx(
                     'rounded-none rounded-tl-md rounded-br-sm text-white',
-                    'shadow-sm shadow-black',
+                    'shadow-xs shadow-black',
                     match(subject.type)
                       .with(SubjectType.书籍, () => 'bg-orange-500')
                       .with(SubjectType.动画, () => 'bg-blue-500')

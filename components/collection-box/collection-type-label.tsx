@@ -13,7 +13,7 @@ export default function CollectionTypeLabel({ userCollection }: Props) {
   return (
     <div
       className={clsx(
-        'absolute left-[12px] top-3 py-0.5 px-2.5 rounded-sm rounded-tl-md rounded-br-md text-sm font-medium text-white',
+        'absolute left-[12px] top-3 py-0.5 px-2.5 rounded-xs rounded-tl-md rounded-br-md text-sm font-medium text-white',
         'drop-shadow-[1px_1px_2px_black]',
         match(userCollection?.type)
           .with(1, () => 'bg-red-500')

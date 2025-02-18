@@ -48,7 +48,7 @@ export default function Character({ subjectId }: Props) {
                   <div className="w-full truncate text-sm">{character.name}</div>
                   <Chip
                     color={character.relation === '主角' ? 'danger' : 'default'}
-                    className="text-xs rounded-sm ml-1 items-baseline"
+                    className="text-xs rounded-xs ml-1 items-baseline"
                     classNames={{
                       base: 'h-max',
                       content: 'p-0'
@@ -60,7 +60,7 @@ export default function Character({ subjectId }: Props) {
                 <Divider className="my-1" />
                 <Link color="foreground" className="w-full" href={`https://bgm.tv/person/${character.actors.at(0)?.id ?? ''}`} isExternal>
                   <Chip
-                    className="text-xs rounded-sm mr-1 bg-blue-400/70"
+                    className="text-xs rounded-xs mr-1 bg-blue-400/70"
                     classNames={{
                       base: 'h-max',
                       content: 'p-0'

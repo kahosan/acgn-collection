@@ -49,7 +49,7 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
-        <h1 className="font-bold text-xl w-max text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-red-300">ACGN Collection</h1>
+        <h1 className="font-bold text-xl w-max text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-red-300">ACGN Collection</h1>
         {
           Object.entries(navItems).map(([path, name]) => (
             <NavbarItem
@@ -96,7 +96,7 @@ export default function Header() {
                 isReadOnly
                 key="theme"
                 className="cursor-default"
-                classNames={{ base: '!bg-inherit !text-inherit' }}
+                classNames={{ base: 'bg-inherit! text-inherit!' }}
                 endContent={
                   <ToggleTheme />
                 }
