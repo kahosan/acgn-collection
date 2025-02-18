@@ -4,7 +4,7 @@ import { fetcher, fetcherErrorHandler } from '~/lib/fetcher';
 
 import type { Characters } from '~/types/bangumi/character';
 
-export const useCharacters = (subjectId: number) => {
+export function useCharacters(subjectId: number) {
   const { data } = useSession();
 
   return useSWRImmutable<Characters, Error>(
@@ -17,4 +17,4 @@ export const useCharacters = (subjectId: number) => {
       }
     }
   );
-};
+}

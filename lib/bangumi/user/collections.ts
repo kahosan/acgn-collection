@@ -6,7 +6,7 @@ import { useToken } from '~/hooks/use-token';
 
 import type { UserCollections, UserCollectionsPayload } from '~/types/bangumi/collection';
 
-export const useUserCollections = (payload: UserCollectionsPayload) => {
+export function useUserCollections(payload: UserCollectionsPayload) {
   const token = useToken();
   const user = useUser();
 
@@ -31,4 +31,4 @@ export const useUserCollections = (payload: UserCollectionsPayload) => {
     isLoading,
     mutate
   };
-};
+}

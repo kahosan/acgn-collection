@@ -15,7 +15,7 @@ export class HTTPError extends Error {
   }
 }
 
-export const fetcherErrorHandler = (error: Error, message?: string) => {
+export function fetcherErrorHandler(error: Error, message?: string) {
   if (error instanceof HTTPError) {
     const text = message ? `${message}: ${error.data.description}` : error.data.description;
     toast.error(text);
@@ -25,7 +25,7 @@ export const fetcherErrorHandler = (error: Error, message?: string) => {
     toast.error(message ?? error.message);
     console.error(error);
   }
-};
+}
 
 export type RequestInitWithBase = RequestInit & { base?: string | URL };
 

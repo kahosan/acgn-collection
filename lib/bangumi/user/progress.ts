@@ -5,7 +5,7 @@ import { useToken } from '~/hooks/use-token';
 
 import type { UserProgressPayload } from '~/types/bangumi/episode';
 
-const fetcher = async ([url, token]: [string, string], { arg }: { arg: UserProgressPayload }) => {
+async function fetcher([url, token]: [string, string], { arg }: { arg: UserProgressPayload }) {
   const headers = new Headers();
   headers.set('Authorization', `Bearer ${token}`);
 
@@ -25,9 +25,9 @@ const fetcher = async ([url, token]: [string, string], { arg }: { arg: UserProgr
 
   if (!res.ok)
     throw new Error('请求失败');
-};
+}
 
-export const useUserProgressUpdate = (subjectId: number) => {
+export function useUserProgressUpdate(subjectId: number) {
   const token = useToken();
 
   const { trigger, isMutating } = useSWRMutation(
@@ -54,4 +54,4 @@ export const useUserProgressUpdate = (subjectId: number) => {
     handleUpdate,
     isMutating
   };
-};
+}

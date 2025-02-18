@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Checkbox, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, Tab, Tabs, Textarea, Tooltip } from '@nextui-org/react';
 
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { useState } from 'react';
 
 import { transformCollectionTypeToJSX } from '~/utils';

@@ -6,7 +6,7 @@ import { useToken } from '~/hooks/use-token';
 
 import type { UserCollectionModifyPayload } from '~/types/bangumi/collection';
 
-export const useUserCollectionModify = (subjectId: number) => {
+export function useUserCollectionModify(subjectId: number) {
   const token = useToken();
   const { trigger, isMutating } = useSWRMutation(
     token ? [`/v0/users/-/collections/${subjectId}`, token] : null,
@@ -35,4 +35,4 @@ export const useUserCollectionModify = (subjectId: number) => {
     handleModify,
     isMutating
   };
-};
+}

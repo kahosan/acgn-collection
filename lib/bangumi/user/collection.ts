@@ -6,7 +6,7 @@ import { useToken } from '~/hooks/use-token';
 
 import type { UserCollection } from '~/types/bangumi/collection';
 
-export const useUserCollection = (subjectId: number) => {
+export function useUserCollection(subjectId: number) {
   const token = useToken();
   const user = useUser();
 
@@ -16,7 +16,7 @@ export const useUserCollection = (subjectId: number) => {
     {
       shouldRetryOnError: false,
       onError(error) {
-        if (!(error instanceof HTTPError && error.status === 404))
+        if (!(error instanceof HTTPError) || error.status !== 404)
           fetcherErrorHandler(error, '收藏获取失败');
       }
     }
@@ -28,4 +28,4 @@ export const useUserCollection = (subjectId: number) => {
     mutate,
     error
   };
-};
+}

@@ -5,7 +5,7 @@ import { useToken } from '~/hooks/use-token';
 
 import type { Episodes, EpisodesPayload } from '~/types/bangumi/episode';
 
-export const useEpisodes = (payload: EpisodesPayload) => {
+export function useEpisodes(payload: EpisodesPayload) {
   const token = useToken();
   const params = new URLSearchParams();
 
@@ -22,4 +22,4 @@ export const useEpisodes = (payload: EpisodesPayload) => {
       }
     }
   );
-};
+}

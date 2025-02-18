@@ -2,14 +2,7 @@
 
 const { kaho } = require('eslint-config-kaho');
 
-module.exports = kaho().then(config => [
-  ...config,
-  {
-    files: ['app/**/*.tsx'],
-    rules: {
-      'react-refresh/only-export-components': 'off'
-    }
-  },
+const userConfig = [
   {
     rules: {
       '@eslint-react/naming-convention/filename-extension': 'off',
@@ -18,4 +11,6 @@ module.exports = kaho().then(config => [
       'arrow-body-style': 'off'
     }
   }
-]);
+];
+
+module.exports = kaho({}, ...userConfig);

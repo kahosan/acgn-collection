@@ -16,7 +16,7 @@ import { toast } from 'sonner';
 import { match } from 'ts-pattern';
 import { useCallback, useMemo, useState } from 'react';
 
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { useIsMobile } from '~/hooks/use-mobile';
 
 import { useEpisodes } from '~/lib/bangumi/episodes/episodes';

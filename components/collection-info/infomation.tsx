@@ -1,6 +1,6 @@
 import { Divider, Link } from '@nextui-org/react';
 
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { match } from 'ts-pattern';
 
 import type { Subject } from '~/types/bangumi/subject';
@@ -15,11 +15,13 @@ interface Props {
   className?: string
 }
 
-const suffix = (key: string) => match(key)
-  .with('wish', () => 'wishes')
-  .with('collect', () => 'collections')
-  .with('doing', () => 'doings')
-  .otherwise(key => key);
+function suffix(key: string) {
+  return match(key)
+    .with('wish', () => 'wishes')
+    .with('collect', () => 'collections')
+    .with('doing', () => 'doings')
+    .otherwise(key => key);
+}
 
 export default function Infomation({ infos, collection, subjectId, className }: Props) {
   return (

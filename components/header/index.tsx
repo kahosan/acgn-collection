@@ -20,7 +20,7 @@ import NextLink from 'next/link';
 import HearderSearch from './search';
 import ToggleTheme from './toggle-theme';
 
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
@@ -74,6 +74,7 @@ export default function Header() {
           <DropdownTrigger>
             <Avatar
               isBordered
+              type="button"
               as="button"
               className="transition-transform min-w-max"
               color="danger"
