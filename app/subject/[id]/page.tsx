@@ -1,5 +1,7 @@
 'use client';
 
+import { use } from 'react';
+
 import Image from 'next/image';
 import { Divider, Link } from '@heroui/react';
 
@@ -14,10 +16,11 @@ import { convertSpecialChar } from '~/utils';
 import { SubjectType } from '~/types/bangumi/subject';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-export default function Subject({ params }: Props) {
+export default function Subject(props: Props) {
+  const params = use(props.params);
   const { data, isLoading } = useSubject(params.id);
 
   if (!data || isLoading) return <Loading />;

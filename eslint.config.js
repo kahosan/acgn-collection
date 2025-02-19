@@ -4,6 +4,12 @@ const { kaho } = require('eslint-config-kaho');
 
 const userConfig = [
   {
+    files: ['**/*.tsx'],
+    rules: {
+      '@eslint-react/prefer-destructuring-assignment': 'off'
+    }
+  },
+  {
     rules: {
       '@eslint-react/naming-convention/filename-extension': 'off',
       'n/prefer-global/process': 'off',
