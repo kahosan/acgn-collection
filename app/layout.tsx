@@ -46,7 +46,7 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://cdn.baiwulin.com/font/harmonyos-fonts/css/harmonyos_sans_sc.css" />
       </head>
-      <body className="font-['HarmonyOS_Sans_SC']">
+      <body>
         <Providers>
           <Header />
           <Suspense>

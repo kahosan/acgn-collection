@@ -1,5 +1,7 @@
 import NextLink from 'next/link';
 import NextImage from 'next/image';
+// eslint-disable-next-line import-x/no-unresolved -- i don't know
+import { GeistSans } from 'geist/font/sans';
 import { Card, CardBody, Chip, Link, Tooltip } from '@heroui/react';
 
 import { clsx } from 'clsx';
@@ -64,15 +66,14 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                 <Chip
                   size="sm"
                   className={clsx(
-                    'rounded-none rounded-tl-md rounded-br-sm text-white',
-                    'shadow-xs shadow-black',
+                    'absolute left-[-3px] top-[-3px] py-0.5 px-2.5 rounded-xs rounded-tl-md rounded-br-md text-sm font-medium',
                     match(subject.type)
-                      .with(SubjectType.书籍, () => 'bg-orange-500')
-                      .with(SubjectType.动画, () => 'bg-blue-500')
-                      .with(SubjectType.音乐, () => 'bg-red-500')
-                      .with(SubjectType.游戏, () => 'bg-indigo-500')
-                      .with(SubjectType.三次元, () => 'bg-gray-500')
-                      .otherwise(() => 'bg-gray-500')
+                      .with(SubjectType.书籍, () => 'bg-orange-400 text-orange-100 drop-shadow-[2px_3px_3px_#de7500]')
+                      .with(SubjectType.动画, () => 'bg-blue-400 text-blue-100 drop-shadow-[2px_3px_3px_#3c82d2]')
+                      .with(SubjectType.音乐, () => 'bg-red-400 text-red-100 drop-shadow-[2px_3px_3px_#c71c1c]')
+                      .with(SubjectType.游戏, () => 'bg-indigo-400 text-indigo-100 drop-shadow-[2px_3px_3px_#5057ac]')
+                      .with(SubjectType.三次元, () => 'bg-stone-400 text-stone-100 drop-shadow-[2px_3px_3px_#9a938e]')
+                      .otherwise(() => 'bg-gray-400 text-gray-100 drop-shadow-[2px_3px_3px_gray]')
                   )}
                   startContent={
                     <div
@@ -99,14 +100,16 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                 {subject.name_cn || subject.name}
               </Link>
             </Tooltip>
-            <div className="mt-2 text-sm opacity-90 font-medium">
+            <div className={`mt-1 text-sm opacity-90 font-medium text-zinc-400 ${GeistSans.className}`} lang="en">
               {(subject.type === SubjectType.书籍 || subject.type === SubjectType.游戏) ? '发售' : '放送'}
               {' '}
               {subject.date || subject.air_date || '暂无'}
             </div>
-            <div className="mt-2 text-sm opacity-90 font-medium">
-              评分 {subject.score?.toFixed(1) ?? '暂无'}
-            </div>
+            {subject.score ? (
+              <div className={`mt-2 text-sm opacity-90 font-medium text-amber-400 dark:text-amber-300 ${GeistSans.className}`} lang="en">
+                评分 <span className="text-2xl font-bold">{subject.score.toFixed(1)}</span>
+              </div>
+            ) : null}
           </div>
           <div className="opacity-70 text-sm line-clamp-4">
             {(subject.short_summary ?? subject.summary ?? '').trim()}
