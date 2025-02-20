@@ -77,15 +77,15 @@ export default function Header() {
       <NavbarContent justify="end">
         <HearderSearch />
         <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Badge
-              color="danger"
-              content={notifyCount}
-              isInvisible={notifyCount === 0}
-              classNames={{
-                badge: 'text-xs'
-              }}
-            >
+          <Badge
+            color="danger"
+            content={notifyCount}
+            isInvisible={notifyCount === 0}
+            classNames={{
+              badge: 'text-xs'
+            }}
+          >
+            <DropdownTrigger>
               <Avatar
                 isBordered
                 type="button"
@@ -96,8 +96,8 @@ export default function Header() {
                 src={user?.avatar.small ?? 'https://placehold.co/32x32'}
                 size="sm"
               />
-            </Badge>
-          </DropdownTrigger>
+            </DropdownTrigger>
+          </Badge>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownSection showDivider>
               <DropdownItem
