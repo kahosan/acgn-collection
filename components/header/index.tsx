@@ -40,7 +40,8 @@ export default function Header() {
   const user = useUser();
   const { data } = useNotify();
 
-  const notifyCount = data?.data.length ?? 0;
+  let notifyCount: number | string = data?.data.length ?? 0;
+  notifyCount = (notifyCount > 99 ? '99+' : notifyCount);
 
   const pn = usePathname();
 
@@ -106,6 +107,24 @@ export default function Header() {
                 href={`https://bgm.tv/user/${user?.username ?? ''}`}
               >
                 Bangumi 主页
+              </DropdownItem>
+              <DropdownItem
+                as="a"
+                key="bangumi-notify"
+                href="https://bgm.tv/notify/all"
+              >
+                <Badge
+                  color="danger"
+                  content="new"
+                  size="sm"
+                  isInvisible={notifyCount === 0}
+                  shape="circle"
+                  classNames={{
+                    badge: 'right-[-20px]'
+                  }}
+                >
+                  电波提醒
+                </Badge>
               </DropdownItem>
               <DropdownItem
                 isReadOnly
