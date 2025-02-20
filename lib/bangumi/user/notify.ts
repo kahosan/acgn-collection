@@ -9,7 +9,7 @@ export function useNotify() {
   const token = useToken();
 
   return useSWRImmutable<Notify>(
-    token ? ['https://next.bgm.tv/p1/notify?limit=20&unread=true', token] : null,
+    token ? ['https://acgn-collection-workers.kahosan.workers.dev/next/p1/notify?limit=20&unread=true', token] : null,
     fetcher,
     {
       onError(error) {

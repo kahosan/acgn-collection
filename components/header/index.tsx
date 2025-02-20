@@ -40,7 +40,7 @@ export default function Header() {
   const user = useUser();
   const { data } = useNotify();
 
-  const notifyCount = data?.data.length;
+  const notifyCount = data?.data.length ?? 0;
 
   const pn = usePathname();
 
@@ -81,7 +81,7 @@ export default function Header() {
             <Badge
               color="danger"
               content={notifyCount}
-              isInvisible={notifyCount !== 0}
+              isInvisible={notifyCount === 0}
               classNames={{
                 badge: 'text-xs'
               }}
