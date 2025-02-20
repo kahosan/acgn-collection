@@ -2,6 +2,7 @@
 
 import {
   Avatar,
+  Badge,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -26,6 +27,7 @@ import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
 import { useUser } from '~/hooks/use-user';
+import { useNotify } from '~/lib/bangumi/user/notify';
 
 const navItems = {
   '/': '收藏',
@@ -36,6 +38,9 @@ const navItems = {
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const user = useUser();
+  const { data } = useNotify();
+
+  const notifyCount = data?.data.length;
 
   const pn = usePathname();
 
@@ -73,16 +78,25 @@ export default function Header() {
         <HearderSearch />
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
-            <Avatar
-              isBordered
-              type="button"
-              as="button"
-              className="transition-transform min-w-max"
+            <Badge
               color="danger"
-              name={user?.username}
-              src={user?.avatar.small ?? 'https://placehold.co/32x32'}
-              size="sm"
-            />
+              content={notifyCount}
+              isInvisible={notifyCount !== 0}
+              classNames={{
+                badge: 'text-xs'
+              }}
+            >
+              <Avatar
+                isBordered
+                type="button"
+                as="button"
+                className="transition-transform min-w-max"
+                color="danger"
+                name={user?.username}
+                src={user?.avatar.small ?? 'https://placehold.co/32x32'}
+                size="sm"
+              />
+            </Badge>
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownSection showDivider>
