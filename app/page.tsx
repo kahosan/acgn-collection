@@ -18,7 +18,7 @@ import { SubjectType } from '~/types/bangumi/subject';
 
 export default function Collection() {
   const searchParams = useSearchParams();
-  const subjectType = searchParams.get('subject-type') ?? SubjectType.动画;
+  const subjectType = searchParams.get('subject-type') ?? '2';
   const collectionType = searchParams.get('collection-type') ?? '0'; // 0 是为了让选择为空
 
   const _offset = searchParams.get('offset') ?? '0';
