@@ -105,6 +105,7 @@ export default function Header() {
                 as="a"
                 key="bangumi-home"
                 href={`https://bgm.tv/user/${user?.username ?? ''}`}
+                textValue="Bangumi 主页"
               >
                 Bangumi 主页
               </DropdownItem>
@@ -112,6 +113,7 @@ export default function Header() {
                 as="a"
                 key="bangumi-notify"
                 href="https://bgm.tv/notify/all"
+                textValue="Bangumi 通知"
               >
                 <Badge
                   color="danger"
