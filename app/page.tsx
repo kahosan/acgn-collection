@@ -17,10 +17,11 @@ import { transformCollectionTypeToJSX, transformSubjectTypeToJSX } from '~/utils
 import { SubjectType } from '~/types/bangumi/subject';
 
 export default function Collection() {
-  const subjectType = useSearchParams().get('subject-type') ?? '2';
-  const collectionType = useSearchParams().get('collection-type') ?? '0'; // 0 是为了让选择为空
+  const searchParams = useSearchParams();
+  const subjectType = searchParams.get('subject-type') ?? SubjectType.动画;
+  const collectionType = searchParams.get('collection-type') ?? '0'; // 0 是为了让选择为空
 
-  const _offset = useSearchParams().get('offset') ?? '0';
+  const _offset = searchParams.get('offset') ?? '0';
   const offset = Number.parseInt(_offset, 10);
 
   const router = useRouter();
