@@ -9,14 +9,13 @@ import CollectionCard from '~/components/collection-card';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { useLegacySearch, useSearch } from '~/lib/bangumi/subjects';
+import { useSearch } from '~/lib/bangumi/subjects';
 
 import type { SearchPayload } from '~/types/bangumi/subject';
 
 export default function Search() {
   const searchParams = useSearchParams();
 
-  const api = searchParams.get('api') ?? 'new';
   const type = searchParams.get('type') ?? '7';
   const keyword = searchParams.get('keyword') ?? '';
 
@@ -29,22 +28,19 @@ export default function Search() {
     keyword: decodeURIComponent(keyword),
     filter: {
       // 7 is all, type is SubjectType
-      type: +type === 7 ? [1, 2, 3, 4, 6] : [+type]
+      type: +type === 7 ? [] : [+type]
     }
   };
 
   const { data, isLoading } = useSearch(payload, offset, 20);
-  const { data: legacyData, isLoading: legacyIsLoading } = useLegacySearch(payload, offset, 20);
-
-  const result = (api === 'new' ? data?.data : legacyData?.list);
 
   return (
     <div>
-      <SearchBar key={keyword} payload={{ keyword, type, api }} />
+      <SearchBar key={keyword} payload={{ keyword, type }} />
       {
         data?.data.length === 0
           ? <div className="text-center text-gray-500 mt-[20rem]">没有更多了</div>
-          : (isLoading || !data || legacyIsLoading || !legacyData
+          : (isLoading || !data
             ? <Loading />
             : (
               <motion.div
@@ -56,18 +52,28 @@ export default function Search() {
                 <div
                   className="grid-card"
                 >
-                  {result?.map(subject => (
-                    <CollectionCard subject={subject} key={subject.id} mobileMask showType />
+                  {data.data.map(subject => (
+                    <CollectionCard
+                      subject={{
+                        ...subject,
+                        name_cn: subject.nameCN,
+                        score: subject.rating.score,
+                        summary: subject.info
+                      }}
+                      key={subject.id}
+                      mobileMask
+                      showType
+                    />
                   ))}
                 </div>
-                {result?.length ? (
+                {data.data.length ? (
                   <Pagination
                     offset={offset}
                     limit={20}
                     setOffset={offset => {
                       router.push(`/?keyword=${payload.keyword}&type=${type}&offset=${offset}`);
                     }}
-                    total={api === 'new' ? data.total : legacyData.results}
+                    total={data.total}
                   />
                 ) : null}
               </motion.div>

@@ -6,17 +6,26 @@ export enum SubjectType {
   三次元 = 6
 }
 
+export enum SearchSort {
+  匹配程度 = 'match',
+  收藏人数 = 'heat',
+  排名由高到低 = 'rank',
+  评分 = 'score'
+}
+
 // request
+// 多值之间为「且」关系
 export interface SearchPayload {
   keyword: string
-  sort?: 'match' | 'heat' | 'rank' | 'score'
+  sort?: SearchSort
   filter?: {
-    type?: SubjectType[]
-    tag?: string[] // example: List [ "童年", "原创" ]
-    air_date?: string[] // example: List [ ">=2020-07-01", "<2020-10-01" ]
-    rating?: string[] // example: List [ ">=6", "<8" ]
-    rank?: string[] // example: List [ ">10", "<=18" ]
+    date?: string[] // example: List [ ">=2020-07-01", "<2020-10-01" ]
+    metaTags?: string[] // example: List [ "动画化" ]
     nsfw?: boolean // 默认或者 null 会返回包含 R18 的所有搜索结果。true 只会返回 R18 条目。false 只会返回非 R18 条目。
+    rank?: string[] // example: List [ ">10", "<=18" ]
+    rating?: string[] // example: List [ ">=6", "<8" ]
+    tags?: string[] // example: List [ "童年", "原创" ]
+    type?: SubjectType[]
   }
 }
 
@@ -122,42 +131,34 @@ export type SlimSubject = Pick<Subject, 'id' | 'type' | 'name' | 'name_cn' | 'da
 
 export interface SearchSubject {
   data: Array<{
-    date: string
-    image: string
-    type: number
-    summary: string
-    name: string
-    name_cn: string
-    tags: Array<{
-      name: string
-      count: number
-    }>
-    score: number
     id: number
-    rank: number
-  }>
-  total: number
-  limit: number
-  offset: number
-}
-
-export interface LegacySearchSubject {
-  results: number
-  list?: Array<{
-    id: number
-    url: string
-    type: number
-    name: string
-    name_cn: string
-    summary: string
-    air_date: string
-    air_weekday: number
     images: {
-      large: string
       common: string
+      grid: string
+      large: string
       medium: string
       small: string
-      grid: string
     }
+    info: string
+    interest: {
+      comment: string
+      rate: number
+      tags: string[]
+      type: number
+      updatedAt: number
+    }
+    locked: boolean
+    name: string
+    nameCN: string
+    nsfw: boolean
+    rating: {
+      count: number[]
+      rank: number
+      score: number
+      total: number
+      type: SubjectType
+    }
+    type: SubjectType
   }>
+  total: number
 }
