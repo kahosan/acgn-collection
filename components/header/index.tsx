@@ -27,7 +27,7 @@ import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 
 import { useUser } from '~/hooks/use-user';
-import { useNotify } from '~/lib/bangumi/user/notify';
+import { useNotify } from '~/lib/bangumi/user';
 
 const navItems = {
   '/': '收藏',
