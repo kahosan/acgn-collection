@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "^1.9.0",
-    "@heroui/react": "https://pkg.pr.new/@heroui/react@4656",
+    "@heroui/react": "v2.7.6-beta.2",
     "@iconify-json/mdi": "^1.2.3",
     "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",

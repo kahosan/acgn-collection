@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description: '使用 Bangumi API 的 ACGN 收藏夹',
     siteName: 'ACGN Collection'
   },
-  icons: 'https://unpkg.com/xfb/favicon/favicon.ico'
+  icons: '/favicon.ico'
 };
 
 export default function RootLayout({

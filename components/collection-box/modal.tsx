@@ -108,6 +108,7 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
           <Textarea
             label="标签"
             placeholder="请输入标签，以空格分隔"
+            maxRows={1}
             labelPlacement="outside"
             radius="sm"
             value={tags?.join(' ')}
