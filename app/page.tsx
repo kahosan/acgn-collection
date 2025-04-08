@@ -96,11 +96,13 @@ export default function Collection() {
                 <div className="grid-card">
                   {
                     data.data.map(collection => (
-                      <motion.div
-                        key={collection.subject_id}
-                        layout
-                      >
-                        <CollectionCard subject={collection.subject} mobileMask />
+                      <motion.div key={collection.subject_id} layout>
+                        <CollectionCard
+                          subject={collection.subject}
+                          collectionType={collection.type}
+                          mobileMask
+                          showState
+                        />
                       </motion.div>
                     ))
                   }

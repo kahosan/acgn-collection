@@ -3,18 +3,19 @@ import { match } from 'ts-pattern';
 
 import { getCollectionTypeBySubjectType } from '~/utils';
 
-import type { UserCollection } from '~/types/bangumi/collection';
-
 interface Props {
-  userCollection: UserCollection | undefined
+  collectionType?: number
+  subjectType?: number
+  className?: string
 }
 
-export default function CollectionTypeLabel({ userCollection }: Props) {
+export default function CollectionState({ className, collectionType, subjectType }: Props) {
   return (
     <div
       className={clsx(
-        'absolute left-[12px] top-3 py-0.5 px-2.5 rounded-xs rounded-tl-md rounded-br-md text-sm font-medium',
-        match(userCollection?.type)
+        'rounded-xs rounded-tl-md rounded-br-md text-sm font-medium',
+        className,
+        match(collectionType)
           .with(1, () => 'bg-red-400 text-red-100 drop-shadow-[2px_3px_3px_#c71c1c]')
           .with(2, () => 'bg-blue-400 text-blue-100 drop-shadow-[2px_3px_3px_#3c82d2]')
           .with(3, () => 'bg-indigo-400 text-indigo-100 drop-shadow-[2px_3px_3px_#5057ac]')
@@ -24,8 +25,8 @@ export default function CollectionTypeLabel({ userCollection }: Props) {
       )}
     >
       {
-        userCollection
-          ? getCollectionTypeBySubjectType(userCollection.subject_type)[userCollection.type]
+        subjectType && collectionType
+          ? getCollectionTypeBySubjectType(subjectType)[collectionType]
           : '未收藏'
       }
     </div>

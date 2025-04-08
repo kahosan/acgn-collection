@@ -6,8 +6,8 @@ import RealBox from './real';
 import MusicBox from './music';
 import AnimeBox from './anime';
 import UnCollection from './un-collection';
-import CollectionTypeLabel from './collection-type-label';
 import CollectionBoxSkeleton from './skeleton';
+import CollectionState from '../collection-state';
 
 import { match } from 'ts-pattern';
 
@@ -38,7 +38,7 @@ export default function CollectionBox({ subject }: Props) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <CollectionTypeLabel userCollection={data} />
+      <CollectionState className="absolute left-[12px] top-3 py-0.5 px-2.5" collectionType={data?.type} subjectType={data?.subject_type} />
       {
         data
           ? (

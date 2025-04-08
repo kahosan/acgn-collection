@@ -2,6 +2,7 @@ import NextLink from 'next/link';
 import NextImage from 'next/image';
 // eslint-disable-next-line import-x/no-unresolved -- i don't know
 import { GeistSans } from 'geist/font/sans';
+import CollectionState from '../collection-state';
 import { Card, CardBody, Chip, Link, Tooltip } from '@heroui/react';
 
 import { clsx } from 'clsx';
@@ -24,12 +25,14 @@ interface Props {
     summary?: string
     type: SubjectType
   }
+  collectionType?: number
   showMask?: boolean
   mobileMask?: boolean
   showType?: boolean
+  showState?: boolean
 }
 
-export default function CollectionCard({ subject, showMask, mobileMask, showType }: Props) {
+export default function CollectionCard({ subject, collectionType, showMask, mobileMask, showType, showState }: Props) {
   return (
     <Card
       shadow="none"
@@ -90,6 +93,11 @@ export default function CollectionCard({ subject, showMask, mobileMask, showType
                   <div className="text-xs">{SubjectType[subject.type]}</div>
                 </Chip>
               )
+              : null
+          }
+          {
+            showState
+              ? <CollectionState className="absolute left-[-4px] top-[-4px] py-0.5 px-2.5" collectionType={collectionType} subjectType={subject.type} />
               : null
           }
         </div>
