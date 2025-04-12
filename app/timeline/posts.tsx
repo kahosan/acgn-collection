@@ -57,7 +57,7 @@ export default function TimelinePosts({ data, user, scope, page, type, isLoading
                       _username = username;
 
                     return (
-                      <div key={item.user.name} className="flex mb-2">
+                      <div key={item.user.name + item.time} className="flex mb-2">
                         {
                           showAvatar || index === 0
                             ? <Avatar radius="sm" className="min-w-max" src={scope === 'me' ? user.avatar.small : item.user.avatar} />
