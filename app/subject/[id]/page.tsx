@@ -7,7 +7,7 @@ import { Divider, Link } from '@heroui/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
-import { Summary, Tags, Infomation, Relations, Characters, TrackList, Reviews, Boards, Comments } from '~/components/collection-info';
+import { Summary, Tags, Information, Relations, Characters, TrackList, Reviews, Boards, Comments } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
@@ -59,7 +59,7 @@ export default function Subject(props: Props) {
         </div>
         <div className="mt-5 sm:flex gap-4">
           <div className="bg-card w-full sm:max-w-[19rem] sm:min-w-[19rem] mb-4 sm:mb-0 self-start">
-            <Infomation infos={data.infobox} collection={data.collection} subjectId={data.id} />
+            <Information infos={data.infobox} collection={data.collection} subjectId={data.id} />
           </div>
           <div className="w-full flex flex-col gap-4">
             <div className="bg-card">

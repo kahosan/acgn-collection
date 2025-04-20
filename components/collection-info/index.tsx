@@ -1,4 +1,4 @@
-export { default as Infomation } from './infomation';
+export { default as Information } from './information';
 
 export { default as Summary } from './summary';
 

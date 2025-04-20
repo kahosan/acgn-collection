@@ -23,7 +23,7 @@ function suffix(key: string) {
     .otherwise(key => key);
 }
 
-export default function Infomation({ infos, collection, subjectId, className }: Props) {
+export default function Information({ infos, collection, subjectId, className }: Props) {
   return (
     <>
       {
