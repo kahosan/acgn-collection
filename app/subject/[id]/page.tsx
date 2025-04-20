@@ -57,23 +57,23 @@ export default function Subject(props: Props) {
             <CollectionBox subject={data} />
           </div>
         </div>
-        <div className="mt-5 sm:flex gap-4">
-          <div className="bg-card w-full sm:max-w-[19rem] sm:min-w-[19rem] mb-4 sm:mb-0 self-start">
+        <div className="mt-5 grid sm:grid-cols-[19rem_auto] grid-rows-1 gap-4">
+          <div className="bg-card w-full mb-4 sm:mb-0 h-min">
             <Information infos={data.infobox} collection={data.collection} subjectId={data.id} />
           </div>
-          <div className="w-full flex flex-col gap-4">
+          <div className="w-full grid gap-4">
             <div className="bg-card">
               <div className="mb-2 dark:text-blue-200 text-blue-400">剧情简介</div>
               <Summary summary={data.summary} />
             </div>
-            <div className="bg-card">
+            <div className="bg-card overflow-hidden">
               <div className="mb-2 dark:text-blue-200 text-blue-400">大家将「{data.name}」标注为</div>
               <Tags tags={data.tags} />
             </div>
             {
               data.type === SubjectType.音乐
                 ? (
-                  <div className="bg-card">
+                  <div className="bg-card overflow-hidden">
                     <div className="mb-2 dark:text-blue-200 text-blue-400">曲目列表</div>
                     <TrackList subjectId={data.id} />
                   </div>

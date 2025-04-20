@@ -19,7 +19,10 @@ export default function Tags({ tags }: Props) {
         tags.slice(0, count).map(tag => (
           <Chip
             key={tag.name}
-            className="text-xs"
+            className="text-xs w-full min-w-[unset]"
+            classNames={{
+              content: 'truncate max-w-full'
+            }}
             color={
               match(tag.count)
                 .returnType<'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'>()

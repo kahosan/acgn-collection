@@ -1,6 +1,5 @@
-import { Chip, Link } from '@heroui/react';
-
-import { useMemo } from 'react';
+import { Link } from '@heroui/react';
+import { Fragment, useMemo } from 'react';
 
 import { useEpisodes } from '~/lib/bangumi/episodes';
 
@@ -25,33 +24,28 @@ export default function TrackList({ subjectId }: Props) {
 
   if (!tracksObj || isLoading) return null;
 
-  return (
-    <div>
-      {
-        Object.entries(tracksObj).map(([disc, tracks]) => (
-          <div key={disc} className="mb-6">
-            <div className="opacity-70 min-h-[15px] text-sm mb-2 p-2 w-full rounded-md bg-slate-200 dark:bg-zinc-700">Disc：{disc}</div>
-            <div className="flex flex-wrap items-center gap-3">
-              {
-                tracks
-                  .sort((a, b) => a.name.length - b.name.length)
-                  .map(track => (
-                    <Chip
-                      key={track.id}
-                      variant="flat"
-                      radius="sm"
-                      size="sm"
-                      startContent={<div className="i-mdi-music" />}
-                      className="p-2 min-w-min"
-                    >
-                      <Link className="text-sm" color="foreground" href={`https://bgm.tv/ep/${track.id}`} isExternal>{track.name}</Link>
-                    </Chip>
-                  ))
-              }
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  );
+  return Object.entries(tracksObj).map(([disc, tracks]) => (
+    <Fragment key={disc}>
+      <div className="mb-4 opacity-70 min-h-[15px] text-sm p-2 w-full rounded-md bg-slate-200 dark:bg-zinc-700">Disc：{disc}</div>
+      <div className="grid sm:grid-cols-2">
+        {
+          tracks
+            .map(track => (
+              <div key={track.id} className="mb-4 text-sm flex gap-2 items-center">
+                <div className="i-mdi-music min-w-4 max-w-4" />
+                <Link
+                  className="text-sm line-clamp-1 pr-2"
+                  color="foreground"
+                  underline="hover"
+                  href={`https://bgm.tv/ep/${track.id}`}
+                  isExternal
+                >
+                  {track.name}
+                </Link>
+              </div>
+            ))
+        }
+      </div>
+    </Fragment>
+  ));
 }
