@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import { RelationsSkeleton } from './skeleton';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { useRelations } from '~/lib/bangumi/subjects';
 
@@ -21,21 +21,11 @@ export default function Relations({ subjectId }: Props) {
 
   const [showAll, setShowAll] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const relationsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new ResizeObserver(entries => {
-      for (const entry of entries) {
-        const scrollHeight = entry.target.scrollHeight;
-        setShowButton(scrollHeight > 432);
-      }
-    });
+  if (data && data.length > 20 && !showButton)
+    setShowButton(true);
 
-    if (relationsRef.current)
-      observer.observe(relationsRef.current);
-
-    return () => observer.disconnect();
-  }, []);
+  const initH = showButton ? '18rem' : 'auto';
 
   const relations = useMemo(() => {
     if (!data) return;
@@ -54,10 +44,10 @@ export default function Relations({ subjectId }: Props) {
   return (
     <>
       <motion.div
-        initial={{ maxHeight: '27rem' }}
-        animate={{ maxHeight: showAll ? '1000rem' : '27rem' }}
+        initial={{ height: initH }}
+        animate={{ height: showAll ? 'auto' : initH }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="grid grid-cols-[repeat(auto-fill,minmax(5rem,auto))] gap-4 overflow-hidden"
-        ref={relationsRef}
       >
         {
           relations.map(([relation, items]) => {
@@ -69,7 +59,7 @@ export default function Relations({ subjectId }: Props) {
                   href={`/subject/${item.id}`}
                 >
                   <div className="opacity-70 text-xs min-h-[15px]">{index === 0 ? relation : ''}</div>
-                  <div className="relative p-2 rounded-md min-h-[5rem] w-full">
+                  <div className="relative p-2 rounded-md min-h-[5rem] w-full max-w-24">
                     <Image
                       src={item.images.small || 'https://placehold.co/64x64@3x.webp?text=No%20Image'}
                       alt={item.name}
@@ -91,7 +81,10 @@ export default function Relations({ subjectId }: Props) {
         {
           showButton
             ? (
-              <span className="cursor-pointer text-sm dark:text-blue-200 text-blue-400" onClick={() => setShowAll(p => !p)}>
+              <span
+                className="cursor-pointer text-sm dark:text-blue-200 text-blue-400"
+                onClick={() => setShowAll(p => !p)}
+              >
                 {
                   showAll ? '显示部分' : '显示全部'
                 }
