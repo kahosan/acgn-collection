@@ -1,35 +1,24 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 export default function Summary({ summary }: { summary: string }) {
   const [showAll, setShowAll] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const summaryRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new ResizeObserver(entries => {
-      for (const entry of entries) {
-        const scrollHeight = entry.target.scrollHeight;
-        setShowButton(scrollHeight > 80);
-      }
-    });
+  if (summary.length > 210 && !showButton)
+    setShowButton(true);
 
-    if (summaryRef.current)
-      observer.observe(summaryRef.current);
-
-    return () => observer.disconnect();
-  }, []);
+  const initH = showButton ? '5.5em' : 'auto';
 
   return (
     <>
       <motion.div
-        initial={{ maxHeight: '5rem' }}
-        animate={{ maxHeight: showAll ? '80rem' : '5rem' }}
         className="text-sm overflow-hidden"
-        ref={summaryRef}
+        initial={{ height: initH }}
+        animate={{ height: showAll ? 'auto' : initH }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
         {summary || '暂无'}
       </motion.div>
@@ -37,10 +26,11 @@ export default function Summary({ summary }: { summary: string }) {
         {
           showButton
             ? (
-              <span className="cursor-pointer text-sm dark:text-blue-200 text-blue-400" onClick={() => setShowAll(p => !p)}>
-                {
-                  showAll ? '显示部分' : '显示全部'
-                }
+              <span
+                className="cursor-pointer text-sm dark:text-blue-200 text-blue-400"
+                onClick={() => setShowAll(p => !p)}
+              >
+                {showAll ? '显示部分' : '显示全部'}
               </span>
             )
             : null

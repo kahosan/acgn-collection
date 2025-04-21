@@ -61,7 +61,7 @@ export default function Subject(props: Props) {
           <div className="bg-card w-full mb-4 sm:mb-0 h-min">
             <Information infos={data.infobox} collection={data.collection} subjectId={data.id} />
           </div>
-          <div className="w-full grid gap-4">
+          <div className="w-full grid self-start gap-4">
             <div className="bg-card">
               <div className="mb-2 dark:text-blue-200 text-blue-400">剧情简介</div>
               <Summary summary={data.summary} />
