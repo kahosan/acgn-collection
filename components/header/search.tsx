@@ -7,7 +7,19 @@ import { transformSubjectTypeToJSX } from '~/utils';
 
 import { SubjectType } from '~/types/bangumi/subject';
 
-export default function HearderSearch() {
+function onK(inputR: HTMLInputElement) {
+  const kd = (e: KeyboardEvent) => {
+    if (e.key === '/') {
+      e.preventDefault();
+      inputR.focus();
+    }
+  };
+
+  document.addEventListener('keydown', kd);
+  return () => document.removeEventListener('keydown', kd);
+}
+
+export default function HeaderSearch() {
   const [keyword, setKeyword] = useState('');
   const [type, setType] = useState('7' /** all */);
 
@@ -49,6 +61,7 @@ export default function HearderSearch() {
       </Select>
       <Divider orientation="vertical" />
       <Input
+        ref={onK}
         onValueChange={v => setKeyword(v)}
         value={keyword}
         classNames={{

@@ -18,7 +18,7 @@ import {
 } from '@heroui/react';
 import NextLink from 'next/link';
 
-import HearderSearch from './search';
+import HeaderSearch from './search';
 import ToggleTheme from './toggle-theme';
 
 import { clsx } from 'clsx';
@@ -76,7 +76,7 @@ export default function Header() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <HearderSearch />
+        <HeaderSearch />
         <Dropdown placement="bottom-end">
           <Badge
             color="danger"
