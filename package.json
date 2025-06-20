@@ -43,7 +43,7 @@
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "eslint": "^9.25.0",
-    "eslint-config-kaho": "3.5.2",
+    "eslint-config-kaho": "3.7.0",
     "foxact": "^0.2.45",
     "postcss": "^8.5.3",
     "simple-git-hooks": "^2.12.1",
@@ -58,7 +58,8 @@
     "onlyBuiltDependencies": [
       "@heroui/shared-utils",
       "sharp",
-      "simple-git-hooks"
+      "simple-git-hooks",
+      "unrs-resolver"
     ],
     "overrides": {
       "@types/react": "19.0.10",
