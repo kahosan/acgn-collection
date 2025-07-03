@@ -44,7 +44,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
                 {' '}
                 {review.time}
               </div>
-              <p className="break-all text-sm">{review.content}</p>
+              <p className="text-sm">{review.content}</p>
             </div>
           ))
         }
