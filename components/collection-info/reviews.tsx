@@ -32,7 +32,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
               />
               <Link
                 href={`https://bgm.tv/blog/${review.id}`}
-                className="font-medium text-lg dark:text-blue-300 text-blue-400 block"
+                className="font-medium text-lg dark:text-blue-300 text-blue-400 block truncate"
                 isExternal
               >
                 {review.title}
@@ -44,7 +44,7 @@ export default function Reviews({ subjectId }: { subjectId: number }) {
                 {' '}
                 {review.time}
               </div>
-              <p className="text-sm">{review.content}</p>
+              <p className="text-sm break-all">{review.content}</p>
             </div>
           ))
         }
