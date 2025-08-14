@@ -94,7 +94,7 @@ export default function ModifyModal({ isOpen, onOpenChange, onClose, userCollect
                 <Tooltip key={_rating} content={ratingTexts[_rating - 1] /** 这里使用数组下标，从 0 开始 */}>
                   <Button
                     className={clsx('w-auto', rate === _rating && 'bg-primary text-white')}
-                    value={rate}
+                    value={rate?.toString()}
                     onPress={() => updateCollectionData('rate', _rating)}
                   >
                     {_rating}
