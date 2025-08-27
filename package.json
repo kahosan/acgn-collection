@@ -38,14 +38,14 @@
   "devDependencies": {
     "@eslint-sukka/node": "^6.18.2",
     "@eslint-sukka/react": "^6.18.2",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^22.14.1",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "eslint": "^9.25.0",
     "eslint-config-kaho": "3.7.0",
     "foxact": "^0.2.45",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.6",
     "simple-git-hooks": "^2.12.1",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.8.3"
@@ -57,6 +57,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@heroui/shared-utils",
+      "@tailwindcss/oxide",
       "sharp",
       "simple-git-hooks",
       "unrs-resolver"
