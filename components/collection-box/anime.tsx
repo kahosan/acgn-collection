@@ -145,6 +145,7 @@ export function Episodes({ payload, watchedEpisode, collectionType, userCollecti
                 <Tooltip
                   key={episode.id}
                   isOpen={isMobile ? openState.isOpen && openState.ep === episode.ep : undefined}
+                  onOpenChange={isOpen => (isMobile ? setOpenState(() => ({ isOpen, ep: episode.ep })) : undefined)}
                   closeDelay={0}
                   content={
                     <div className="min-w-[12rem] max-w-[20rem] p-2">
