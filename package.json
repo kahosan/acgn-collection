@@ -54,15 +54,6 @@
   "engines": {
     "node": ">=20.16.2"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@heroui/shared-utils",
-      "@tailwindcss/oxide",
-      "sharp",
-      "simple-git-hooks",
-      "unrs-resolver"
-    ]
-  },
   "simple-git-hooks": {
     "pre-commit": "npm run lint",
     "pre-push": "npm run lint:fix"
