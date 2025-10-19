@@ -88,7 +88,7 @@ export interface Subject {
   }>
   infobox: Array<{
     key: string
-    value: string | Array<Record<'v', string>>
+    value: string | Array<Record<'v' | 'k', string>>
   }>
   rating: {
     rank: number

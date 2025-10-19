@@ -8,7 +8,7 @@ import type { Subject } from '~/types/bangumi/subject';
 interface Props {
   infos: Array<{
     key: string
-    value: string | Array<Record<'v', string>>
+    value: string | Array<Record<'v' | 'k', string>>
   }>
   subjectId: number
   collection: Subject['collection']
@@ -29,31 +29,30 @@ export default function Information({ infos, collection, subjectId, className }:
       {
         infos.map(info => (
           <div key={info.key} className={clsx('', className)}>
-            <div className="opacity-60 text-sm">{info.key}：</div>
+            <div className="opacity-60 text-sm mb-1">{info.key}：</div>
             <div className="text-sm break-all">
               {
                 Array.isArray(info.value)
                   ? (
-                    info.value.map((item, index) => (
-                      <div key={item.v} className={clsx(index !== 0 && 'opacity-60 my-2')}>{item.v}</div>
+                    info.value.map(item => (
+                      <div key={item.k}>
+                        <IsLink value={item.v}>
+                          <div className="my-1 bg-current/5 inline-block px-2 py-1 rounded">
+                            {item.v}
+                            <sup className="ml-1 opacity-65">{item.k}</sup>
+                          </div>
+                        </IsLink>
+                      </div>
                     ))
                   )
-                  : (
-                    info.value.startsWith('http')
-                      ? (
-                        <Link size="sm" isExternal href={info.value}>
-                          {info.value}
-                        </Link>
-                      )
-                      : info.value
-                  )
+                  : <IsLink value={info.value}>{info.value}</IsLink>
               }
             </div>
             <Divider className="my-2 opacity-20" />
           </div>
         ))
       }
-      <div className="opacity-60 text-sm">观看详情：</div>
+      <div className="opacity-60 text-sm mb-1">观看详情：</div>
       <div className="flex flex-wrap">
         {
           Object.entries(collection).map(([key, value]) => (
@@ -87,4 +86,14 @@ export default function Information({ infos, collection, subjectId, className }:
       </div>
     </>
   );
+}
+
+function IsLink({ value, children }: React.PropsWithChildren<{ value: string }>) {
+  return value.startsWith('http')
+    ? (
+      <Link size="sm" isExternal href={value}>
+        {value}
+      </Link>
+    )
+    : children;
 }
