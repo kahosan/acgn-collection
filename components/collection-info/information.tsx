@@ -33,8 +33,20 @@ export default function Information({ infos, collection, subjectId, className }:
             <div className="text-sm break-all">
               {
                 Array.isArray(info.value)
-                  ? info.value.map(item => item.v)
-                  : info.value
+                  ? (
+                    info.value.map((item, index) => (
+                      <div key={item.v} className={clsx(index !== 0 && 'opacity-60 my-2')}>{item.v}</div>
+                    ))
+                  )
+                  : (
+                    info.value.startsWith('http')
+                      ? (
+                        <Link size="sm" isExternal href={info.value}>
+                          {info.value}
+                        </Link>
+                      )
+                      : info.value
+                  )
               }
             </div>
             <Divider className="my-2 opacity-20" />
