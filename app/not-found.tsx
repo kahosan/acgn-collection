@@ -15,6 +15,7 @@ export default function NotFound() {
     7: '/musume/musume7.png'
   } as const;
 
+  // eslint-disable-next-line react-hooks/purity -- random key generation
   const key = Math.floor(Math.random() * 7) + 1 as keyof typeof musume;
 
   const { data } = useHitokoto();

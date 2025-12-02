@@ -37,14 +37,12 @@
     "ts-pattern": "^5.7.0"
   },
   "devDependencies": {
-    "@eslint-sukka/node": "^6.18.2",
-    "@eslint-sukka/react": "^6.18.2",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/node": "^22.14.1",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
-    "eslint": "^9.25.0",
-    "eslint-config-kaho": "3.7.0",
+    "eslint": "^9.39.1",
+    "eslint-config-kaho": "^4.0.1",
     "foxact": "^0.2.45",
     "postcss": "^8.5.6",
     "simple-git-hooks": "^2.12.1",

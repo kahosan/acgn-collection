@@ -21,7 +21,6 @@ export default function TimelinePosts({ data, user, scope, page, type, isLoading
   const router = useRouter();
 
   if (!data || !user || isLoading) return <Loading />;
-  let _username = '';
 
   return (
     <motion.div
@@ -52,9 +51,7 @@ export default function TimelinePosts({ data, user, scope, page, type, isLoading
                     const username = scope === 'me' ? user.username : item.user.name;
 
                     // 当某个用户有多条时间线时，只显示第一条的头像
-                    const showAvatar = _username !== username;
-                    if (index === 0 || showAvatar)
-                      _username = username;
+                    const showAvatar = index === 0 || (scope !== 'me' && item.user.name !== post.items[index - 1].user.name);
 
                     return (
                       <div key={item.user.name + item.time} className="flex mb-2">

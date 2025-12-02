@@ -1,23 +1,16 @@
-import { startTransition, useState } from 'react';
-import { useLayoutEffect } from 'foxact/use-isomorphic-layout-effect';
-import { isBrowser } from '~/utils';
+import { useSyncExternalStore, useMemo } from 'react';
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
+  const query = '(max-width: 767.9px)';
 
-  useLayoutEffect(() => {
-    if (isBrowser)
-      setIsMobile(window.innerWidth < 768);
+  const subscribe = useMemo(() => (callback: () => void) => {
+    const mql = window.matchMedia(query);
 
-    const updateSize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    const fn = () => startTransition(updateSize);
-    window.addEventListener('resize', fn);
-
-    return () => window.removeEventListener('resize', fn);
+    mql.addEventListener('change', callback);
+    return () => mql.removeEventListener('change', callback);
   }, []);
 
-  return isMobile;
+  const getSnapshot = () => window.matchMedia(query).matches;
+
+  return useSyncExternalStore(subscribe, getSnapshot, () => false);
 }

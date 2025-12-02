@@ -19,8 +19,8 @@ interface Props {
   params: Promise<{ id: string }>
 }
 
-export default function Subject(props: Props) {
-  const params = use(props.params);
+export default function Subject({ params: _params }: Props) {
+  const params = use(_params);
   const { data, isLoading } = useSubject(params.id);
 
   if (!data || isLoading) return <Loading />;

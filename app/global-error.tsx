@@ -1,23 +1,26 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { HTTPError } from '~/lib/fetcher';
 
 export default function GlobalError({ error }: { error: Error }) {
-  const [theme, setTheme] = useState<string>();
-
-  useEffect(() => {
-    const localTheme = localStorage.getItem('theme');
-    if (localTheme === 'dark') {
-      setTheme('dark');
-    } else {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      setTheme(systemTheme);
-    }
-  }, []);
-
   return (
-    <html className={theme ?? ''}>
+    <html ref={el => {
+      if (!el) return;
+
+      try {
+        const localTheme = localStorage.getItem('theme');
+
+        if (localTheme === 'dark') {
+          el.classList.add('dark');
+        } else {
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          el.classList.remove(systemTheme);
+        }
+      } catch (e) {
+        console.error('获取主题失败', e);
+      }
+    }}
+    >
       <title>Error</title>
       <body>
         <div className="mt-40 max-w-xl mx-auto p-4">

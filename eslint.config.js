@@ -2,21 +2,13 @@
 
 const { kaho } = require('eslint-config-kaho');
 
-const userConfig = [
+module.exports = kaho(
   {
-    files: ['**/*.tsx'],
-    rules: {
-      '@eslint-react/prefer-destructuring-assignment': 'off'
-    }
+    react: true
   },
   {
     rules: {
-      '@eslint-react/naming-convention/filename-extension': 'off',
-      'n/prefer-global/process': 'off',
-      'sukka/no-chain-array-higher-order-functions': 'off',
-      'arrow-body-style': 'off'
+      'sukka/no-chain-array-higher-order-functions': 'off'
     }
   }
-];
-
-module.exports = kaho({}, ...userConfig);
+);
