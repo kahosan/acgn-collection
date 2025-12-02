@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "install": "simple-git-hooks"
+    "postinstall": "simple-git-hooks"
   },
   "author": {
     "name": "kahosan",
@@ -44,6 +44,7 @@
     "eslint": "^9.39.1",
     "eslint-config-kaho": "^4.0.1",
     "foxact": "^0.2.45",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "simple-git-hooks": "^2.12.1",
     "tailwindcss": "^4.1.12",
@@ -54,7 +55,14 @@
     "node": ">=20.16.2"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run lint && npm run typecheck",
-    "pre-push": "npm run lint:fix"
+    "pre-commit": "npx lint-staged && pnpm typecheck"
+  },
+  "lint-staged": {
+    "src/**/*.{js,cjs,mjs,ts,cts,mts}": [
+      "eslint --fix"
+    ],
+    "*.json": [
+      "eslint --fix"
+    ]
   }
 }
