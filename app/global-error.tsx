@@ -12,9 +12,11 @@ export default function GlobalError({ error }: { error: Error }) {
 
         if (localTheme === 'dark') {
           el.classList.add('dark');
+        } else if (localTheme === 'light') {
+          el.classList.remove('dark');
         } else {
           const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          el.classList.remove(systemTheme);
+          el.classList.add(systemTheme);
         }
       } catch (e) {
         console.error('获取主题失败', e);
