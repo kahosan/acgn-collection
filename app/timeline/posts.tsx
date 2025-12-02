@@ -54,7 +54,8 @@ export default function TimelinePosts({ data, user, scope, page, type, isLoading
                     const showAvatar = index === 0 || (scope !== 'me' && item.user.name !== post.items[index - 1].user.name);
 
                     return (
-                      <div key={item.user.name + item.time} className="flex mb-2">
+                      // eslint-disable-next-line @eslint-react/no-array-index-key -- Use index as key
+                      <div key={item.user.name + item.time + index} className="flex mb-2">
                         {
                           showAvatar || index === 0
                             ? <Avatar radius="sm" className="min-w-max" src={scope === 'me' ? user.avatar.small : item.user.avatar} />
