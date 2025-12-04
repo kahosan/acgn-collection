@@ -8,7 +8,7 @@ import type { Subject } from '~/types/bangumi/subject';
 interface Props {
   infos: Array<{
     key: string
-    value: string | Array<Record<'v' | 'k', string>>
+    value: string | Array<{ v?: string, k?: string }>
   }>
   subjectId: number
   collection: Subject['collection']
@@ -35,8 +35,8 @@ export default function Information({ infos, collection, subjectId, className }:
                 Array.isArray(info.value)
                   ? (
                     info.value.map(item => (
-                      <div key={item.k}>
-                        <IsLink value={item.v}>
+                      <div key={item.k ?? item.v}>
+                        <IsLink value={item.v ?? ''}>
                           <div className="my-1 bg-current/5 inline-block px-2 py-1 rounded">
                             {item.v}
                             <sup className="ml-1 opacity-65">{item.k}</sup>
