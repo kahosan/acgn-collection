@@ -65,7 +65,7 @@ export default function Header() {
                 as={NextLink}
                 isDisabled={pn === path}
                 color="foreground"
-                className={clsx('opacity-75 font-[500] mt-0.5', pn === path && 'opacity-100')}
+                className={clsx('opacity-75 font-medium mt-0.5', pn === path && 'opacity-100')}
                 href={path}
               >
                 {name}
@@ -122,7 +122,7 @@ export default function Header() {
                   isInvisible={notifyCount === 0}
                   shape="circle"
                   classNames={{
-                    badge: 'right-[-20px]'
+                    badge: '-right-5'
                   }}
                 >
                   电波提醒

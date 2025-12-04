@@ -5,7 +5,9 @@ import { permanentRedirect } from 'next/navigation';
 
 import { options } from '~/lib/auth';
 
-export const metadata = {
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
   title: '登入'
 };
 

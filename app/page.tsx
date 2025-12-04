@@ -83,7 +83,7 @@ export default function Collection() {
       </div>
       {
         data?.data.length === 0
-          ? <div className="text-center text-gray-500 dark:text-gray-300 mt-[20rem]">没有更多了</div>
+          ? <div className="text-center text-gray-500 dark:text-gray-300 mt-80">没有更多了</div>
           : (isLoading || !data
             ? <Loading />
             : (

@@ -1,6 +1,6 @@
 import { Divider, Input, Select, SelectItem } from '@heroui/react';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { transformSubjectTypeToJSX } from '~/utils';
@@ -23,21 +23,26 @@ export default function HeaderSearch() {
   const [keyword, setKeyword] = useState('');
   const [type, setType] = useState('7' /** all */);
 
+  const [isPending, startTransition] = useTransition();
+
   const router = useRouter();
 
   const handleSearch = () => {
     if (!keyword) return;
-    router.push(`/search?keyword=${keyword}&type=${type}`);
+
+    startTransition(() => {
+      router.push(`/search?keyword=${keyword}&type=${type}`);
+    });
   };
 
   return (
-    <div className="flex min-w-[12rem] max-w-[14rem]">
+    <div className="flex min-w-48 max-w-56">
       <Select
         radius="sm"
         placeholder="选择类型"
         aria-label="选择类型"
         labelPlacement="outside"
-        className="max-w-[4rem]"
+        className="max-w-16"
         classNames={{
           trigger: 'rounded-r-none dark:bg-default-500/20 bg-default-400/20 justify-center',
           innerWrapper: 'w-max',
@@ -77,7 +82,9 @@ export default function HeaderSearch() {
             handleSearch();
         }}
         endContent={
-          <div className="cursor-pointer i-mdi-magnify p-2" onClick={handleSearch} />
+          isPending
+            ? <div className="i-mdi-loading animate-spin p-2" />
+            : <div className="cursor-pointer i-mdi-magnify p-2" onClick={handleSearch} />
         }
       />
     </div>
