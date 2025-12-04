@@ -1,8 +1,6 @@
-'use strict';
+import { kaho } from 'eslint-config-kaho';
 
-const { kaho } = require('eslint-config-kaho');
-
-module.exports = kaho(
+export default kaho(
   {
     react: true
   },

@@ -1,8 +1,8 @@
-'use strict';
+import type { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
+  reactCompiler: true,
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -22,4 +22,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+export default nextConfig;
