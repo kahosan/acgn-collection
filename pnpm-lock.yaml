@@ -82,8 +82,8 @@ importers:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.5.1)
       eslint-config-kaho:
-        specifier: ^4.0.1
-        version: 4.0.1(@typescript-eslint/utils@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint@9.39.1(jiti@2.5.1)))(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3)
+        specifier: ^4.0.4
+        version: 4.0.4(@typescript-eslint/utils@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint@9.39.1(jiti@2.5.1)))(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3)
       foxact:
         specifier: ^0.2.45
         version: 0.2.45(react@19.2.1)
@@ -2601,11 +2601,11 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  eslint-config-kaho@4.0.1:
-    resolution: {integrity: sha512-NaCUJgzTb794ZflvPOXGoqUg9ZLSua6UQf1UyU8wxGVpXHcmnq2AThqy0QHJXN09bM0oWAVri39P/FgvICNFSg==}
+  eslint-config-kaho@4.0.4:
+    resolution: {integrity: sha512-RxQ20Z5mHrXmGgZ/+ydlkMmtDcOPVzMDmIjoXsd3WIR5QGEzmgYi1cthjBzGbdbeceARlQjk8SdcXVGoWe89RA==}
     peerDependencies:
-      eslint: '>=9.31.0 <9.39.0'
-      typescript: ^5.8.3
+      eslint: '>=9.31.0 <=9.39.1'
+      typescript: <=5.9.3
 
   eslint-config-sukka@8.0.5:
     resolution: {integrity: sha512-++zRNmlwlpsdbEqNK7FfWz1kupF0+tdj+UCTIlb3hKWirVmrVsrt3WdfxwPQuyxlT3N2pRt/jp/ysISemOntcA==}
@@ -7416,7 +7416,7 @@ snapshots:
       eslint: 9.39.1(jiti@2.5.1)
       semver: 7.7.1
 
-  eslint-config-kaho@4.0.1(@typescript-eslint/utils@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint@9.39.1(jiti@2.5.1)))(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3):
+  eslint-config-kaho@4.0.4(@typescript-eslint/utils@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.48.0(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3))(eslint@9.39.1(jiti@2.5.1)))(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3):
     dependencies:
       '@eslint-sukka/node': 8.0.5(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3)
       '@eslint-sukka/react': 8.0.5(eslint@9.39.1(jiti@2.5.1))(typescript@5.8.3)

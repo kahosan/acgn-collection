@@ -44,7 +44,7 @@
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.39.1",
-    "eslint-config-kaho": "^4.0.1",
+    "eslint-config-kaho": "^4.0.4",
     "foxact": "^0.2.45",
     "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
