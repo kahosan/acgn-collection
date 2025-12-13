@@ -46,7 +46,7 @@ export default function CollectionCard({ subject, collectionType, showMask, mobi
           : (
             <div
               className={clsx(
-                'absolute h-full w-full dark:bg-zinc-800 bg-zinc-100  transition-all rounded-large',
+                'absolute h-full w-full dark:bg-zinc-800 bg-zinc-100 transition-transform-opacity rounded-large',
                 mobileMask ? 'sm:opacity-0 sm:scale-95 sm:group-hover:opacity-100 sm:group-hover:scale-100' : 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100'
               )}
             />
