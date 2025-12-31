@@ -47,8 +47,8 @@ export async function fetcher<T>(key: string | [string, string | RequestInitWith
     headers.set('Authorization', `Bearer ${token}`);
 
   if (options.headers) {
-    for (const [key, value] of Object.entries(options.headers))
-      headers.set(key, value);
+    const optionsHeaders = new Headers(options.headers);
+    optionsHeaders.forEach((value, key) => headers.set(key, value));
   }
 
   if (arg) {
