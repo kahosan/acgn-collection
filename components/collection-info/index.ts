@@ -15,3 +15,5 @@ export { default as Reviews } from './reviews';
 export { default as Boards } from './boards';
 
 export { default as Comments } from './comments';
+
+export { default as Anitabi } from './anitabi';

@@ -7,7 +7,7 @@ import { Divider, Link } from '@heroui/react';
 
 import Loading from '~/components/loading';
 import CollectionBox from '~/components/collection-box';
-import { Summary, Tags, Information, Relations, Characters, TrackList, Reviews, Boards, Comments } from '~/components/collection-info';
+import { Anitabi, Summary, Tags, Information, Relations, Characters, TrackList, Reviews, Boards, Comments } from '~/components/collection-info';
 
 import { useSubject } from '~/lib/bangumi/subjects';
 
@@ -90,6 +90,7 @@ export default function Subject({ params: _params }: Props) {
                 )
                 : null
             }
+            {data.type === SubjectType.动画 ? <Anitabi subjectId={data.id} /> : null}
             <div className="bg-card">
               <div className="mb-2 dark:text-blue-200 text-blue-400">关联条目</div>
               <Relations subjectId={data.id} />
