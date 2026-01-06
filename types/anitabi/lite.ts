@@ -2,7 +2,7 @@ export interface AnitabiLite {
   id: number
   cn: string
   title: string
-  city: string
+  city?: string
   cover: string
   color?: string
   geo?: number[]

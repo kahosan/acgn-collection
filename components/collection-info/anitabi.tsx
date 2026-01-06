@@ -24,7 +24,7 @@ export default function Anitabi({ subjectId}: { subjectId: number }) {
       <div className="mb-2 dark:text-blue-200 text-blue-400">动画取景地标信息</div>
       <div>
         <div className="flex items-center justify-between *:text-sm mb-4 max-sm:flex-col max-sm:items-start max-sm:gap-2">
-          <div>主要取景城市：<Link href={`https://anitabi.cn/map?bangumiId=${subjectId}`} size="sm" isExternal>{data.city}</Link></div>
+          <div>主要取景城市：<Link href={`https://anitabi.cn/map?bangumiId=${subjectId}`} size="sm" isExternal>{data.city ?? '日本'}</Link></div>
           <div>共整理了 {data.pointsLength} 个地标、{data.imagesLength} 张截图</div>
         </div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-3">
