@@ -48,8 +48,8 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <Header />
           <Suspense>
+            <Header />
             <main className="mx-auto py-4 px-6">
               {children}
               <Analytics />
