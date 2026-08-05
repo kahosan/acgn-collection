@@ -52,14 +52,14 @@ export default function Relations({ subjectId }: Props) {
         {
           relations.map(([relation, items]) => {
             return items.map((item, index) => (
-              <Tooltip key={item.id} content={item.name_cn}>
+              <Tooltip key={item.id} content={item.name_cn || item.name}>
                 <Link
                   color="foreground"
                   className="flex-col items-start flex-auto"
                   href={`/subject/${item.id}`}
                 >
-                  <div className="opacity-70 text-xs min-h-[15px]">{index === 0 ? relation : ''}</div>
-                  <div className="relative p-2 rounded-md min-h-[5rem] w-full max-w-24">
+                  <div className="opacity-70 text-xs min-h-3.75">{index === 0 ? relation : ''}</div>
+                  <div className="relative p-2 rounded-md min-h-20 w-full max-w-24">
                     <Image
                       src={item.images.small || 'https://placehold.co/64x64@3x.webp?text=No%20Image'}
                       alt={item.name}
