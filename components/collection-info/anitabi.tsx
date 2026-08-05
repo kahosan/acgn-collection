@@ -30,16 +30,19 @@ export default function Anitabi({ subjectId}: { subjectId: number }) {
         <div className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-3">
           {data.litePoints.map(point => (
             <div key={point.id}>
-              <Link className="relative w-full min-h-24 mb-1" isExternal href={`https://www.anitabi.cn/map?bangumiId=${subjectId}&pid=${point.id}`}>
-                <Image
-                  src={point.image}
-                  alt={point.name}
-                  priority
-                  fill
-                  sizes="100%"
-                  className="object-cover bg-center opacity-0 transition-all duration-300 rounded-md w-auto h-auto"
-                  onLoad={e => { e.currentTarget.style.opacity = '1'; }}
-                />
+              <Link className="w-full mb-1 " isExternal href={`https://www.anitabi.cn/map?bangumiId=${subjectId}&pid=${point.id}`}>
+                <div className="relative w-full min-h-24 bg-[#fbbd00] rounded-md">
+                  <Image
+                    src={point.image ?? data.cover}
+                    alt={point.name}
+                    priority
+                    fill
+                    sizes="100%"
+                    className="object-cover bg-center opacity-0 transition-all duration-300 rounded-md w-auto h-auto"
+                    onLoad={e => { e.currentTarget.style.opacity = point.image ? '1' : '0.3'; }}
+                  />
+                  {point.image ? null : (<span className='absolute top-0 text-center w-full leading-20 opacity-[0.8] text-sm text-white text-shadow-[0_1px_2px_rgba(128,128,128,.5)] before:content-["尚无截图"]' />)}
+                </div>
               </Link>
               <p className="text-sm line-clamp-1 leading-3.5">{point.cn ?? point.name}</p>
               <small className="opacity-60">

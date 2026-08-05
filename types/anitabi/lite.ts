@@ -12,7 +12,7 @@ export interface AnitabiLite {
     id: string
     cn?: string
     name: string
-    image: string
+    image?: string
     ep?: number
     s?: number
     geo: number[]
