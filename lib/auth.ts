@@ -12,7 +12,10 @@ export const options: NextAuthOptions = {
       id: 'bangumi',
       name: 'Bangumi',
       type: 'oauth',
-      authorization: 'https://bgm.tv/oauth/authorize',
+      authorization: {
+        url: 'https://bgm.tv/oauth/authorize',
+        params: { scope: '' }
+      },
       token: 'https://bgm.tv/oauth/access_token',
       userinfo: 'https://api.bgm.tv/v0/me',
       profile: (userInfo: UserInfo) => userInfo,
