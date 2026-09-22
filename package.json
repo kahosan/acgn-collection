@@ -34,7 +34,7 @@
     "react-dom": "19.2.3",
     "sharp": "^0.34.5",
     "sonner": "^2.0.7",
-    "swr": "^2.3.7",
+    "swr": "^2.5.1",
     "ts-pattern": "^5.9.0"
   },
   "devDependencies": {
@@ -42,7 +42,6 @@
     "@types/node": "^25.0.1",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.39.1",
     "eslint-config-kaho": "^4.0.4",
     "foxact": "^0.2.49",

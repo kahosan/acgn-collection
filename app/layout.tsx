@@ -43,9 +43,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <head>
-        <link rel="stylesheet" href="https://cdn.baiwulin.com/font/harmonyos-fonts/css/harmonyos_sans_sc.css" />
-      </head>
       <body>
         <Providers>
           <Suspense>
