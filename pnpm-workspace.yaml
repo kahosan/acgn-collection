@@ -1,2 +1,5 @@
-onlyBuiltDependencies:
-  - simple-git-hooks
+allowBuilds:
+  '@heroui/shared-utils': false
+  sharp: false
+  simple-git-hooks: false
+  unrs-resolver: false
