@@ -23,7 +23,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.23.26",
+    "framer-motion": "14.2.0",
     "geist": "^1.5.1",
     "jotai": "^2.16.0",
     "next": "16.3.0",
